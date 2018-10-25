@@ -1,19 +1,20 @@
 body{
-    background-color : #2c5676;
-    font-family: "Roboto Thin", Roboto;
+    background-color : #1f3a70;
+    font-family: "Roboto Thin";
 }
 
 #conn{
-    margin-top: 5%;
+    margin-top: 3%;
     text-align:center;
     color: white;
-    font-family : "Libel Suit", Arial;
+    font-family : "Libel Suit";
+	font-size : 3em;
 }
 /* Bordered form */
 form {
     border: 3px solid #f1f1f1;
     background-color: #D4D6D7;
-    margin-top: 9vh;
+    margin-top: 3%;
     margin-left: 10%;
     width: 80%;
     border-radius: 7px;
@@ -62,6 +63,13 @@ button:hover {
 .psw {
     float: right;
     padding : 16px;
+	text-decoration : none;
+	font-style : italic;
+	color : white;
+}
+
+.psw:hover{
+	color : green;
 }
 
 /* Change styles for span and cancel button on extra small screens */

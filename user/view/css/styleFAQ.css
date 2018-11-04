@@ -1,68 +1,3 @@
-body{
-	font-family: "Roboto Thin";
-	margin : 0;
-}
-
-/* -------------------------------
-				MENU 
-   ------------------------------- */
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-	border-right: 1px solid #bbb;
-	width : 20%;
-}
-
-.avatar {
-	width : 25.5%;
-	margin-left : 35%;
-	
-}
-
-.logo{
-	width : 19.6%;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-	height : 49px;
-	vertical-align : middle;
-	font-size : 1.5em;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-	display : block;
-}
-
-.active:hover{
-	background-color: green;
-}
-
-.logout{
-	width : 7%;
-	margin-top : 6%;
-}
-
 /* -------------------------------
 				FAQ 
    ------------------------------- */
@@ -94,6 +29,13 @@ li a:hover:not(.active) {
 .contactbutton:hover{
 	background: #264973;
 	cursor:pointer;
+}
+
+@media screen and (max-width: 660px) {
+	.contactbutton{
+		margin : 0 0 0 20%;
+		float : none;
+	}
 }
 
 /* Espacement entre les questions */
@@ -178,18 +120,4 @@ li a:hover:not(.active) {
         border-top-color: inherit;
         margin-top: -3px;
         right: 10px;
-}
-/* -------------------------------
-				FOOTER 
-   ------------------------------- */
-   
-.footer {
-    height: 5%;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color : white;
-    background-color: #242027;
-    text-align: right;
 }

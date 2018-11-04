@@ -1,0 +1,115 @@
+body{
+	font-family: "Roboto Thin";
+	margin : 0;
+}
+
+/* -------------------------------
+				MENU 
+   ------------------------------- */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+	height: 75px;
+}
+
+li {
+    float: left;
+	border-right: 1px solid #bbb;
+	width : 20%;
+}
+
+.avatar {
+	width : 25.5%;
+	margin-left : 35%;
+}
+
+.logo{
+	width : 19.6%;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+	height : 49px;
+	vertical-align : middle;
+	font-size : 1.5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+	display : block;
+}
+
+.active:hover{
+	background-color: green;
+}
+
+.logout_img{
+	width : 7%;
+	margin-top : 6%;
+}
+
+.logoutQuery{
+	display : none;
+}
+
+@media screen and (max-width: 1260px) {
+	li a{
+		font-size:1em;
+	}
+	
+	.logout {
+		display: none;
+		transition :1s;
+	}
+	
+	.logoutQuery{
+		display : block;
+		width: 10%;
+		float : right;
+		transition :1s;
+	}
+	
+	.logoutQuery .active{
+		background-color: #4CAF50;
+	}
+	
+	.logoutQuery .active:hover{
+		background-color:green;
+	}
+	
+	.logoutQuery_img{
+		text-align : center;
+		margin-left :0;
+		margin-top:5%;
+		width:2em;
+	}
+}
+
+@media screen and (max-width: 1260px) {
+	.avatar{
+		height:72px;
+		width:72px;
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.avatar{
+		margin-left : 10%;
+		transition : 1s;
+	}
+}

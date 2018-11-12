@@ -12,16 +12,13 @@ SET time_zone = "+00:00";
 --
 Create table `TypeAdministrateur`
 (
-	`idTypeAdministrateur` int(11) not null,
+	`idTypeAdministrateur` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-alter table `TypeAdministrateur`
-	add primary key (`idTypeAdministrateur`);
     
 CREATE TABLE `Administrateur`
 (
-	`idAdministrateur` int(11) NOT NULL,
+	`idAdministrateur` int(11) NOT NULL primary key auto_increment,
 	`nom` varchar(50) NOT NULL,
 	`prenom` varchar(50) NOT NULL,
 	`mail` varchar(255) NOT NULL,
@@ -30,12 +27,11 @@ CREATE TABLE `Administrateur`
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 Alter table `Administrateur`
-	add primary key (`idAdministrateur`),
 	add constraint `Fk_Administrateur_Type`  foreign key (`idTypeAdministrateur`) references `TypeAdministrateur`(`idTypeAdministrateur`) on delete cascade;
 
 CREATE TABLE `Client` 
 (
-	`idClient` int(11) NOT NULL,
+	`idClient` int(11) NOT NULL primary key auto_increment,
 	`nom` varchar(50) NOT NULL,
 	`prenom` varchar(50) NOT NULL,
 	`adresse` varchar(255),
@@ -46,22 +42,16 @@ CREATE TABLE `Client`
 	`dateNaissance` Date not null,
 	`dateCreation` Date not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-alter table `Client`
-	add primary key (`idClient`);
 	
 Create table `TypeSujet`
 (
-	`idTypeSujet` int(11) not null,
+	`idTypeSujet` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table `TypeSujet`
-	add primary key (`idTypeSujet`);
-
 CREATE TABLE `Message`
 (
-	`idMessage` int (11) NOT NULL,
+	`idMessage` int (11) NOT NULL primary key auto_increment,
 	`sujet` varchar(255) NOT NULL,
 	`objet` varchar(255) not null,
 	`texte` varchar(1000) not null,
@@ -71,26 +61,24 @@ CREATE TABLE `Message`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table `Message`
-	add primary key (`idMessage`),
 	add constraint `Fk_Message_Client` foreign key (`idClient`) references `Client`(`idClient`) on delete cascade,
 	add constraint `Fk_Message_Administrateur` foreign key (`idAdministrateur`) references `Administrateur`(`idAdministrateur`) on delete cascade,
 	add constraint `Fk_Message_Sujet` foreign key (`idTypeSujet`) references `TypeSujet`(`idTypeSujet`) on delete cascade;
 	
 Create table `Reponse`
 (
-	`idReponse` int (11) not null,
+	`idReponse` int (11) not null primary key auto_increment,
 	`texte` varchar(1000) not null,
 	`dateReponse` date not null,
 	`idMessage` int(11) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table `Reponse`
-	add primary key (`idReponse`),
 	add constraint `Fk_Reponse_Message` foreign key (`idMessage`) references `Message`(`idMessage`) on delete cascade;
 
 CREATE TABLE `Maison`
 (
-	`idMaison` int(11) not null,
+	`idMaison` int(11) not null primary key auto_increment,
 	`adresse` varchar(255) not null,
 	`ville` varchar(255) not null,
 	`codePostale` int(5) not null,
@@ -98,28 +86,23 @@ CREATE TABLE `Maison`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table `Maison`
-	add primary key (`idMaison`),
 	add constraint `Fk_Maison_Client` foreign key (`idClient`) references `Client`(`idClient`) on delete cascade;
 
 Create table `TypePiece`
 (
-	`idTypePiece` int(11) not null,
+	`idTypePiece` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table `TypePiece`
-	add primary key (`idTypePiece`);
-
 CREATE TABLE `Piece`
 (
-	`idPiece` int(11) not null,
+	`idPiece` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null,
 	`idMaison` int(11) not null,
 	`idTypePiece` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table `Piece`
-	add primary key (`idPiece`),
 	add constraint `Fk_Piece_Maison` foreign key (`idMaison`) references `Maison`(`idMaison`) on delete cascade,
 	add constraint `Fk_Piece_TypePiece` foreign key  (`idTypePiece`) references `TypePiece`(`idTypePiece`) on delete cascade;
 
@@ -128,26 +111,20 @@ alter table `Piece`
 
 Create table `TypeCapteur`
 (
-	`idTypeCapteur` int(11) not null,
+	`idTypeCapteur` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-Alter table `TypeCapteur`
-	add primary key (`idTypeCapteur`);
-
 Create table `GrandeurPhysique`
 (
-	`idGrandeurPhysique` int(11) not null,
+	`idGrandeurPhysique` int(11) not null primary key auto_increment,
 	`nom` Varchar(50),
 	`symbole` varchar(5)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-Alter table `GrandeurPhysique`
-	add primary key (`idGrandeurPhysique`);
-
 CREATE TABLE `Cemac`
 (
-	`idCemac` int(11) not null,
+	`idCemac` int(11) not null primary key auto_increment,
 	`nom` varchar(50) not null,
 	`statut` varchar(50) not null,
 	`idTypeCapteur` int(11) not null,
@@ -155,32 +132,27 @@ CREATE TABLE `Cemac`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 alter table `Cemac`
-	add primary key (`idCemac`),
 	add constraint `Fk_Cemac_TypeCapteur` foreign key (`idTypeCapteur`) references `TypeCapteur`(`idTypeCapteur`) on delete cascade,
 	add constraint `Fk_Cemac_GrandeurPhysique` foreign key (`idGrandeurPhysique`) references `GrandeurPhysique`(`idGrandeurPhysique`) on delete cascade;
 	
 CREATE TABLE `Historique`
 (
-	`idHistorique` int(11) not null,
+	`idHistorique` int(11) not null primary key auto_increment,
 	`dateReleve` Date not null,
 	`valeurReleve` float(11) not null,
 	`idCemac` int(11) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 Alter table `Historique`
-	add primary key (`idHistorique`),
 	add constraint `Fk_Historique_Cemac` foreign key (`idCemac`) references `Cemac`(`idCemac`) on delete cascade;
 
 CREATE TABLE `Programme`
 (
-	`idProgramme` int(11) not null,
+	`idProgramme` int(11) not null primary key auto_increment,
 	`dateDebut` Datetime not null,
 	`dateFin` Datetime not null,
 	`valeur` float(11) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-alter table `Programme`
-	add primary key (`idProgramme`);
 	
 Create table `ProgrammeCemac`
 (

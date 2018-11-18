@@ -1,27 +1,33 @@
-var modal_bg = $(".modal-bg")[0];
-var modals = $(".modal");
+let modal_bg = document.querySelector(".modal-bg");
+let modals = document.getElementsByClassName("modal");
+let modal_closers = document.getElementsByClassName("modal-close");
 
-$(window).on('click', function(event) {
-    if(event.target == modal_bg) {
-        hideModal();
-    }
-});
+window.onclick = function(event) {
+    if(event.target == modal_bg) { hideModal(); }
+}
 
-$(".modal-close").on('click', function(event){
-    if($(event.target).parent().parent().hasClass('modal')){
-        hideModal();
+for(let i = 0; i < modals.length; i++){
+    modals[i].onclick = function(event){
+        if(event.target.parentNode.parentNode.classList.contains('modal')){
+            hideModal();
+        }
     }
-});
+}
 
 let displayModal = function(id){
-    if($(id).length == 1){
-        $(modals).css("display","none");
-        $(id).css("display","block");
-        $(modal_bg).css("display","block");
+    var displayedModal = document.querySelector(id);
+    if(id != null){
+        for (let i = 0; i < modals.length; i++) {
+            modals[i].style.display = "none";
+        }
+        displayedModal.style.display = "block";
+        modal_bg.style.display = "block";
     }
 }
 
 let hideModal = function(){
-    $(modals).css("display","none");
-    $(modal_bg).css("display","none");
+    for (let i = 0; i < modals.length; i++) {
+        modals[i].style.display = "none";
+    }
+    modal_bg.style.display = "none";
 }

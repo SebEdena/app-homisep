@@ -1,0 +1,57 @@
+.label-left
+{
+  float: left;
+  margin-left: 10px;
+}
+
+#headerMaison
+{
+  grid-area: headerMaison;
+  clear:both;
+}
+
+#headerPiece
+{
+  grid-area: headerPiece;
+}
+
+#headerCapteur
+{
+  grid-area: headerCapteur;
+}
+
+#headerAjout
+{
+  grid-area: headerAjout;
+}
+
+.header
+{
+  text-align: center;
+}
+
+.gridContainerMaisonPieceCapteur
+{
+  display:grid;
+  grid-template-areas :
+  'headerMaison headerMaison headerMaison'
+  'headerPiece headerCapteur headerAjout'
+  'piece capteur ajout'
+  'piece capteur ajout';
+  grid-gap: 20px;
+}
+
+#piece
+{
+  grid-area: piece;
+}
+
+#capteur
+{
+  grid-area: capteur;
+}
+
+#ajout
+{
+  grid-area: ajout;
+}

@@ -6,8 +6,8 @@ window.onclick = function(event) {
     if(event.target == modal_bg) { hideModal(); }
 }
 
-for(let i = 0; i < modals.length; i++){
-    modals[i].onclick = function(event){
+for(let i = 0; i < modal_closers.length; i++){
+    modal_closers[i].onclick = function(event){
         if(event.target.parentNode.parentNode.classList.contains('modal')){
             hideModal();
         }

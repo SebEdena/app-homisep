@@ -7,22 +7,23 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+use homisep;
 --
 -- Base de données :  `Homisep`
 --
 Create table `TypeAdministrateur`
 (
 	`idTypeAdministrateur` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null
+	`nom` varchar(255) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
     
 CREATE TABLE `Administrateur`
 (
 	`idAdministrateur` int(11) NOT NULL primary key auto_increment,
-	`nom` varchar(50) NOT NULL,
-	`prenom` varchar(50) NOT NULL,
+	`nom` varchar(255) NOT NULL,
+	`prenom` varchar(255) NOT NULL,
 	`mail` varchar(255) NOT NULL,
-	`passe` varchar(50) NOT NULL,
+	`passe` varchar(255) NOT NULL,
 	`idTypeAdministrateur` int(11)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -32,8 +33,8 @@ Alter table `Administrateur`
 CREATE TABLE `Client` 
 (
 	`idClient` int(11) NOT NULL primary key auto_increment,
-	`nom` varchar(50) NOT NULL,
-	`prenom` varchar(50) NOT NULL,
+	`nom` varchar(255) NOT NULL,
+	`prenom` varchar(255) NOT NULL,
 	`adresse` varchar(255),
 	`ville` varchar(255) NOT NULL,
 	`codePostal` int(5) DEFAULT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE `Client`
 Create table `TypeSujet`
 (
 	`idTypeSujet` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null
+	`nom` varchar(255) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Message`
@@ -91,13 +92,13 @@ alter table `Maison`
 Create table `TypePiece`
 (
 	`idTypePiece` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null
+	`nom` varchar(255) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Piece`
 (
 	`idPiece` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null,
+	`nom` varchar(255) not null,
 	`idMaison` int(11) not null,
 	`idTypePiece` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -112,21 +113,21 @@ alter table `Piece`
 Create table `TypeCapteur`
 (
 	`idTypeCapteur` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null
+	`nom` varchar(255) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 Create table `GrandeurPhysique`
 (
 	`idGrandeurPhysique` int(11) not null primary key auto_increment,
-	`nom` Varchar(50),
+	`nom` Varchar(255),
 	`symbole` varchar(5)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `Cemac`
 (
 	`idCemac` int(11) not null primary key auto_increment,
-	`nom` varchar(50) not null,
-	`statut` varchar(50) not null,
+	`nom` varchar(255) not null,
+	`statut` varchar(255) not null,
 	`idTypeCapteur` int(11) not null,
 	`idGrandeurPhysique` int(11) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

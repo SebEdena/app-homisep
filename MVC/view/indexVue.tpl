@@ -7,17 +7,18 @@
 
     <body>
         <h1 id="conn">Page de connexion</h1>
-        <form action="action_page.php">
+        <form action="index.php?control=page_routing&action=seConnecter" method="post">
           <div class="imgcontainer">
-            <img src="img/LogoAPP.png" alt="Homisep" class="avatar">
+            <img src="./vue/img/LogoAPP.png" alt="Homisep" class="avatar">
           </div>
 
           <div class="container">
 
-            <label for="uname"><b>Identifiant</b></label><form>
+            <label for="uname"><b>Identifiant</b></label>
+            <form>
               <div class="radio-group">
-                <input type="radio" id="option-one" name="selector" checked><label for="option-one">Client</label>
-                <input type="radio" id="option-three" name="selector"><label for="option-three">Administrateur</label>
+                <input type="radio" id="option-one" name="selector" value="client" checked><label for="option-one">Client</label>
+                <input type="radio" id="option-three" name="selector" value="admin" ><label for="option-three">Administrateur</label>
               </div>
             </form>
             <input type="text" placeholder="Entrez votre identifiant" name="uname" required>
@@ -27,9 +28,8 @@
 
             <button type="submit">Se connecter</button>
 
-            <span ><a href="#" class="psw">Créer un nouvel utilisateur</a></span>
+            <span><a href="#" class="psw">Créer un nouvel utilisateur</a></span>
           </div>
-
         </form>
     </body>
 

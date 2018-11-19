@@ -1,15 +1,15 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./vue/css/styleConnexion.css"/>
+        <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
         <title>Bienvenue - Homisep</title>
     </head>
 
     <body>
         <h1 id="conn">Page de connexion</h1>
-        <form action="index.php?control=page_routing&action=seConnecter" method="post">
+        <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post">
           <div class="imgcontainer">
-            <img src="./vue/img/LogoAPP.png" alt="Homisep" class="avatar">
+            <img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar">
           </div>
 
           <div class="container">

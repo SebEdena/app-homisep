@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+body{
+    background-color : #1f3a70;
+    font-family : Roboto;
+}
+
+#conn{
+    margin-top: 3%;
+    text-align:center;
+    color: white;
+    font-family : "Libel Suit";
+	font-size : 3em;
+}
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+    background-color: #D4D6D7;
+    margin-top: 3%;
+    margin-left: 10%;
+    width: 80%;
+    border-radius: 7px;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Add padding to containers */
+.container {
+    width:80%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+/* The "Forgot password" text */
+.psw {
+    float: right;
+    padding : 16px;
+	text-decoration : none;
+	font-style : italic;
+	color : white;
+}
+
+.psw:hover{
+	color : green;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 1050px) {
+    .psw {
+        display: block;
+        float: none;
+        padding : 0;
+    }
+}
+
+
+.footer {
+    height: 5%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color : white;
+    background-color: #242027;
+    text-align: right;
+}
+
+/* RADIO BUTTON */
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: #9a929e;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label {
+  color: #ccc8ce;
+  background: #675f6b;
+}
+
+.radio-group {
+  border: solid 3px #675f6b;
+  display: inline-block;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left:50%;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+		body {font-family: "Lato", sans-serif;}
+
+		.tablink {
+			background-color: #999;
+			color: white;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			font-size: 17px;
+			width: 25%;
+			border-radius: 15px 15px 0px 0px;
+		}
+
+		.tablink:hover {
+			background-color: #777;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+			color: black;
+			display: none;
+			padding: 50px;
+			text-align: center;
+			border-style: solid;
+			border-width: 1px 1px 1px 1px;
+		}
+		
+		</style>
+	</head>
+<body>
+<div>	
+	<button class="tablink" onclick="openCity('London', this)" id="defaultOpen">London</button>
+	<button class="tablink" onclick="openCity('Paris', this)">Paris</button>
+	<button class="tablink" onclick="openCity('Tokyo', this)">Tokyo</button>
+	<button class="tablink" onclick="openCity('Oslo', this)">Oslo</button>
+</div>
+</br>
+	<div id="London" class="tabcontent">
+	  <h1>London</h1>
+	  <p>London is the capital city of England.</p>
+	</div>
+
+	<div id="Paris" class="tabcontent">
+	  <h1>Paris</h1>
+	  <p>Paris is the capital of France.</p> 
+	</div>
+
+	<div id="Tokyo" class="tabcontent">
+	  <h1>Tokyo</h1>
+	  <p>Tokyo is the capital of Japan.</p>
+	</div>
+
+	<div id="Oslo" class="tabcontent">
+	  <h1>Oslo</h1>
+	  <p>Oslo is the capital of Norway.</p>
+	</div>
+
+<script>
+function openCity(cityName,elmnt) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(cityName).style.display = "block";
+    elmnt.style.backgroundColor = "#444";
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+     
+</body>
+</html> 
+ 
+ 

@@ -8,7 +8,7 @@
     }
     else
     {
-      $res = $database -> prepare('select * from client client.mail = ?');
+      $res = $database -> prepare('select * from client where client.mail = ?');
     }
 
     $res -> bindParam(1, $username);

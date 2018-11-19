@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/styleConnexion.css" />
+        <link rel="stylesheet" href="./vue/css/styleConnexion.css"/>
         <title>Bienvenue - Homisep</title>
     </head>
 

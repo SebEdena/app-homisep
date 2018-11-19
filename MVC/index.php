@@ -1,10 +1,10 @@
 <?php
-
   session_start();
-  require 'config.php';
 
-  $bdd = new DB($db_name, $db_user, $db_pass, $db_host);
+  $control = isset($_GET['control'])?$_GET['control']:'page_routing';
+  $action = isset($_GET['action'])?$_GET['action']:'page_connexion';
 
-  require 'vue/indexVue.html'
+  require ('./controleur/' .  $control . '.php');
+  $action();
 
 ?>

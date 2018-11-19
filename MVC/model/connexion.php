@@ -14,10 +14,14 @@
     $res -> bindParam(1, $username);
 
     $res -> execute();
-
-    while ($row = $res->fetch(PDO::FETCH_ASSOC))
+    $row = $res->fetch(PDO::FETCH_ASSOC);
+    if(password_verify($password,$row["passe"]))
     {
-      echo($row);
+      echo(1);
+    }
+    else
+    {
+      echo(0);
     }
   }
 

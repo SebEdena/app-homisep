@@ -7,7 +7,6 @@
   function seConnecter()
   {
       require("./modele/connexion.php");
-      echo($_POST['selector']);
-      connexionUtilisateur($_POST['uname'],$_POST['psw']);
+      connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
   }
 ?>

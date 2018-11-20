@@ -1,0 +1,59 @@
+.label-left
+{
+  padding-bottom: 20px;
+  margin-left: 0px;
+}
+
+#headerPiece
+{
+  grid-area: headerPiece;
+}
+
+#headerCapteur
+{
+  grid-area: headerCapteur;
+}
+
+#headerAjout
+{
+  grid-area: headerAjout;
+}
+
+.header
+{
+  text-align: center;
+}
+
+.gridContainerMaisonPieceCapteur
+{
+  display:grid;
+  grid-template-areas :
+  'headerPiece headerCapteur headerAjout'
+  'piece capteur ajout'
+  'piece capteur ajout';
+  grid-gap: 20px;
+}
+
+.boutonRight
+{
+  float:right;
+  margin-right: 25px;
+}
+
+#piece
+{
+  grid-area: piece;
+  border : solid 1px;
+}
+
+#capteur
+{
+  grid-area: capteur;
+  border : solid 1px;
+}
+
+#ajout
+{
+  grid-area: ajout;
+  border : solid 1px;
+}

@@ -1,20 +1,28 @@
 @font-face {
-    font-family: "Roboto"
-    src: url("./font/Roboto-Regular.ttf") format("truetype");
+    font-family: Roboto;
+    src: url("font/Roboto-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "Libel Suit"
-    src: url("./font/libel-suit-rg.ttf") format("truetype");
+    font-family: Libel Suit;
+    src: url("../font/libel-suit-rg.ttf") format("truetype");
 }
 
 :root {
-    --font-text: "Roboto";
-    --font-title: "Libel Suit";
+    --font-text: Roboto;
+    --font-title: Libel Suit;
 
-    --color-lt-grey: #D4D6D7;
+    --color-lightgrey: #D4D6D7;
     --color-grey: #C0C3C5;
-    --color-dk-grey: #464B4E;
+    --color-darkgrey: #464B4E;
     --color-green: #0B9709;
     --color-blue: #254672;
+}
+
+* {
+    font-family: var(--font-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title);
 }

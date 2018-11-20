@@ -10,5 +10,8 @@
       connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
   }
 
-  function
+  function inscriptionClient()
+  {
+    
+  }
 ?>

@@ -9,4 +9,6 @@
       require("./model/connexion.php");
       connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
   }
+
+  function
 ?>

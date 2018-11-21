@@ -6,12 +6,29 @@
 
   function seConnecter()
   {
-      require("./model/connexion.php");
-      connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
+    require("./model/connexion.php");
+    $etat = connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
+    if($etat  == "null")
+    {
+      echo("connexion refusée");
+      require("./view/indexVue.tpl");
+    }
+    else
+    {
+      if($etat == "client")
+      {
+        require("./view/TemplateUtilisateur.tpl");
+      }
+      else
+      {
+        require("./view/TemplateAdmin.tpl");
+      }
+    }
   }
 
   function inscriptionClient()
   {
-    
+    require("./model/inscription.php");
+    inscrireClient($_POST['email'],$_POST['pass']);
   }
 ?>

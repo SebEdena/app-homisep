@@ -1,15 +1,15 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/styleMenuUtil.css" />
-		<link rel="stylesheet" href="css/styleFooter.css" />
+        <link rel="stylesheet" href="./view/css/styleMenuUtil.css" />
+		<link rel="stylesheet" href="./view/css/styleFooter.css" />
         <title>Espace client - Homisep</title>
     </head>
-    
+
     <body>
-        
+
 		<ul>
-		  <li class ="logo"><img src="img/LogoAPP.png" alt="Homisep" class="avatar"></li>
+		  <li class ="logo"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></li>
 		  <li><a href="#home">Tableau de bord</a></li>
 		  <li><a href="#account">Mon compte</a></li>
 		  <li><a href="#contact">F.A.Q</a></li>

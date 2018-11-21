@@ -1,15 +1,15 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/styleMenuAdmin.css" />
-		<link rel="stylesheet" href="css/styleFooter.css" />
+        <link rel="stylesheet" href="./view/css/styleMenuAdmin.css" />
+		<link rel="stylesheet" href="./view/css/styleFooter.css" />
         <title>Espace administrateur - Homisep</title>
     </head>
-    
+
     <body>
-        
+
 		<ul>
-		  <li class ="logo"><img src="img/LogoAPP.png" alt="Homisep" class="avatar"></li>
+		  <li class ="logo"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></li>
 		  <li><a href="#home">Données</a></li>
 		  <li><a href="#account">Messagerie</a></li>
 		  <li class="logout"><a class="active" href="#indexUtilisateur"><img src="img/power_icon.png" class="logout_img">  Déconnexion</a></li>

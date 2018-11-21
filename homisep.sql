@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrateur` (
   `idAdministrateur` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
+  `nom` varchar(255),
+  `prenom` varchar(255),
   `mail` varchar(255) NOT NULL,
   `passe` varchar(255) NOT NULL,
   `idTypeAdministrateur` int(11) DEFAULT NULL
@@ -65,15 +65,15 @@ CREATE TABLE `cemac` (
 
 CREATE TABLE `client` (
   `idClient` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
+  `nom` varchar(255) default null,
+  `prenom` varchar(255) default null,
   `adresse` varchar(255) DEFAULT NULL,
-  `ville` varchar(255) NOT NULL,
+  `ville` varchar(255) Default NULL,
   `codePostal` int(5) DEFAULT NULL,
-  `mail` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL unique,
   `passe` varchar(255) NOT NULL,
-  `dateNaissance` date NOT NULL,
-  `dateCreation` date NOT NULL
+  `dateNaissance` date Default NULL,
+  `dateCreation` date Default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

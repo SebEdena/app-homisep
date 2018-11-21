@@ -29,7 +29,6 @@
       <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
 
       <button type="submit">Se connecter</button>
-
       <span ><a href="#" id="modalBtn">Créer un nouvel utilisateur</a></span>
     </div>
 
@@ -43,9 +42,9 @@
       </div>
       <div class="modal-body">
         <div class="module">
-          <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient">
-            <label>Adresse email</label><input type="email" placeholder="Entrez votre adresse mail" class="textbox" required/>
-            <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" required/>
+          <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient" method="post">
+            <label>Adresse email</label><input type="email" placeholder="Entrez votre adresse mail" class="textbox" name="email" required/>
+            <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass" required/>
             <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
             <input type="submit" value="S'enregistrer" class="button" onclick="validate();"/>
           </form>

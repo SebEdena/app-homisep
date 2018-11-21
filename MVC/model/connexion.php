@@ -1,7 +1,8 @@
 <?php
   function connexionUtilisateur($username,$password,$selecteur)
   {
-    $database = new PDO('mysql:host=localhost;dbname=homisep', "root", "root");
+    require('./model/config.php');
+    $database = new PDO($db_host,$db_user, $db_pass);
     if($selecteur == "admin")
     {
       $res = $database -> prepare('select * from administrateur where administrateur.mail = ?');
@@ -17,11 +18,11 @@
     $row = $res->fetch(PDO::FETCH_ASSOC);
     if(password_verify($password,$row["passe"]))
     {
-      echo(1);
+      return $selecteur;
     }
     else
     {
-      echo(0);
+      return "null";
     }
   }
 

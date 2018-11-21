@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 20 Novembre 2018 à 12:05
+-- Généré le :  Mer 21 Novembre 2018 à 19:54
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrateur` (
   `idAdministrateur` int(11) NOT NULL,
-  `nom` varchar(255),
-  `prenom` varchar(255),
+  `nom` varchar(255) DEFAULT NULL,
+  `prenom` varchar(255) DEFAULT NULL,
   `mail` varchar(255) NOT NULL,
   `passe` varchar(255) NOT NULL,
   `idTypeAdministrateur` int(11) DEFAULT NULL
@@ -54,7 +54,7 @@ CREATE TABLE `cemac` (
   `statut` varchar(255) NOT NULL,
   `idTypeCapteur` int(11) NOT NULL,
   `idGrandeurPhysique` int(11) NOT NULL,
-  `idPiece` int(11) not null
+  `idPiece` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -65,16 +65,23 @@ CREATE TABLE `cemac` (
 
 CREATE TABLE `client` (
   `idClient` int(11) NOT NULL,
-  `nom` varchar(255) default null,
-  `prenom` varchar(255) default null,
+  `nom` varchar(255) DEFAULT NULL,
+  `prenom` varchar(255) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
-  `ville` varchar(255) Default NULL,
+  `ville` varchar(255) DEFAULT NULL,
   `codePostal` int(5) DEFAULT NULL,
-  `mail` varchar(255) NOT NULL unique,
+  `mail` varchar(255) NOT NULL,
   `passe` varchar(255) NOT NULL,
-  `dateNaissance` date Default NULL,
-  `dateCreation` date Default NULL
+  `dateNaissance` date DEFAULT NULL,
+  `dateCreation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `client`
+--
+
+INSERT INTO `client` (`idClient`, `nom`, `prenom`, `adresse`, `ville`, `codePostal`, `mail`, `passe`, `dateNaissance`, `dateCreation`) VALUES
+(5, NULL, NULL, NULL, NULL, NULL, 'laurent@isep.fr', '$2y$10$I8tQPOD3Mjs4Bz4.1yAz8e/puk/ZoQRI9tH9Ianrv3pkGqa1oRLQy', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -242,13 +249,15 @@ ALTER TABLE `administrateur`
 ALTER TABLE `cemac`
   ADD PRIMARY KEY (`idCemac`),
   ADD KEY `Fk_Cemac_TypeCapteur` (`idTypeCapteur`),
-  ADD KEY `Fk_Cemac_GrandeurPhysique` (`idGrandeurPhysique`);
+  ADD KEY `Fk_Cemac_GrandeurPhysique` (`idGrandeurPhysique`),
+  ADD KEY `Fk_Cemac_Piece` (`idPiece`);
 
 --
 -- Index pour la table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`idClient`);
+  ADD PRIMARY KEY (`idClient`),
+  ADD UNIQUE KEY `mail` (`mail`);
 
 --
 -- Index pour la table `grandeurphysique`
@@ -349,7 +358,7 @@ ALTER TABLE `cemac`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `grandeurphysique`
 --
@@ -420,8 +429,8 @@ ALTER TABLE `administrateur`
 --
 ALTER TABLE `cemac`
   ADD CONSTRAINT `Fk_Cemac_GrandeurPhysique` FOREIGN KEY (`idGrandeurPhysique`) REFERENCES `grandeurphysique` (`idGrandeurPhysique`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Fk_Cemac_TypeCapteur` FOREIGN KEY (`idTypeCapteur`) REFERENCES `typecapteur` (`idTypeCapteur`) ON DELETE CASCADE,
-  add constraint `Fk_Cemac_Piece` foreign key (`idPiece`) references `Piece`(`idPiece`) on delete cascade;
+  ADD CONSTRAINT `Fk_Cemac_Piece` FOREIGN KEY (`idPiece`) REFERENCES `piece` (`idPiece`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Fk_Cemac_TypeCapteur` FOREIGN KEY (`idTypeCapteur`) REFERENCES `typecapteur` (`idTypeCapteur`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `historique`

@@ -1,8 +1,9 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="./view/css/basic_rules.css" />
         <link rel="stylesheet" href="./view/css/styleMenuUtil.css" />
-		<link rel="stylesheet" href="./view/css/styleFooter.css" />
+	      <link rel="stylesheet" href="./view/css/styleFooter.css" />
         <title>Espace client - Homisep</title>
     </head>
 
@@ -13,8 +14,8 @@
 		  <li><a href="#home">Tableau de bord</a></li>
 		  <li><a href="#account">Mon compte</a></li>
 		  <li><a href="#contact">F.A.Q</a></li>
-		  <li class="logout"><a class="active" href="#indexUtilisateur"><img src="img/power_icon.png" class="logout_img">  Déconnexion</a></li>
-		  <li class="logoutQuery"><a class="active" href="#indexUtilisateur"><img src="img/power_icon.png" class="logoutQuery_img"></a></li>
+		  <li class="logout"><a class="active" href="#indexUtilisateur"><img src="./view/img/power_icon.png" class="logout_img">  Déconnexion</a></li>
+		  <li class="logoutQuery"><a class="active" href="#indexUtilisateur"><img src="./view/img/power_icon.png" class="logoutQuery_img"></a></li>
 		</ul>
 
         BONJOUR

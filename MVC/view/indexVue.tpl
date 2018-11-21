@@ -1,9 +1,10 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="./view/css/basic_rules.css" />
   <link rel="stylesheet" href="./view/css/styleModalInscription.css" />
-  <link rel="stylesheet" href="./view/css/styleModal.css" />
-  <link rel="stylesheet" href="./view/css/styleConnexion.css" />
+  <link rel="stylesheet" href="./view/css/styleModal.css"/>
+  <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
   <script src="./view/js/confMDPmodal.js"></script>
   <title>Bienvenue - Homisep</title>
 </head>

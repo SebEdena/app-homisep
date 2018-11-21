@@ -30,5 +30,6 @@
   {
     require("./model/inscription.php");
     inscrireClient($_POST['email'],$_POST['pass']);
+    page_connexion();
   }
 ?>

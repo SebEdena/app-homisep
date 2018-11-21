@@ -1,8 +1,9 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="./view/css/basic_rules.css" />
         <link rel="stylesheet" href="./view/css/styleMenuAdmin.css" />
-		<link rel="stylesheet" href="./view/css/styleFooter.css" />
+	      <link rel="stylesheet" href="./view/css/styleFooter.css" />
         <title>Espace administrateur - Homisep</title>
     </head>
 
@@ -12,8 +13,8 @@
 		  <li class ="logo"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></li>
 		  <li><a href="#home">Données</a></li>
 		  <li><a href="#account">Messagerie</a></li>
-		  <li class="logout"><a class="active" href="#indexUtilisateur"><img src="img/power_icon.png" class="logout_img">  Déconnexion</a></li>
-		  <li class="logoutQuery"><a class="active" href="#indexUtilisateur"><img src="img/power_icon.png" class="logoutQuery_img"></a></li>
+		  <li class="logout"><a class="active" href="#indexUtilisateur"><img src="./view/img/power_icon.png" class="logout_img">  Déconnexion</a></li>
+		  <li class="logoutQuery"><a class="active" href="#indexUtilisateur"><img src="./view/img/power_icon.png" class="logoutQuery_img"></a></li>
 		</ul>
 
     </body>

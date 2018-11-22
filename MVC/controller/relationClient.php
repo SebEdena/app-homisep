@@ -8,4 +8,10 @@
   {
     require("./view/TemplateUtilisateur.tpl");
   }
+
+  function deconnexion()
+  {
+    session_destroy();
+    require("./view/indexVue.tpl");
+  }
 ?>

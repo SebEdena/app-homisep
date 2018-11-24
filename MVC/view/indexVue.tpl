@@ -20,8 +20,8 @@
 
       <label for="uname"><b>Identifiant</b></label><form>
         <div class="radio-group">
-          <input type="radio" id="option-one" name="selector" value="client" checked><label for="option-one">Client</label>
-          <input type="radio" id="option-three" name="selector" value="admin"><label for="option-three">Administrateur</label>
+          <input type="radio" id="option-one" name="selector" value="client" checked><label for="option-one">Client</label></input>
+          <input type="radio" id="option-three" name="selector" value="admin"><label for="option-three">Administrateur</label></input>
         </div>
       </form>
       <input type="text" placeholder="Entrez votre identifiant" name="uname" required>

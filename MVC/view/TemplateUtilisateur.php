@@ -14,7 +14,7 @@
 <body>
 
   <ul id="menu">
-    <li class="logo"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></li>
+    <li class="logo"><img src="./view/img/LogoAPP_short.png" alt="Homisep" class="avatar"></li>
     <li><a href="#home">Tableau de bord</a></li>
     <li><a href="#account">Mon compte</a></li>
     <li><a href="index.php?control=relationClient&action=afficherFAQ">F.A.Q</a></li>

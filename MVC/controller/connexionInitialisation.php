@@ -17,7 +17,7 @@
     {
       if($etat == "client")
       {
-        require("./view/TemplateUtilisateur.tpl");
+        require("./view/consultationCapteurs.php");
       }
       else
       {

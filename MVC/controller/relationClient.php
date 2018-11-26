@@ -1,12 +1,12 @@
 <?php
   function afficherFAQ()
   {
-    require("./view/FAQ.tpl");
+    require("./view/FAQ.php");
   }
 
   function afficherAccueil()
   {
-    require("./view/TemplateUtilisateur.tpl");
+    require("./view/consultationCapteurs.php");
   }
 
   function deconnexion()

@@ -21,15 +21,24 @@ li {
 	width : 20%;
 }
 
+li:last-child {
+	border-right: 0;
+}
+
 .avatar {
-	width : 25.5%;
-	margin-left : 35%;
+	height: 90%;
+	width: auto;
+	overflow: hidden;
 	transition : 1s;
 }
 
 .logo{
 	width : 19.6%;
+	height: 100%;
 	cursor : pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .logo:hover{
@@ -105,7 +114,7 @@ li a:hover:not(.active) {
 	}
 }
 
-@media screen and (max-width: 1260px) {
+/* @media screen and (max-width: 1260px) {
 	.avatar{
 		height:72px;
 		width:72px;
@@ -115,5 +124,12 @@ li a:hover:not(.active) {
 @media screen and (max-width: 960px) {
 	.avatar{
 		margin-left : 10%;
+	}
+} */
+
+@media screen and (max-width: 600px) {
+	.avatar{
+		height: 70%;
+		transition: 1s;
 	}
 }

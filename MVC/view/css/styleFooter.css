@@ -1,15 +1,15 @@
 
 /* -------------------------------
-				FOOTER 
+				FOOTER
    ------------------------------- */
-   
+
 .footer {
-    height: 5%;
+    height: 30px;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    color : white;
+    color: white;
     background-color: #242027;
     text-align: right;
 	display: flex;

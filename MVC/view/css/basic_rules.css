@@ -1,6 +1,6 @@
 @font-face {
     font-family: Roboto;
-    src: url("font/Roboto-Regular.ttf") format("truetype");
+    src: url("../font/Roboto-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -25,4 +25,8 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-title);
+}
+
+button:not(:disabled) {
+    cursor: pointer;
 }

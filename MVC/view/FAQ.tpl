@@ -12,7 +12,7 @@
     <body>
 
 		<ul>
-		  <li class ="logo"><a href="index.php?control=relationClient&action=afficherAccueil"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></a></li>
+		  <li class ="logo"><img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar"></a></li>
 		  <li><a href="#home">Tableau de bord</a></li>
 		  <li><a href="#account">Mon compte</a></li>
 		  <li><a href="#contact">F.A.Q</a></li>

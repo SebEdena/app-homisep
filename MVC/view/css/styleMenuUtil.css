@@ -1,23 +1,22 @@
 body{
-	font-family: "Roboto Thin";
 	margin : 0;
 }
 
 /* -------------------------------
-				MENU 
-   ------------------------------- */
+MENU
+------------------------------- */
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 	height: 75px;
 }
 
 li {
-    float: left;
+	float: left;
 	border-right: 1px solid #bbb;
 	width : 20%;
 }
@@ -25,18 +24,24 @@ li {
 .avatar {
 	width : 25.5%;
 	margin-left : 35%;
+	transition : 1s;
 }
 
 .logo{
 	width : 19.6%;
+	cursor : pointer;
+}
+
+.logo:hover{
+	background-color: #111;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 	height : 49px;
 	vertical-align : middle;
 	font-size : 1.5em;
@@ -46,11 +51,11 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #111;
+	background-color: #111;
 }
 
 .active {
-    background-color: #4CAF50;
+	background-color: #4CAF50;
 	display : block;
 }
 
@@ -61,37 +66,37 @@ li a:hover:not(.active) {
 .logout_img{
 	width : 7%;
 	margin-top : 6%;
+	transition :1s;
 }
 
 .logoutQuery{
 	display : none;
+	transition :1s;
 }
 
 @media screen and (max-width: 1260px) {
 	li a{
 		font-size:1em;
 	}
-	
+
 	.logout {
 		display: none;
-		transition :1s;
 	}
-	
+
 	.logoutQuery{
 		display : block;
 		width: 10%;
 		float : right;
-		transition :1s;
 	}
-	
+
 	.logoutQuery .active{
 		background-color: #4CAF50;
 	}
-	
+
 	.logoutQuery .active:hover{
 		background-color:green;
 	}
-	
+
 	.logoutQuery_img{
 		text-align : center;
 		margin-left :0;
@@ -110,6 +115,5 @@ li a:hover:not(.active) {
 @media screen and (max-width: 960px) {
 	.avatar{
 		margin-left : 10%;
-		transition : 1s;
 	}
 }

@@ -70,7 +70,7 @@ CREATE TABLE `client` (
   `adresse` varchar(255) DEFAULT NULL,
   `ville` varchar(255) DEFAULT NULL,
   `codePostal` int(5) DEFAULT NULL,
-  `mail` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL unique,
   `passe` varchar(255) NOT NULL,
   `dateNaissance` date DEFAULT NULL,
   `dateCreation` date DEFAULT NULL

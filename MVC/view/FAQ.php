@@ -3,11 +3,9 @@ $title = "Espace utilisateur - FAQ";
 $css = [
   "styleFAQ.css"
 ];
-$js = [
-  "logo.js"
-];
-$modals = '';
-$jsonpage = '';
+$js = [];
+$modals = null;
+$jsonpage = null;
 ?>
 <?php ob_start(); ?>
 <h1 class="titre">Foire aux questions</h1>

@@ -21,7 +21,7 @@
       }
       else
       {
-        require("./view/TemplateAdmin.tpl");
+        require("./view/consultationDonneesClient.php");
       }
     }
   }

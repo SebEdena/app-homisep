@@ -19,6 +19,10 @@
     --color-blue: #254672;
 }
 
+html {
+    min-height: 100%;
+}
+
 * {
     font-family: var(--font-text);
 }

@@ -4,7 +4,7 @@ body{
 }
 
 #conn{
-    margin-top: 3%;
+    margin: 4vh 0;
     text-align:center;
     color: white;
     font-family : "Libel Suit";
@@ -14,7 +14,7 @@ body{
 form {
     border: 3px solid #f1f1f1;
     background-color: #D4D6D7;
-    margin-top: 3%;
+    /* margin-top: 3%; */
     margin-left: 10%;
     width: 80%;
     border-radius: 7px;
@@ -49,7 +49,7 @@ button:hover {
 /* Center the avatar image inside this container */
 .imgcontainer {
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: 2vh 0 2vh 0;
 }
 
 /* Add padding to containers */
@@ -79,18 +79,6 @@ button:hover {
         float: none;
         padding : 0;
     }
-}
-
-
-.footer {
-    height: 5%;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color : white;
-    background-color: #242027;
-    text-align: right;
 }
 
 /* RADIO BUTTON */

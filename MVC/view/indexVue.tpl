@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="./view/css/styleModalInscription.css" />
   <link rel="stylesheet" href="./view/css/styleModal.css"/>
   <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
+  <link rel="stylesheet" href="./view/css/styleFooter.css"/>
   <script src="./view/js/confMDPmodal.js"></script>
   <title>Bienvenue - Homisep</title>
 </head>
@@ -13,7 +14,7 @@
   <h1 id="conn">Page de connexion</h1>
   <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post">
     <div class="imgcontainer">
-      <img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar">
+      <img src="./view/img/LogoAPP_short.png" alt="Homisep" class="avatar">
     </div>
 
     <div class="container">

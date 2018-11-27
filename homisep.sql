@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 21 Novembre 2018 à 19:54
+-- Généré le :  Mar 27 Novembre 2018 à 14:42
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -57,6 +57,18 @@ CREATE TABLE `cemac` (
   `idPiece` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `cemac`
+--
+
+INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idGrandeurPhysique`, `idPiece`) VALUES
+(1, 'X474103', 'Marche', 2, 1, 1),
+(2, 'X450017', 'Marche', 1, 2, 1),
+(3, 'X310070', 'Panne', 3, 2, 2),
+(4, 'X123456', 'Panne', 4, 2, 2),
+(5, 'X812288', 'Marche', 5, 2, 3),
+(6, 'X255320', 'Marche', 1, 2, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +107,14 @@ CREATE TABLE `grandeurphysique` (
   `symbole` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `grandeurphysique`
+--
+
+INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`) VALUES
+(1, 'Celsius', '°C'),
+(2, 'Pourcentage', '%');
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +141,13 @@ CREATE TABLE `maison` (
   `codePostale` int(5) NOT NULL,
   `idClient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `maison`
+--
+
+INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostale`, `idClient`) VALUES
+(1, '143 avenue de Versailles', 'Paris', 75016, 5);
 
 -- --------------------------------------------------------
 
@@ -150,6 +177,15 @@ CREATE TABLE `piece` (
   `idMaison` int(11) NOT NULL,
   `idTypePiece` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `piece`
+--
+
+INSERT INTO `piece` (`idPiece`, `nom`, `idMaison`, `idTypePiece`) VALUES
+(1, 'Salon', 1, NULL),
+(2, 'Chambre', 1, NULL),
+(3, 'Salle de Bain', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,6 +245,17 @@ CREATE TABLE `typecapteur` (
   `idTypeCapteur` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `typecapteur`
+--
+
+INSERT INTO `typecapteur` (`idTypeCapteur`, `nom`) VALUES
+(1, 'Capteur Luminosité'),
+(2, 'Capteur Température'),
+(3, 'Actionneur Luminosité'),
+(4, 'Actionneur Température'),
+(5, 'Actionneur Volet');
 
 -- --------------------------------------------------------
 
@@ -353,7 +400,7 @@ ALTER TABLE `administrateur`
 -- AUTO_INCREMENT pour la table `cemac`
 --
 ALTER TABLE `cemac`
-  MODIFY `idCemac` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCemac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `client`
 --
@@ -363,7 +410,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `grandeurphysique`
 --
 ALTER TABLE `grandeurphysique`
-  MODIFY `idGrandeurPhysique` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGrandeurPhysique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `historique`
 --
@@ -373,7 +420,7 @@ ALTER TABLE `historique`
 -- AUTO_INCREMENT pour la table `maison`
 --
 ALTER TABLE `maison`
-  MODIFY `idMaison` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMaison` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `message`
 --
@@ -383,7 +430,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `piece`
 --
 ALTER TABLE `piece`
-  MODIFY `idPiece` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPiece` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `programme`
 --
@@ -403,7 +450,7 @@ ALTER TABLE `typeadministrateur`
 -- AUTO_INCREMENT pour la table `typecapteur`
 --
 ALTER TABLE `typecapteur`
-  MODIFY `idTypeCapteur` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTypeCapteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `typepiece`
 --

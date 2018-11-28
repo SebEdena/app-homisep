@@ -16,16 +16,24 @@
 
     $res -> execute();
     $row = $res->fetch(PDO::FETCH_ASSOC);
-    if(password_verify($password,$row["passe"]))
+    if($row['mail'] <> "")
     {
-      $_SESSION["mail"] = $row["mail"];
-      $_SESSION["type"] = $selecteur;
-      return $selecteur;
+      if(password_verify($password,$row["passe"]))
+      {
+        $_SESSION["mail"] = $row["mail"];
+        $_SESSION["type"] = $selecteur;
+        return $selecteur;
+      }
+      else
+      {
+        return "ErrorMDP";
+      }
     }
     else
     {
-      return "null";
+      return "ErrorUser";
     }
+
   }
 
 ?>

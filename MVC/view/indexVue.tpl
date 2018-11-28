@@ -31,7 +31,10 @@
       <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
 
       <button type="submit">Se connecter</button>
-      <span ><a href="#" id="modalBtn">Créer un nouvel utilisateur</a></span>
+      <h3>
+        <?php if(isset($message)) echo($message); ?>
+      </h3>
+      <span><a href="#" id="modalBtn">Créer un nouvel utilisateur</a></span>
     </div>
 
   </form>

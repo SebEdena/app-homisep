@@ -8,28 +8,45 @@
   {
     require("./model/connexion.php");
     $etat = connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
-    if($etat  == "null")
+    switch($etat)
     {
-      echo("connexion refusée");
-      require("./view/indexVue.tpl");
-    }
-    else
-    {
-      if($etat == "client")
-      {
-        require("./view/consultationCapteurs.php");
-      }
-      else
-      {
+      case "admin":
         require("./view/consultationDonneesClient.php");
-      }
+        break;
+      case "client":
+        require("./view/consultationCapteurs.php");
+        break;
+      case "ErrorMDP":
+        $message = "Mot de passe incorrect";
+        require("./view/indexVue.tpl");
+        break;
+      case "ErrorUser":
+        $message = "Utilisateur Inconnu";
+        require("./view/indexVue.tpl");
+        break;
     }
+    // if($etat  == "null")
+    // {
+    //   $message = "Utilisateur inconnu ou mot de passe refusé";
+    //   require("./view/indexVue.tpl");
+    // }
+    // else
+    // {
+    //   if($etat == "admin")
+    //   {
+    //     require("./view/consultationDonneesClient.php");
+    //   }
+    //   else
+    //   {
+    //     require("./view/consultationCapteurs.php");
+    //   }
+    // }
   }
 
   function inscriptionClient()
   {
     require("./model/inscription.php");
-    inscrireClient($_POST['email'],$_POST['pass']);
-    page_connexion();
+    $message = inscrireClient($_POST['email'],$_POST['pass']);
+    require("./view/indexVue.tpl");
   }
 ?>

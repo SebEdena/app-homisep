@@ -18,7 +18,7 @@
 		  <li><a href="#home">Données</a></li>
 		  <li><a href="#account">Messagerie</a></li>
           <li class="logout">
-              <a href="index.php?control=relationAdmin&action=deconnexion">
+              <a href="index.php?control=controleurGenerique&action=deconnexion">
                   <img src="./view/img/power_icon.png"></img>
                   <div>Déconnexion</div>
               </a>

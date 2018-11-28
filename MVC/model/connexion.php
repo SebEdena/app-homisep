@@ -18,6 +18,8 @@
     $row = $res->fetch(PDO::FETCH_ASSOC);
     if(password_verify($password,$row["passe"]))
     {
+      $_SESSION["mail"] = $row["mail"];
+      $_SESSION["type"] = $selecteur;
       return $selecteur;
     }
     else

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="./css/styleOnglet.css">
+	<link type="text/css" rel="stylesheet" href="./css/styleMaisonPieceCapteur.css">
+	<link type="text/css" rel="stylesheet" href="./css/basic_rules.css">
+	<style>
+		body {font-family: "Lato", sans-serif;}
+	</style>
+</head>
+<body>
+	<div class="tabcontainer">
+		<div class="tablist">
+			<a class="tablink" id="defaultOpen">Coordonnées</a>
+			<a class="tablink" id="defaultOpen">Données Utilisateur</a>
+		</div>
+		<div class="tabcontent" id="content">
+			<div class="tabpage">
+				<h1>Coordonnées</h1>
+				<p>N/A</p>
+			</div>
+			<div class="tabpage">
+				<h1>Données Utilisateurs</h1>
+				<div>
+					<form>
+						<label>Liste des Clients</label>
+						<input input type="text" placeholder="Entrez un nom, ou un prénom" name="nameClient"></imput>
+						<button type="submit">Rechercher</button>
+					</form>
+					<form>
+						<button>Nouveau Client</button>
+					</form>
+					<div>
+						<table>
+							<tr>
+								<th>N°Client</th>
+								<th>Email</th>
+								<th>Nom</th>
+								<th>Prénom</th>
+							</tr>
+							<tr>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+	<div class="boutonRight">
+		<button>Annuler</button>
+		<button>Modifier</button>
+		<button>Valider</button>
+	</div>
+</div>
+</div>
+</body>
+<script src="./js/onglet.js"></script>
+</html>

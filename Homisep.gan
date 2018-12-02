@@ -34,12 +34,12 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Début de l'équipe" meeting="false" start="2018-10-01" duration="2" complete="100" expand="false">
+        <task id="0" name="Début de l'équipe" meeting="false" start="2018-10-01" duration="2" complete="100" expand="true">
             <task id="1" name="Attribution des rôles pour l'équipe" color="#8cb6ce" meeting="false" start="2018-10-01" duration="1" complete="100" expand="true"/>
             <task id="4" name="Etablir la charte de travail" color="#8cb6ce" meeting="false" start="2018-10-01" duration="1" complete="100" expand="true"/>
             <task id="5" name="Créer un logo et un nom pour l'équipe" color="#8cb6ce" meeting="false" start="2018-10-01" duration="2" complete="100" expand="true"/>
         </task>
-        <task id="11" name="Spécification" meeting="false" start="2018-10-01" duration="21" complete="100" expand="false">
+        <task id="11" name="Spécification" meeting="false" start="2018-10-01" duration="21" complete="100" expand="true">
             <task id="12" name="Définir les fonctionnalités du système" color="#8cb6ce" meeting="false" start="2018-10-01" duration="6" complete="100" expand="true"/>
             <task id="93" name="Maquettage des pages web(IHM)" color="#8cb6ce" meeting="false" start="2018-10-08" duration="16" complete="100" expand="true"/>
             <task id="14" name="Modélisation de la base de données" meeting="false" start="2018-10-11" duration="13" complete="100" expand="true">
@@ -47,21 +47,40 @@
                 <task id="15" name="Conceptionde du modèle relationnel" color="#8cb6ce" meeting="false" start="2018-10-16" duration="10" complete="100" expand="true"/>
             </task>
         </task>
-        <task id="41" name="Conception" meeting="false" start="2018-10-23" duration="15" complete="90" expand="false">
+        <task id="41" name="Conception" meeting="false" start="2018-10-23" duration="15" complete="90" expand="true">
             <task id="42" name="Partie Configuration" meeting="false" start="2018-10-23" duration="15" complete="90" expand="true">
                 <task id="47" name="Mise en place de GIT" color="#8cb6ce" meeting="false" start="2018-10-23" duration="10" complete="80" expand="true"/>
                 <task id="51" name="Priorisation des fonctionnalités" color="#8cb6ce" meeting="false" start="2018-10-29" duration="11" complete="100" expand="true"/>
             </task>
         </task>
+        <task id="154" name="Partie Indispensable" color="#000000" meeting="false" start="2018-10-22" duration="56" complete="32" expand="true">
+            <task id="155" name="Utilisateur" meeting="false" start="2018-10-22" duration="56" complete="36" expand="true">
+                <task id="156" name="Connexion" color="#8cb6ce" meeting="false" start="2018-10-22" duration="20" complete="100" expand="true"/>
+                <task id="157" name="Créer un compte utilisateur" color="#8cb6ce" meeting="false" start="2018-11-12" duration="5" complete="100" expand="true"/>
+                <task id="158" name="Gestion de compte utilisateur" color="#8cb6ce" meeting="false" start="2018-11-12" duration="23" complete="50" expand="true"/>
+                <task id="159" name="Ajouter/Supprimer une maison" color="#8cb6ce" meeting="false" start="2018-12-03" duration="11" complete="25" expand="true"/>
+                <task id="160" name="Ajouter/Supprimer une pièce" color="#8cb6ce" meeting="false" start="2018-12-03" duration="11" complete="25" expand="true"/>
+                <task id="161" name="Ajouter/Supprimer un capteur/Actionneur" color="#8cb6ce" meeting="false" start="2018-12-03" duration="11" complete="25" expand="true"/>
+                <task id="162" name="Consultation/Modification générale + Maison + Pièce" color="#8cb6ce" meeting="false" start="2018-12-10" duration="11" complete="15" expand="true"/>
+                <task id="163" name="Consultation/Modification Maison + Capteur + Pièce" color="#8cb6ce" meeting="false" start="2018-12-10" duration="11" complete="15" expand="true"/>
+                <task id="164" name="Visualiser les CGU" color="#8cb6ce" meeting="false" start="2018-11-20" duration="35" complete="5" expand="true"/>
+            </task>
+            <task id="165" name="Administrateur" meeting="false" start="2018-10-22" duration="56" complete="29" expand="true">
+                <task id="166" name="Connexion" color="#8cb6ce" meeting="false" start="2018-10-22" duration="20" complete="100" expand="true"/>
+                <task id="167" name="Gérer son compte (mot de passe)" color="#8cb6ce" meeting="false" start="2018-12-03" duration="8" complete="0" expand="true"/>
+                <task id="168" name="Consulter les données utilisateurs" meeting="false" start="2018-12-03" duration="11" complete="0" expand="true"/>
+                <task id="169" name="Modification dynamique des CGU" color="#8cb6ce" meeting="false" start="2018-11-20" duration="35" complete="5" expand="true"/>
+            </task>
+        </task>
         <task id="108" name="Partie Confort" meeting="false" start="2018-10-22" duration="95" complete="7" expand="false">
             <task id="109" name="Utilisateur" meeting="false" start="2018-10-22" duration="94" complete="11" expand="true">
-                <task id="111" name="Affichage de la FAQ Statique" color="#8cb6ce" meeting="false" start="2018-10-22" duration="22" complete="100" expand="true"/>
                 <task id="126" name="Actionneur" meeting="false" start="2019-01-07" duration="35" complete="0" expand="true"/>
                 <task id="127" name="Détection et déclaration de panne" meeting="false" start="2019-01-14" duration="34" complete="0" expand="true"/>
                 <task id="128" name="Utilisation de la messagerie" meeting="false" start="2019-01-14" duration="30" complete="0" expand="true"/>
                 <task id="129" name="Statistique" meeting="false" start="2019-01-22" duration="24" complete="0" expand="true"/>
                 <task id="130" name="Ordre des maisons" meeting="false" start="2019-01-22" duration="24" complete="0" expand="true"/>
                 <task id="135" name="Accéder les mentions légales" meeting="false" start="2019-01-22" duration="24" complete="0" expand="true"/>
+                <task id="111" name="Affichage de la FAQ Statique" color="#8cb6ce" meeting="false" start="2018-10-22" duration="22" complete="100" expand="true"/>
             </task>
             <task id="110" name="Administrateur" meeting="false" start="2019-01-07" duration="40" complete="0" expand="true">
                 <task id="113" name="Créer un compte d'un autre utilisateur" meeting="false" start="2019-01-07" duration="1" complete="0" expand="true"/>
@@ -73,7 +92,7 @@
                 <task id="124" name="Création du type Super Admin" meeting="false" start="2019-01-21" duration="30" complete="0" expand="true"/>
             </task>
         </task>
-        <task id="139" name="Partie Luxe" meeting="false" start="2018-10-22" duration="116" complete="22" expand="false">
+        <task id="139" name="Partie Luxe" meeting="false" start="2019-03-01" duration="22" complete="0" expand="false">
             <task id="140" name="Utilisateur" meeting="false" start="2019-03-01" duration="22" complete="0" expand="true">
                 <task id="142" name="Réinitialiser le mot de passe" color="#8cb6ce" meeting="false" start="2019-03-01" duration="22" complete="0" expand="true"/>
                 <task id="143" name="Ajout/Suppr un type de pièce" meeting="false" start="2019-03-01" duration="10" complete="0" expand="true"/>
@@ -85,25 +104,6 @@
                 <task id="147" name="Création WebMaster" meeting="false" start="2019-03-01" duration="22" complete="0" expand="true"/>
                 <task id="148" name="Modification dynamique du logo" meeting="false" start="2019-03-01" duration="10" complete="0" expand="true"/>
                 <task id="149" name="Modification dynamique mentions légales" meeting="false" start="2019-03-01" duration="16" complete="0" expand="true"/>
-            </task>
-            <task id="154" name="Partie Indispensable" color="#000000" meeting="false" start="2018-10-22" duration="56" complete="41" expand="false">
-                <task id="155" name="Utilisateur" meeting="false" start="2018-10-22" duration="56" complete="44" expand="true">
-                    <task id="156" name="Connexion" color="#8cb6ce" meeting="false" start="2018-10-22" duration="20" complete="100" expand="true"/>
-                    <task id="157" name="Créer un compte utilisateur" color="#8cb6ce" meeting="false" start="2018-11-12" duration="23" complete="100" expand="true"/>
-                    <task id="158" name="Gestion de compte utilisateur" color="#8cb6ce" meeting="false" start="2018-11-12" duration="23" complete="50" expand="true"/>
-                    <task id="159" name="Ajouter/Supprimer une maison" color="#8cb6ce" meeting="false" start="2018-12-03" duration="6" complete="25" expand="true"/>
-                    <task id="160" name="Ajouter/Supprimer une pièce" color="#8cb6ce" meeting="false" start="2018-12-03" duration="11" complete="25" expand="true"/>
-                    <task id="161" name="Ajouter/Supprimer un capteur/Actionneur" color="#8cb6ce" meeting="false" start="2018-12-03" duration="11" complete="25" expand="true"/>
-                    <task id="162" name="Consultation/Modification générale + Maison + Pièce" color="#8cb6ce" meeting="false" start="2018-12-10" duration="11" complete="15" expand="true"/>
-                    <task id="163" name="Consultation/Modification Maison + Capteur + Pièce" color="#8cb6ce" meeting="false" start="2018-12-10" duration="11" complete="15" expand="true"/>
-                    <task id="164" name="Visualiser les CGU" color="#8cb6ce" meeting="false" start="2018-11-20" duration="35" complete="5" expand="true"/>
-                </task>
-                <task id="165" name="Administrateur" meeting="false" start="2018-10-22" duration="56" complete="38" expand="true">
-                    <task id="166" name="Connexion" color="#8cb6ce" meeting="false" start="2018-10-22" duration="20" complete="100" expand="true"/>
-                    <task id="167" name="Gérer son compte (mot de passe)" color="#8cb6ce" meeting="false" start="2018-12-03" duration="6" complete="100" expand="true"/>
-                    <task id="168" name="Consulter les données utilisateurs" meeting="false" start="2018-12-03" duration="11" complete="0" expand="true"/>
-                    <task id="169" name="Modification dynamique des CGU" color="#8cb6ce" meeting="false" start="2018-11-20" duration="35" complete="5" expand="true"/>
-                </task>
             </task>
         </task>
         <task id="17" name="Formation Personnelle" meeting="false" start="2018-10-01" duration="71" complete="6" expand="false">

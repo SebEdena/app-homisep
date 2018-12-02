@@ -26,7 +26,7 @@
     ';
 ?>
 <?php ob_start(); ?>
-    <h1>BONJOUR</h1>
+    <h1>Données Client</h1>
     <button id="ModalBtn">LE modal</button>
 <?php $content = ob_get_clean(); ?>
 <?php require("./view/templateAdmin.php"); ?>

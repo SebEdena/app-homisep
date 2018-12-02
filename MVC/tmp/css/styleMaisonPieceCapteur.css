@@ -57,3 +57,19 @@
   grid-area: ajout;
   border : solid 1px;
 }
+
+
+@media screen and (max-width:800px) {
+  .gridContainerMaisonPieceCapteur
+  {
+    display:grid;
+    grid-template-areas :
+    'headerPiece'
+    'piece'
+    'headerCapteur'
+    'capteur'
+    'headerAjout'
+    'ajout';
+    grid-gap: 20px;
+  }
+}

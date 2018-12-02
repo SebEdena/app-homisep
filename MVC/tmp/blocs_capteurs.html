@@ -5,141 +5,193 @@
     <link type="text/css" rel="stylesheet" href="./css/basic_rules.css">
     <link type="text/css" rel="stylesheet" href="./css/modal.css">
     <style>
-        .capt-gen{
-            width: 250px;
-            height: 170px;
-            border: 1px solid black;
-        }
 
-        .capt-title {
-            padding: 2px;
-            text-align: center;
-            border-bottom: 1px solid black;
-        }
+    .capt-menu{
+        grid-area: capt-menu;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .capt-content {
-            padding: 2px;
-            display: grid;
-            grid-template-columns: 20% 60% 20%;
-            grid-template-rows: 45% 45% 20%;
-            align-items: center;
-            grid-template-areas:
-                "capt-menu capt-data-desired capt-buttons"
-                "capt-status capt-data-real capt-buttons"
-                "capt-auto-manual capt-auto-manual capt-auto-manual";
-        }
+    .capt-menu > button {
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-lightgrey);
+        border: 1px solid var(--color-darkgrey);
+    }
 
-        .capt-menu{
-            grid-area: capt-menu;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .capt-menu > button > img {
+        height: 30px;
+        width: 30px;
+    }
 
-        .capt-menu > button {
-            height: 45px;
-            width: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-lightgrey);
-            border: 1px solid var(--color-darkgrey);
-        }
+    .capt-status {
+        grid-area: capt-status;
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 5px solid var(--color-green);
+        background-color: lime;
+    }
 
-        .capt-menu > button > img {
-            height: 30px;
-            width: 30px;
-        }
+    .capt-status.capt-error {
+        border: 5px solid crimson;
+        background-color: red;
+    }
+    .capt-gen{
+        width: 250px;
+        height: 170px;
+        border: 1px solid black;
+    }
 
-        .capt-status {
-            grid-area: capt-status;
-            width: 35px;
-            height: 35px;
-            border-radius: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 5px solid var(--color-green);
-            background-color: lime;
-        }
+    .capt-gen .capt-title {
+        padding: 2px;
+        text-align: center;
+        border-bottom: 1px solid black;
+    }
 
-        .capt-status.capt-error {
-            border: 5px solid crimson;
-            background-color: red;
-        }
+    .capt-gen .capt-content {
+        padding: 2px;
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        grid-template-rows: 45% 45% 10%;
+        align-items: center;
+        grid-template-areas:
+        "capt-menu capt-data-desired capt-buttons"
+        "capt-status capt-data-real capt-buttons"
+        "capt-auto-manual capt-auto-manual capt-auto-manual";
+    }
 
-        .capt-auto-manual {
-            grid-area: capt-auto-manual;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .capt-gen .capt-auto-manual {
+        grid-area: capt-auto-manual;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .capt-auto-manual {
-            width: auto;
-        }
+    .capt-gen .capt-auto-manual {
+        width: auto;
+    }
 
-        .capt-auto-manual button {
-            padding: 10px;
-            background-color: var(--color-grey);
-            border: 0;
-            color: white;
-            font-size: 1.1em;
-            transition: background-color 0.2s;
-        }
+    .capt-gen .capt-auto-manual button {
+        padding: 10px;
+        background-color: var(--color-grey);
+        border: 0;
+        color: white;
+        font-size: 1.1em;
+        transition: background-color 0.2s;
+    }
 
-        .capt-auto-manual button:not(:disabled):hover {
-            background-color: var(--color-darkgrey);
-        }
+    .capt-gen .capt-auto-manual button:not(:disabled):hover {
+        background-color: var(--color-darkgrey);
+    }
 
-        .capt-data-desired {
-            grid-area: capt-data-desired;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
-        }
+    .capt-gen .capt-data-desired {
+        grid-area: capt-data-desired;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .capt-data-desired .capt-value{
-            font-size: 1.5em;
-            font-style: bold;
-        }
+    .capt-gen .capt-data-desired .capt-value{
+        font-size: 1.5em;
+        font-style: bold;
+    }
 
-        .capt-data-real {
-            grid-area: capt-data-real;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
-        }
+    .capt-data-real {
+        grid-area: capt-data-real;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .capt-value {
-            font-size: 1.5em;
-            font-style: bold;
-        }
+    .capt-value {
+        font-size: 1.5em;
+        font-style: bold;
+    }
 
-        .capt-buttons{
-            grid-area: capt-buttons;
-            height: match-parent;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-        }
+    .capt-buttons{
+        grid-area: capt-buttons;
+        height: match-parent;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
 
-        .capt-buttons > button {
-            height: 45px;
-            width: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-lightgrey);
-            border: 1px solid var(--color-darkgrey);
-        }
+    .capt-buttons > button {
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-lightgrey);
+        border: 1px solid var(--color-darkgrey);
+    }
 
-        .capt-buttons > button > img {
-            height: 35px;
-            width: 35px;
-        }
+    .capt-buttons > button > img {
+        height: 35px;
+        width: 35px;
+    }
+
+    .capt-solo {
+        width: 150px;
+        height: 170px;
+        border: 1px solid black;
+    }
+
+    .capt-solo .capt-title {
+        padding: 2px;
+        font-size: 0.9em;
+        text-align: center;
+        border-bottom: 1px solid black;
+    }
+
+    .capt-solo .capt-content {
+        padding: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .capt-solo.act-solo .capt-buttons{
+        padding: 2px;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        justify-content: center,
+    }
+
+    .capt-solo.act-solo .capt-buttons{
+        padding: 2px;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        justify-content: center,
+    }
+
+    .capt-solo.act-solo .capt-menu-data-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .capt-solo.act-solo .capt-menu-data-container *{
+        padding: 0 2px;
+    }
+
+    .capt-solo.act-solo .capt-data-desired {
+        padding-top: 1px;
+    }
     </style>
 </head>
 <body>
@@ -165,6 +217,51 @@
                 <button disabled><img src="./img/chevron-arrow-up.png"></button>
                 <button disabled><img src="./img/chevron-arrow-down.png"></button>
             </div>
+        </div>
+    </div>
+    <div class="capt-gen" data-capt-id=3>
+        <div class="capt-title">Température Ext.</div>
+        <div class="capt-content">
+            <div class="capt-menu">
+                <button disabled><img src="./img/menu-button-3.png"></img></button>
+            </div>
+            <div class="capt-status capt-error"></div>
+            <div class="capt-data-real">
+                <div class="capt-dr-label">Actuel</div>
+                <div class="capt-value">78%</div>
+            </div>
+        </div>
+    </div>
+    <div class="capt-solo" data-capt-id=3>
+        <div class="capt-title">Capteur #3</div>
+        <div class="capt-content">
+            <div class="capt-menu">
+                <button disabled><img src="./img/menu-button-3.png"></img></button>
+            </div>
+            <div class="capt-data-real">
+                <div class="capt-dr-label">Actuel</div>
+                <div class="capt-value">78%</div>
+            </div>
+            <div class="capt-status capt-error"></div>
+        </div>
+    </div>
+    <div class="capt-solo act-solo" data-capt-id=3>
+        <div class="capt-title">Actionneur #3</div>
+        <div class="capt-content">
+            <div class="capt-menu-data-container">
+                <div class="capt-menu">
+                    <button disabled><img src="./img/menu-button-3.png"></img></button>
+                </div>
+                <div class="capt-data-desired">
+                    <div class="capt-dd-label">Désiré</div>
+                    <div class="capt-value">80%</div>
+                </div>
+            </div>
+            <div class="capt-buttons">
+                <button disabled><img src="./img/chevron-arrow-up.png"></button>
+                <button disabled><img src="./img/chevron-arrow-down.png"></button>
+            </div>
+            <div class="capt-status capt-error"></div>
         </div>
     </div>
 </body>

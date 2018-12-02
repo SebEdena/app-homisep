@@ -7,7 +7,7 @@
     }
     else
     {
-      require("./view/consultationCapteurs.php");
+        header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
     }
   }
 

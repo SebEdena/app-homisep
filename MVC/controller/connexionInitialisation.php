@@ -11,10 +11,9 @@
     switch($etat)
     {
       case "admin":
-        require("./view/consultationDonneesClient.php");
-        break;
       case "client":
-        require("./view/consultationCapteurs.php");
+        require("./controller/controleurGenerique.php");
+        afficherAccueil();
         break;
       case "ErrorMDP":
         $message = "Mot de passe incorrect";

@@ -138,7 +138,7 @@ CREATE TABLE `maison` (
   `idMaison` int(11) NOT NULL,
   `adresse` varchar(255) NOT NULL,
   `ville` varchar(255) NOT NULL,
-  `codePostale` int(5) NOT NULL,
+  `codePostal` int(5) NOT NULL,
   `idClient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -146,7 +146,7 @@ CREATE TABLE `maison` (
 -- Contenu de la table `maison`
 --
 
-INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostale`, `idClient`) VALUES
+INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`) VALUES
 (1, '143 avenue de Versailles', 'Paris', 75016, 5);
 
 -- --------------------------------------------------------

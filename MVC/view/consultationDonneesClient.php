@@ -27,6 +27,34 @@
 ?>
 <?php ob_start(); ?>
     <h1>Données Client</h1>
-    <button id="ModalBtn">LE modal</button>
+    <div id="content">
+      <form>
+        <label>Liste des Clients : </label>
+        <input input type="text" placeholder="Entrez un nom, ou un prénom" name="nameClient"></imput>
+        <button type="submit">Rechercher</button>
+      </form>
+      <form>
+        <button>Nouveau Client</button>
+      </form>
+      <div>
+        <table>
+          <tr>
+            <th>N°Client</th>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+          </tr>
+          <?php foreach ($clients as $client) { ?>
+              <td><?= $client->getId();?></td>
+              <td><?= $client->getMail();?></td>
+              <td><?= $client->getNom();?></td>
+              <td><?= $client->getPrenom();?></td>
+              <td><?= $client->getAdresse();?></td>
+          <?php } ?>
+
+        </table>
+      </div>
+    </div>
 <?php $content = ob_get_clean(); ?>
 <?php require("./view/templateAdmin.php"); ?>

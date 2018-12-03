@@ -3,11 +3,11 @@
   {
     if($_SESSION['type'] == "admin")
     {
-      require("./view/consultationDonneesClient.php");
+      header("Location: " . "index.php?control=relationAdmin&action=afficheDonneesClients");
     }
     else
     {
-        header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
+      header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
     }
   }
 

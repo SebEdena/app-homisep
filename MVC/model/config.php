@@ -4,4 +4,5 @@
 	$db_user = 'root';
 
 	$database = new PDO($db_host,$db_user, $db_pass);
+	$database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>

@@ -2,6 +2,10 @@
     margin: 20px 0;
 }
 
+.tabcontent{
+    padding: 5px;
+}
+
 @media screen and (max-width: 700px) {
     .tablink {
         font-size: 0.8em;

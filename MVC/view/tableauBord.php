@@ -2,10 +2,12 @@
     $title = "Espace utilisateur - Vue générale";
     $css = [
         "styleOnglet.css",
-        "styleTableauBord.css"
+        "styleTableauBord.css",
+        "styleAccordion.css"
     ];
     $js = [
-        "onglet.js"
+        "onglet.js",
+        "tableauBord.js"
     ];
     $modals = null;
     $jsonpage = null;
@@ -21,10 +23,10 @@
     </select>
     <div class="tabcontainer">
         <div class="tablist">
-            <a class="tablink" id="defaultOpen">Vue générale</a>
-            <a class="tablink">Luminosité</a>
-            <a class="tablink">Chauffage</a>
-            <a class="tablink">Volets</a>
+            <a class="tablink defaultOpen" id="gen-tab">Vue générale</a>
+            <a class="tablink" id="gen-lux">Luminosité</a>
+            <a class="tablink" id="gen-heat">Chauffage</a>
+            <a class="tablink" id="gen-shut">Volets</a>
         </div>
         <div class="tabcontent">
             <div class="tabpage">

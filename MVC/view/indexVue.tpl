@@ -12,7 +12,7 @@
 
 <body>
   <h1 id="conn">Page de connexion</h1>
-  <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post">
+  <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post" onsubmit="validate(event);">
     <div class="imgcontainer">
       <img src="./view/img/LogoAPP_short.png" alt="Homisep" class="avatar">
     </div>
@@ -47,11 +47,11 @@
       </div>
       <div class="modal-body">
         <div class="module">
-          <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient" method="post">
+          <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient" method="post" onsubmit="validate(event);">
             <label>Adresse email</label><input type="email" placeholder="Entrez votre adresse mail" class="textbox" name="email" required/>
             <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass" required/>
             <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
-            <input type="submit" value="S'enregistrer" class="button" onclick="validate(event);"/>
+            <input type="submit" value="S'enregistrer" class="button"/>
           </form>
         </div>
       </div>

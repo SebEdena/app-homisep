@@ -49,7 +49,8 @@
         <div class="module">
           <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient" method="post" onsubmit="validate(event);">
             <label>Adresse email</label><input type="email" placeholder="Entrez votre adresse mail" class="textbox" name="email" required/>
-            <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass" required/>
+            <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un nombre, une minuscule, une majuscule et au moins 8 caractères ou plus."required/>
             <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
             <input type="submit" value="S'enregistrer" class="button"/>
           </form>

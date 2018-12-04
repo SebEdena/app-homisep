@@ -70,7 +70,13 @@ INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idGra
 (3, 'X310070', 'Panne', 3, 2, 2),
 (4, 'X123456', 'Panne', 4, 2, 2),
 (5, 'X812288', 'Marche', 5, 2, 3),
-(6, 'X255320', 'Marche', 1, 2, 3);
+(6, 'X255320', 'Marche', 1, 2, 3),
+(7, 'X402500', 'Marche', 2, 1, 4),
+(8, 'X536111', 'Panne', 1, 2, 5),
+(9, 'X647222', 'Panne', 3, 2, 5),
+(10, 'X758333', 'Marche', 4, 2, 4),
+(11, 'X869444', 'Marche', 5, 2, 4),
+(12, 'X970555', 'Marche', 1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -150,7 +156,8 @@ CREATE TABLE `maison` (
 --
 
 INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`) VALUES
-(1, '143 avenue de Versailles', 'Paris', 75016, 5);
+(1, '143 avenue de Versailles', 'Paris', 75016, 5),
+(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5);
 
 -- --------------------------------------------------------
 
@@ -188,7 +195,9 @@ CREATE TABLE `piece` (
 INSERT INTO `piece` (`idPiece`, `nom`, `idMaison`, `idTypePiece`) VALUES
 (1, 'Salon', 1, NULL),
 (2, 'Chambre', 1, NULL),
-(3, 'Salle de Bain', 1, NULL);
+(3, 'Salle de Bain', 1, NULL),
+(4, 'Salle de classe', 2, NULL),
+(5, 'Amphithéâtre Olympe de Gouges', 2, NULL);
 
 -- --------------------------------------------------------
 

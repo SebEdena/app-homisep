@@ -46,11 +46,13 @@
             <th>Adresse</th>
           </tr>
           <?php foreach ($clients as $client) { ?>
+            <tr>
               <td><?= $client->getId();?></td>
               <td><?= $client->getMail();?></td>
               <td><?= $client->getNom();?></td>
               <td><?= $client->getPrenom();?></td>
               <td><?= $client->getAdresse();?></td>
+            </tr>
           <?php } ?>
 
         </table>

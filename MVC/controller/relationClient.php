@@ -21,7 +21,7 @@
       }catch(Exception $exception){
           http_response_code(500);
           header('Content-Type: application/json; charset=UTF-8');
-          print json_encode(array('error'=>true, 'message'=>$exception));
+          print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
       }
   }
 ?>

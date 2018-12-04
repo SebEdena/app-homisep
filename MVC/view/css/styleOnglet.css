@@ -46,6 +46,6 @@
 .tabpage {
     color: black;
     display: none;
-    padding: 50px;
-    text-align: center;
+    padding: 0;
+    /* text-align: center; */
 }

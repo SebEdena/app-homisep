@@ -2,11 +2,12 @@
     $title = "Espace utilisateur - Vue générale";
     $css = [
         "styleOnglet.css",
-        "styleTableauBord.css",
-        "styleAccordion.css"
+        "styleAccordion.css",
+        "styleTableauBord.css"
     ];
     $js = [
         "onglet.js",
+        "accordion.js",
         "tableauBord.js"
     ];
     $modals = null;
@@ -30,8 +31,6 @@
         </div>
         <div class="tabcontent">
             <div class="tabpage">
-                <h1>London</h1>
-                <p>London is the capital city of England.</p>
             </div>
             <div class="tabpage">
                 <h1>Paris</h1>

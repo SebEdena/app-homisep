@@ -13,9 +13,11 @@ function recupDonnéesMaison(event){
                 return (typeof v === "object" || isNaN(v)) ? v : parseInt(v, 10);
             });
             console.log(formatted);
+            deleteAccordions();
             for (data of formatted) {
-                $('.tabcontent').append(build_piece(data));
+                $('.tabpage').append(build_piece(data));
             }
+            updateAccordions();
         },
         error: function(error){
             console.log(error);
@@ -26,10 +28,9 @@ function recupDonnéesMaison(event){
 
 function build_piece(data){
     return `
-        <div class="accord-piece" data-piece-id=${data['id']}>
-            <input type="checkbox" id="title">
-            <label for="title">${data['nom']}</label>
-            <div id="piece-content">
+        <div class="accord" data-piece-id=${data['id']}>
+            <label>${data['nom']}</label>
+            <div class="accord-content">
                 <h1>Bijour</h1>
             </div>
         </div>

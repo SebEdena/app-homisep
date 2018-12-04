@@ -1,19 +1,19 @@
 body{
-    background-color : #1f3a70;
+    background-image: url("../img/fond.jpg");
     font-family : Roboto;
 }
 
 #conn{
     margin: 4vh 0;
     text-align:center;
-    color: white;
+    color: #254672;
     font-family : "Libel Suit";
-	font-size : 3em;
+	   font-size : 3em;
 }
 /* Bordered form */
 form {
-    border: 3px solid #f1f1f1;
-    background-color: #D4D6D7;
+    border: 1px solid #254672;
+    background-color: #F5F5F5;
     /* margin-top: 3%; */
     margin-left: 10%;
     width: 80%;
@@ -90,7 +90,7 @@ input[type=radio] {
 }
 
 label {
-  color: #9a929e;
+  color: #254672;
   display: inline-block;
   cursor: pointer;
   font-weight: bold;

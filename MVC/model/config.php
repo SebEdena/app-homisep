@@ -1,5 +1,5 @@
 <?php
-	$db_host = 'mysql:host=localhost:3306;dbname=homisep';
+	$db_host = 'mysql:host=localhost:3306;dbname=homisep;charset=utf8';
 	$db_pass = 'root';
 	$db_user = 'root';
 

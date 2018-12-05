@@ -33,16 +33,10 @@
             <div class="tabpage">
             </div>
             <div class="tabpage">
-                <h1>Paris</h1>
-                <p>Paris is the capital of France.</p>
             </div>
             <div class="tabpage">
-                <h1>Tokyo</h1>
-                <p>Tokyo is the capital of Japan.</p>
             </div>
             <div class="tabpage">
-                <h1>Oslo</h1>
-                <p>Oslo is the capital of Norway.</p>
             </div>
         </div>
     </div>

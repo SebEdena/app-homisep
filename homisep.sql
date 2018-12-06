@@ -56,7 +56,6 @@ CREATE TABLE `cemac` (
   `numeroSerie` varchar(255) NOT NULL,
   `statut` varchar(255) NOT NULL,
   `idTypeCapteur` int(11) NOT NULL,
-  `idGrandeurPhysique` int(11) NOT NULL,
   `idPiece` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -64,19 +63,19 @@ CREATE TABLE `cemac` (
 -- Contenu de la table `cemac`
 --
 
-INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idGrandeurPhysique`, `idPiece`) VALUES
-(1, 'X474103', 'Marche', 2, 1, 1),
-(2, 'X450017', 'Marche', 1, 2, 1),
-(3, 'X310070', 'Panne', 3, 2, 2),
-(4, 'X123456', 'Panne', 4, 2, 2),
-(5, 'X812288', 'Marche', 5, 2, 3),
-(6, 'X255320', 'Marche', 1, 2, 3),
-(7, 'X402500', 'Marche', 2, 1, 4),
-(8, 'X536111', 'Panne', 1, 2, 5),
-(9, 'X647222', 'Panne', 3, 2, 5),
-(10, 'X758333', 'Marche', 4, 2, 4),
-(11, 'X869444', 'Marche', 5, 2, 4),
-(12, 'X970555', 'Marche', 1, 2, 4);
+INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idPiece`) VALUES
+(1, 'X474103', 'Marche', 5, 1),
+(2, 'X450017', 'Marche', 2, 1),
+(3, 'X310070', 'Panne', 1, 2),
+(4, 'X123456', 'Panne', 3, 2),
+(5, 'X812288', 'Marche', 4, 3),
+(6, 'X255320', 'Marche', 7, 3),
+(7, 'X402500', 'Marche', 7, 4),
+(8, 'X536111', 'Panne', 1, 5),
+(9, 'X647222', 'Panne', 3, 5),
+(10, 'X758333', 'Marche', 1, 4),
+(11, 'X869444', 'Marche', 2, 4),
+(12, 'X970555', 'Marche', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -255,19 +254,24 @@ CREATE TABLE `typeadministrateur` (
 
 CREATE TABLE `typecapteur` (
   `idTypeCapteur` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL
+  `categorie` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `isExterieur` bit(1) NOT NULL,
+  `idGrandeurPhysique` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `typecapteur`
 --
 
-INSERT INTO `typecapteur` (`idTypeCapteur`, `nom`) VALUES
-(1, 'Capteur Luminosité'),
-(2, 'Capteur Température'),
-(3, 'Actionneur Luminosité'),
-(4, 'Actionneur Température'),
-(5, 'Actionneur Volet');
+INSERT INTO `typecapteur` (`idTypeCapteur`, `categorie`, `type`, `isExterieur`, `idGrandeurPhysique`) VALUES
+(1, 'lum', 'capteur', b'0', 2),
+(2, 'lum', 'capteur', b'1', 2),
+(3, 'lum', 'actionneur', b'0', 2),
+(4, 'temp', 'capteur', b'0', 1),
+(5, 'temp', 'capteur', b'1', 1),
+(6, 'temp', 'actionneur', b'0', 1),
+(7, 'shut', 'actionneur', b'0', 2);
 
 -- --------------------------------------------------------
 
@@ -308,7 +312,6 @@ ALTER TABLE `administrateur`
 ALTER TABLE `cemac`
   ADD PRIMARY KEY (`idCemac`),
   ADD KEY `Fk_Cemac_TypeCapteur` (`idTypeCapteur`),
-  ADD KEY `Fk_Cemac_GrandeurPhysique` (`idGrandeurPhysique`),
   ADD KEY `Fk_Cemac_Piece` (`idPiece`);
 
 --
@@ -385,7 +388,8 @@ ALTER TABLE `typeadministrateur`
 -- Index pour la table `typecapteur`
 --
 ALTER TABLE `typecapteur`
-  ADD PRIMARY KEY (`idTypeCapteur`);
+  ADD PRIMARY KEY (`idTypeCapteur`),
+  ADD KEY `Fk_Typecapteur_GrandeurPhysique` (`idGrandeurPhysique`);
 
 --
 -- Index pour la table `typepiece`
@@ -487,7 +491,6 @@ ALTER TABLE `administrateur`
 -- Contraintes pour la table `cemac`
 --
 ALTER TABLE `cemac`
-  ADD CONSTRAINT `Fk_Cemac_GrandeurPhysique` FOREIGN KEY (`idGrandeurPhysique`) REFERENCES `grandeurphysique` (`idGrandeurPhysique`) ON DELETE CASCADE,
   ADD CONSTRAINT `Fk_Cemac_Piece` FOREIGN KEY (`idPiece`) REFERENCES `piece` (`idPiece`) ON DELETE CASCADE,
   ADD CONSTRAINT `Fk_Cemac_TypeCapteur` FOREIGN KEY (`idTypeCapteur`) REFERENCES `typecapteur` (`idTypeCapteur`) ON DELETE CASCADE;
 
@@ -530,6 +533,12 @@ ALTER TABLE `programmecemac`
 --
 ALTER TABLE `reponse`
   ADD CONSTRAINT `Fk_Reponse_Message` FOREIGN KEY (`idMessage`) REFERENCES `message` (`idMessage`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `typecapteur`
+--
+ALTER TABLE `typecapteur`
+  ADD CONSTRAINT `Fk_Typecapteur_GrandeurPhysique` FOREIGN KEY (`idGrandeurPhysique`) REFERENCES `grandeurphysique` (`idGrandeurPhysique`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

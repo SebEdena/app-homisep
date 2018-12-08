@@ -6,10 +6,10 @@ class Piece {
     private $idTypePiece;
 
     public function fill($data){
-        $this->idPiece = $data['idPiece'];
+        $this->idPiece = (int) $data['idPiece'];
         $this->nom = $data['nom'];
-        $this->idMaison = $data['idMaison'];
-        $this->idTypePiece = $data['idTypePiece'];
+        $this->idMaison = (int) $data['idMaison'];
+        $this->idTypePiece = (int) $data['idTypePiece'];
     }
 
     public function getId(){

@@ -24,19 +24,19 @@
     </select>
     <div class="tabcontainer">
         <div class="tablist">
-            <a class="tablink defaultOpen" id="gen-tab">Vue générale</a>
-            <a class="tablink" id="gen-lux">Luminosité</a>
-            <a class="tablink" id="gen-heat">Chauffage</a>
-            <a class="tablink" id="gen-shut">Volets</a>
+            <a class="tablink defaultOpen" id="tablink-gen">Vue générale</a>
+            <a class="tablink" id="tablink-lum">Luminosité</a>
+            <a class="tablink" id="tablink-temp">Chauffage</a>
+            <a class="tablink" id="tablink-shut">Volets</a>
         </div>
         <div class="tabcontent">
-            <div class="tabpage">
+            <div class="tabpage" id="tabpage-gen">
             </div>
-            <div class="tabpage">
+            <div class="tabpage" id="tabpage-lum">
             </div>
-            <div class="tabpage">
+            <div class="tabpage" id="tabpage-temp">
             </div>
-            <div class="tabpage">
+            <div class="tabpage" id="tabpage-shut">
             </div>
         </div>
     </div>

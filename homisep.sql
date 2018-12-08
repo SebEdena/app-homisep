@@ -54,7 +54,7 @@ INSERT INTO `administrateur` (`idAdministrateur`, `nom`, `prenom`, `mail`, `pass
 CREATE TABLE `cemac` (
   `idCemac` int(11) NOT NULL,
   `numeroSerie` varchar(255) NOT NULL,
-  `statut` varchar(255) NOT NULL,
+  `statut` bit(1) NOT NULL,
   `idTypeCapteur` int(11) NOT NULL,
   `idPiece` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -64,18 +64,18 @@ CREATE TABLE `cemac` (
 --
 
 INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idPiece`) VALUES
-(1, 'X474103', 'Marche', 5, 1),
-(2, 'X450017', 'Marche', 2, 1),
-(3, 'X310070', 'Panne', 1, 2),
-(4, 'X123456', 'Panne', 3, 2),
-(5, 'X812288', 'Marche', 4, 3),
-(6, 'X255320', 'Marche', 7, 3),
-(7, 'X402500', 'Marche', 7, 4),
-(8, 'X536111', 'Panne', 1, 5),
-(9, 'X647222', 'Panne', 3, 5),
-(10, 'X758333', 'Marche', 1, 4),
-(11, 'X869444', 'Marche', 2, 4),
-(12, 'X970555', 'Marche', 3, 4);
+(1, 'X474103', b'1', 5, 1),
+(2, 'X450017', b'1', 2, 1),
+(3, 'X310070', b'0', 1, 2),
+(4, 'X123456', b'0', 3, 2),
+(5, 'X812288', b'1', 4, 3),
+(6, 'X255320', b'1', 7, 3),
+(7, 'X402500', b'1', 7, 4),
+(8, 'X536111', b'0', 1, 5),
+(9, 'X647222', b'0', 3, 5),
+(10, 'X758333', b'1', 1, 4),
+(11, 'X869444', b'1', 2, 4),
+(12, 'X970555', b'1', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -256,7 +256,8 @@ CREATE TABLE `typecapteur` (
   `idTypeCapteur` int(11) NOT NULL,
   `categorie` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
-  `isExterieur` bit(1) NOT NULL,
+  `exterieur` varchar(5) NOT NULL,
+  `libelleGroupBy` varchar(25) NOT NULL,
   `idGrandeurPhysique` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -264,14 +265,14 @@ CREATE TABLE `typecapteur` (
 -- Contenu de la table `typecapteur`
 --
 
-INSERT INTO `typecapteur` (`idTypeCapteur`, `categorie`, `type`, `isExterieur`, `idGrandeurPhysique`) VALUES
-(1, 'lum', 'capteur', b'0', 2),
-(2, 'lum', 'capteur', b'1', 2),
-(3, 'lum', 'actionneur', b'0', 2),
-(4, 'temp', 'capteur', b'0', 1),
-(5, 'temp', 'capteur', b'1', 1),
-(6, 'temp', 'actionneur', b'0', 1),
-(7, 'shut', 'actionneur', b'0', 2);
+INSERT INTO `typecapteur` (`idTypeCapteur`, `categorie`, `type`, `exterieur`, `libelleGroupBy`, `idGrandeurPhysique`) VALUES
+(1, 'lum', 'capteur', 'int', 'Luminosité Int.', 2),
+(2, 'lum', 'capteur', 'ext', 'Luminosité Ext.', 2),
+(3, 'lum', 'actionneur', 'int', 'Luminosité Int.', 2),
+(4, 'temp', 'capteur', 'int', 'Température Int.', 1),
+(5, 'temp', 'capteur', 'ext', 'Température Ext.', 1),
+(6, 'temp', 'actionneur', 'int', 'Température Int.', 1),
+(7, 'shut', 'actionneur', 'int', 'Volets', 2);
 
 -- --------------------------------------------------------
 

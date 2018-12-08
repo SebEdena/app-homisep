@@ -6,6 +6,20 @@
     padding: 5px;
 }
 
+.accord-content{
+    padding: 5px;
+    flex-wrap: wrap;
+
+}
+
+.accord.accord-opened .accord-content {
+    display: flex !important;
+}
+
+.accord-content > * {
+    margin: 5px;
+}
+
 #house-select{
     max-width: 100%;
 }
@@ -14,4 +28,190 @@
     .tablink {
         font-size: 0.8em;
     }
+}
+
+/*
+    Style Blocs Capteurs
+*/
+.capt-menu{
+    grid-area: capt-menu;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.capt-menu > button {
+    height: 45px;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-lightgrey);
+    border: 1px solid var(--color-darkgrey);
+}
+
+.capt-menu > button > img {
+    height: 30px;
+    width: 30px;
+}
+
+.capt-status {
+    grid-area: capt-status;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid var(--color-green);
+    background-color: lime;
+}
+
+.capt-status.capt-error {
+    border: 5px solid crimson;
+    background-color: red;
+}
+.capt-gen{
+    width: 250px;
+    height: 170px;
+    border: 1px solid black;
+}
+
+.capt-gen .capt-title {
+    padding: 2px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.capt-gen .capt-content {
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 45% 45% 10%;
+    align-items: center;
+    grid-template-areas:
+    "capt-menu capt-data-desired capt-buttons"
+    "capt-status capt-data-real capt-buttons"
+    "capt-auto-manual capt-auto-manual capt-auto-manual";
+}
+
+.capt-gen .capt-auto-manual {
+    grid-area: capt-auto-manual;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.capt-gen .capt-auto-manual {
+    width: auto;
+}
+
+.capt-gen .capt-auto-manual button {
+    padding: 10px;
+    background-color: var(--color-grey);
+    border: 0;
+    color: white;
+    font-size: 1.1em;
+    transition: background-color 0.2s;
+}
+
+.capt-gen .capt-auto-manual button:not(:disabled):hover {
+    background-color: var(--color-darkgrey);
+}
+
+.capt-gen .capt-data-desired {
+    grid-area: capt-data-desired;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.capt-gen .capt-data-desired .capt-value{
+    font-size: 1.5em;
+    font-style: bold;
+}
+
+.capt-data-real {
+    grid-area: capt-data-real;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.capt-value {
+    font-size: 1.5em;
+    font-style: bold;
+}
+
+.capt-buttons{
+    grid-area: capt-buttons;
+    height: match-parent;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.capt-buttons > button {
+    height: 45px;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-lightgrey);
+    border: 1px solid var(--color-darkgrey);
+}
+
+.capt-buttons > button > img {
+    height: 35px;
+    width: 35px;
+}
+
+.capt-solo {
+    width: 150px;
+    height: 170px;
+    border: 1px solid black;
+}
+
+.capt-solo .capt-title {
+    padding: 2px;
+    font-size: 0.9em;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.capt-solo .capt-content {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.capt-solo .capt-buttons{
+    padding: 2px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: center,
+}
+
+.capt-solo .capt-menu-data-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.capt-solo .capt-menu-data-container * {
+    padding: 0 2px;
+}
+
+.capt-solo .capt-data-desired {
+    padding-top: 1px;
+}
+
+.capt-solo .capt-data-real {
+    padding: 2px;
 }

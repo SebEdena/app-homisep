@@ -7,7 +7,7 @@ class Maison {
     private $idClient;
 
     public function getId(){
-        return $this->idMaison;
+        return (int) $this->idMaison;
     }
 
     public function getAdresse(){
@@ -23,7 +23,7 @@ class Maison {
     }
 
     public function getIdClient(){
-        return $this->idClient;
+        return (int) $this->idClient;
     }
 }
 ?>

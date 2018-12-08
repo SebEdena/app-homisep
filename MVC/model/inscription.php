@@ -2,18 +2,31 @@
 
   function inscrireClient($email,$passe)
   {
+    require('./model/util.php');
     require('./model/config.php');
+
+    $email = traitementCaractereSpeciaux($email);
+    $passe = traitementCaractereSpeciaux($passe);
+
     $query = $database -> prepare('insert into client(`mail`,`passe`) values(?,?)');
     $query -> bindParam(1,$email);
     $passHash = password_hash($passe,PASSWORD_DEFAULT);
     $query -> bindParam(2,$passHash);
-    if($query -> execute())
+    try
     {
+      $query -> execute();
       return "Client.e créé.e";
     }
-    else
+    catch(PDOException $exception)
     {
-      return "Client.e déjà existant.e";
+      if ($exception->getCode() == 23000) //violation de clé unique
+      {
+        return "Client.e déjà existant.e";
+      }
+      else
+      {
+        return "Erreur de traitement";
+      }
     }
   }
 ?>

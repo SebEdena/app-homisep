@@ -15,6 +15,11 @@
 ?>
 <?php ob_start(); ?>
     <h1>Tableau de bord</h1>
+    <?php if(count($maisons) == 0){?>
+            <div id="noMaison">
+              <h1>Pas de Maisons</h1>
+            </div>
+    <?php }else{ ?>
     <label for="house-select">Maison : </label>
     <select id="house-select">
         <?php foreach ($maisons as $maison) { ?>
@@ -40,5 +45,6 @@
             </div>
         </div>
     </div>
+  <?php } ?>
 <?php $content = ob_get_clean(); ?>
 <?php require("./view/templateUtilisateur.php"); ?>

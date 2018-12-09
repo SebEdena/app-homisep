@@ -12,7 +12,7 @@ function getMaisons()
     return $res;
 }
 
-function getPieces(int $idMaison){
+function getPieces($idMaison){
     require('./model/config.php');
     require('./model/classes/piece.php');
     $query = $database -> prepare('select p.* from piece p, maison m where p.idMaison=m.idMaison and m.idClient=? and p.idMaison=? order by p.nom');
@@ -31,7 +31,7 @@ function getPieces(int $idMaison){
     return $res;
 }
 
-function getCemacs(int $idMaison){
+function getCemacs($idMaison){
     require('./model/config.php');
     require('./model/classes/cemac.php');
 

@@ -1,6 +1,10 @@
 function recupDonnéesMaison(event){
-    let idMaison = event.target.value;
-
+    let idMaison = parseInt(event.target.value);
+    if(isNaN(idMaison))
+    {
+      return;
+    }
+    console.log(idMaison);
     $.ajax({
         url: "index.php?control=relationClient&action=getDonneesMaison",
         type: "POST",

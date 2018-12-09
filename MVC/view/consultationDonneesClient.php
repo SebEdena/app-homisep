@@ -26,8 +26,8 @@
     ';
 ?>
 <?php ob_start(); ?>
-    <h1>Données Client</h1>
-    <div id="content">
+    <div>
+      <h1>Données Client</h1>
       <form>
         <label>Liste des Clients : </label>
         <input input type="text" placeholder="Entrez un nom, ou un prénom" name="nameClient"></imput>

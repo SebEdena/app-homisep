@@ -59,7 +59,8 @@
 
 </body>
 
-<footer class="footer">
+<br/>
+<footer>
   <p>&#9400; Homisep 2018, tous droits réservés.</p>
 </footer>
 

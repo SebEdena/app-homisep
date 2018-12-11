@@ -4,14 +4,14 @@
    ------------------------------- */
 
 .footer {
-    height: 30px;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    background-color: #242027;
-    text-align: right;
+  height: 30px;
+  margin: 1% 0 0 0;
+  width: 100%;
+  color: #254672;
+  background-color: #CECECE;
+  border-top: 2px solid #254672;
+  font-weight: bold;
+  text-align: right;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

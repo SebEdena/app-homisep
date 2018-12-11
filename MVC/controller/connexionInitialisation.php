@@ -7,7 +7,7 @@
   function seConnecter()
   {
     require("./model/connexion.php");
-    $etat = connexionUtilisateur($_POST['uname'],$_POST['psw'],$_POST['selector']);
+    $etat = connexionUtilisateur($_POST['uname'],$_POST['psw']);
     switch($etat)
     {
       case "admin":

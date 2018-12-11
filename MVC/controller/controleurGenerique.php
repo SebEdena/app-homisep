@@ -1,7 +1,7 @@
 <?php
   function afficherAccueil()
   {
-    if($_SESSION['type'] == "admin")
+    if($_SESSION['admin'] == true)
     {
       header("Location: " . "index.php?control=relationAdmin&action=afficheDonneesClients");
     }

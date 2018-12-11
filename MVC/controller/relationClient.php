@@ -31,4 +31,9 @@ function getDonneesMaison(){
         print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
     }
 }
+
+function afficheGestionCompte()
+{
+  require("./view/gestionMaisonPieceCapteur.php");
+}
 ?>

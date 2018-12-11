@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-	<link type="text/css" rel="stylesheet" href="./css/styleOnglet.css">
-	<link type="text/css" rel="stylesheet" href="./css/styleMaisonPieceCapteur.css">
-	<link type="text/css" rel="stylesheet" href="./css/basic_rules.css">
-	<style>
-		body {font-family: "Lato", sans-serif;}
-	</style>
-</head>
-<body>
+<?php
+    $title = "Espace utilisateur - Vue générale";
+    $css = [
+        "styleOnglet.css",
+        "styleMaisonPieceCapteur.css",
+    ];
+    $js = [
+        "onglet.js",
+        "accordion.js",
+    ];
+    $modals = null;
+    $jsonpage = null;
+?>
+<?php ob_start(); ?>
 	<div class="tabcontainer">
 		<div class="tablist">
 			<a class="tablink" id="defaultOpen">Coordonnées</a>
@@ -30,16 +33,13 @@
         </div>
         <div class="gridContainerMaisonPieceCapteur">
           <label class="header" id="headerPiece">Pièce</label>
-
           <div id="piece">
             Pièce
           </div>
-
           <label class="header" id="headerCapteur">Capteurs / Effecteurs</label>
           <div id="capteur">
             Capteurs
           </div>
-
           <label class="header" id="headerAjout">Ajout</label>
           <div id="ajout">
 						<div class="tabcontainer">
@@ -50,7 +50,15 @@
 							</div>
 							<div class="tabcontent">
 								<div class="tabpage">
-									<h1>Maison</h1>
+									<form action="index.php?control=relationClient&action=ajoutMaison" method="post">
+                    <h1>Ajout Maison</h1>
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" placeholder="Entrez l'adresse" name="adresse" required></input>
+                    <label for="ville">Ville :</label>
+                    <input type="text" placeholder="Entrez la ville" name="ville" required></input>
+                    <label for="codePostal">Adresse :</label>
+                    <input type="text" placeholder="Entrez l'adresse" name="codePostal" required></input>
+                  </form>
 								</div>
 								<div class="tabpage">
 									<h1>Piece</h1>
@@ -70,6 +78,5 @@
 	</div>
 </div>
 </div>
-</body>
-<script src="./js/onglet.js"></script>
-</html>
+<?php $content = ob_get_clean(); ?>
+<?php require("./view/templateUtilisateur.php"); ?>

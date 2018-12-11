@@ -19,7 +19,11 @@
             </div>
         </div>
     ';
-    $jsonpage = null;
+    $jsonpage = '
+        document.querySelector("#modalBtn").onclick = function(){
+            displayModal("#Modal1");
+        };
+    ';
 ?>
 <?php ob_start(); ?>
     <div>

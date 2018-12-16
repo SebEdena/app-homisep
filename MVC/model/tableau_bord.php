@@ -93,4 +93,48 @@ function buildCemacsContext($pieces, $cemacs){
     return $context;
 }
 
+
+function getCemacsInPiece($idPiece)
+{
+  require('./model/config.php');
+  require('./model/classes/cemac.php');
+
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole from cemac c, typecapteur tc, grandeurphysique gp, piece p where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idPiece = ? order by c.idCemac');
+  $query -> bindParam(1, $idPiece);
+  $query -> execute();
+
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($res as $key => $value) {
+      $p = new Cemac();
+      $p -> fill($value);
+      $res[$key] = $p->toArray();
+  }
+  return $res;
+}
+
+function getInfoMaisonBD($idMaison)
+{
+    require('./model/config.php');
+    require('./model/classes/maison.php');
+    $query = $database -> prepare('select * from maison where idMaison= ?');
+    $query -> bindParam(1, $idMaison);
+    $query -> execute();
+
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $res;
+}
+
+function getInfoPieceBD($idPiece)
+{
+  require('./model/config.php');
+  require('./model/classes/maison.php');
+  $query = $database -> prepare('select * from piece where idPiece= ?');
+  $query -> bindParam(1, $idPiece);
+  $query -> execute();
+
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $res;
+}
+
 ?>

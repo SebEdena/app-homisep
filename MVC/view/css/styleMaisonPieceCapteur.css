@@ -1,7 +1,7 @@
 .label-left
 {
   padding-bottom: 20px;
-  margin-left: 0px;
+  margin: 5px;
 }
 
 #headerPiece
@@ -14,9 +14,9 @@
   grid-area: headerCapteur;
 }
 
-#headerAjout
+#headerInformation
 {
-  grid-area: headerAjout;
+  grid-area: headerInformation;
 }
 
 .header
@@ -28,38 +28,51 @@
 {
   display:grid;
   grid-template-areas :
-  'headerPiece headerCapteur headerAjout'
-  'piece capteur ajout'
-  'piece capteur ajout';
+  'headerPiece headerCapteur headerInformation'
+  'piece capteur information'
+  'piece capteur information';
   grid-gap: 20px;
 }
 
 .boutonRight
 {
-  float:right;
-  margin-right: 25px;
+  margin: 5px;
 }
 
 #piece
 {
   grid-area: piece;
-  border : solid 1px;
+  margin : 10px;
 }
 
 #capteur
 {
   grid-area: capteur;
-  border : solid 1px;
+  margin : 10px;
 }
 
-#ajout
+#information
 {
-  grid-area: ajout;
-  border : solid 1px;
+  grid-area: information;
+  margin : 10px;
 }
 
+.ajoutFormulaire
+{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  margin: 10px;
+  width: 90%;
+}
 
-@media screen and (max-width:800px) {
+#piece-select-gestion, #capteur-select-gestion
+{
+  width:100%;
+  height:100%;
+}
+
+@media screen and (max-width:850px) {
   .gridContainerMaisonPieceCapteur
   {
     display:grid;
@@ -68,8 +81,8 @@
     'piece'
     'headerCapteur'
     'capteur'
-    'headerAjout'
-    'ajout';
+    'headerInformation'
+    'information';
     grid-gap: 20px;
   }
 }

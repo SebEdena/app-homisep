@@ -16,6 +16,7 @@ function recupDonnéesMaison(event){
             console.log(retour);
             build_pieces(retour.pieces);
             build_capteurs(retour);
+            $('.tablink.active').trigger('click');
         },
         error: function(error){
             console.error(error);
@@ -36,7 +37,7 @@ function build_pieces(data){
 
 function inflate_piece(data){
     let piece = $(`
-        <div class="accord piece accord-opened" data-piece-id=${data['id']}>
+        <div class="accord piece" data-piece-id=${data['id']}>
             <label>${data['nom']}</label>
             <div class="accord-content">
                 <h2>Pas de capteurs.</h2>
@@ -148,5 +149,10 @@ function inflate_capteur(grouped, id, data, categorie, ext){
     }
 }
 
+function openAccordions(event){
+    $($('.tabpage')[$(this).index()]).find('.piece:not(.accord-opened) label').trigger('click');
+}
+
 $("#house-select").on('change', recupDonnéesMaison);
 $("#house-select").trigger('change');
+$('.tablink').on('click', openAccordions);

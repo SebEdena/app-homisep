@@ -29,8 +29,8 @@
     </select>
     <div class="tabcontainer">
         <div class="tablist">
-            <a class="tablink " id="tablink-gen">Vue générale</a>
-            <a class="tablink defaultOpen" id="tablink-lum">Luminosité</a>
+            <a class="tablink defaultOpen" id="tablink-gen">Vue générale</a>
+            <a class="tablink" id="tablink-lum">Luminosité</a>
             <a class="tablink" id="tablink-temp">Chauffage</a>
             <a class="tablink" id="tablink-shut">Volets</a>
         </div>

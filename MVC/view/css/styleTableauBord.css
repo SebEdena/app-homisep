@@ -3,16 +3,12 @@
 }
 
 .tabcontent{
-    padding: 5px;
+    padding: 5px 5px 0 5px;
 }
 
 .accord-content{
     padding: 5px;
     flex-wrap: wrap;
-}
-
-.tabpage .accord.accord-opened:last-child .accord-content {
-    margin-bottom: 0;
 }
 
 .accord.accord-opened .accord-content {

@@ -11,20 +11,23 @@ ul {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #333;
+	background-color: var(--color-lightgrey);
 	height: 75px;
+  	border-bottom: 2px solid #254672;
+	box-sizing: border-box;
+	display: flex;
 }
 
 li {
 	box-sizing: border-box;
 	float: left;
-	border-right: 1px solid #bbb;
-	width : 20%;
+    flex: 1;
+	flex-grow: 1;
 }
-
+/*
 li:last-child {
 	border-right: 0;
-}
+} */
 
 .avatar {
 	height: 90%;
@@ -42,15 +45,15 @@ li:last-child {
 }
 
 .logo:hover{
-	background-color: #111;
+	background-color: var(--color-grey);
 }
 
 li a {
-	color: white;
+	color: var(--color-darkblue);
 	text-align: center;
-	padding: 14px 16px;
+	/* padding: 14px 16px; */
 	text-decoration: none;
-	height : 49px;
+	height: 100%;
 	vertical-align : middle;
 	font-size : 1.5em;
 	display: flex;
@@ -59,16 +62,25 @@ li a {
 	justify-content: center;
 }
 
-li:not(.logout) a:hover {
-	background-color: #111;
+li a:hover {
+	background-color: var(--color-grey);
+}
+
+/* li:not(.logout) a:hover {
+	background-color: var(--color-grey);
 }
 
 .logout{
-	background-color: var(--color-green);
+	background-color: var(--color-darkgreen);
 }
 
 .logout:hover {
 	background-color: green;
+} */
+
+.logout {
+	flex: 1;
+	flex-grow: 1;
 }
 
 .logout a {
@@ -78,7 +90,7 @@ li:not(.logout) a:hover {
 }
 
 .logout a img{
-	height: 60%;
+	height: 30px;
 }
 
 .logout a div{
@@ -89,7 +101,7 @@ li:not(.logout) a:hover {
 @media screen and (max-width: 1260px) {
 	.logout a img {
 		padding: 0;
-		height: 70%;
+		height: 40px;
 	}
 
 	li a{

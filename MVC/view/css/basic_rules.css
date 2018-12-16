@@ -12,11 +12,13 @@
     --font-text: Roboto;
     --font-title: Libel Suit;
 
-    --color-lightgrey: #D4D6D7;
+    --color-lightgrey: #CECECE;
     --color-grey: #C0C3C5;
     --color-darkgrey: #464B4E;
-    --color-green: #0B9709;
-    --color-blue: #254672;
+    --color-green: #90c843;
+    --color-darkgreen: #0B9709;
+    --color-blue: #00bfff;
+    --color-darkblue: #254672;
 }
 
 html {

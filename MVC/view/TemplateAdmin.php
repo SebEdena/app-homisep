@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="./view/img/LogoAPP.png" />
     <link rel="stylesheet" href="./view/css/basic_rules.css" />
-    <link rel="stylesheet" href="./view/css/styleMenuAdmin.css" />
+    <link rel="stylesheet" href="./view/css/styleMenuUtil.css" />
     <link rel="stylesheet" href="./view/css/styleFooter.css" />
     <?php foreach ($css as $value) { ?>
         <link rel="stylesheet" href="./view/css/<?= $value ?>" />

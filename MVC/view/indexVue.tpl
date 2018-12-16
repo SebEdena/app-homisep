@@ -1,6 +1,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="./view/img/LogoAPP.png"/>
   <link rel="stylesheet" href="./view/css/basic_rules.css" />
   <link rel="stylesheet" href="./view/css/styleModal.css"/>
   <link rel="stylesheet" href="./view/css/styleConnexion.css"/>

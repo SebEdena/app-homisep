@@ -1,12 +1,18 @@
 :root{
-    --tab-border: #444;
-    --tab-bg: #999;
-    --tab-bg-active: #444;
+    --tab-border: var(--color-darkblue);
+    --tab-bg: var(--color-blue);
+    --tab-bg-active: var(--color-darkblue);
 }
 
 .tabcontainer{
     margin: 5px;
-    border: 1px solid var(--tab-border);
+    border: 2px solid var(--tab-border);
+    border-radius: 10px;
+    background-color: white;
+}
+
+.tablink:first-child {
+    border-radius: 7px 0 0 0;
 }
 
 .tablist {
@@ -24,7 +30,7 @@
     justify-content: center;
     flex: 1;
     font-size: 17px;
-    border-right: 1px solid var(--tab-border);
+    /* border-right: 1px solid var(--tab-border); */
 }
 
 .tablink.active {
@@ -33,19 +39,20 @@
 
 .tablink:last-child {
     border: none;
+    border-radius: 0 7px 0 0;
 }
 
 .tablink:hover {
+    transition: 0.5s;
     background-color: var(--tab-bg-active);
 }
 
 .tabcontent{
-    border-top: 1px solid var(--tab-border);
+    border-top: 2px solid var(--tab-border);
 }
 
 .tabpage {
     color: black;
     display: none;
     padding: 0;
-    /* text-align: center; */
 }

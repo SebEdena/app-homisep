@@ -36,7 +36,7 @@ function build_pieces(data){
 
 function inflate_piece(data){
     let piece = $(`
-        <div class="accord piece" data-piece-id=${data['id']}>
+        <div class="accord piece accord-opened" data-piece-id=${data['id']}>
             <label>${data['nom']}</label>
             <div class="accord-content">
                 <h2>Pas de capteurs.</h2>
@@ -44,7 +44,7 @@ function inflate_piece(data){
         </div>
     `);
     piece.data('piece', data);
-    $('.tabpage').append(piece);
+    $('.tabpage:not("#tabpage-gen")').append(piece);
 }
 
 function build_capteurs(data){

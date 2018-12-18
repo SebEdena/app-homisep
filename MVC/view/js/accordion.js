@@ -21,3 +21,11 @@ function deleteAccordions(){
     $('.accord label').off('click', toggleAccordion);
     $('.accord').remove();
 }
+
+$(window).on('resize', (event) => {
+    for(let accordCt of $(".accord .accord-content")){
+        if(accordCt.style.maxHeight !== "0px"){
+            accordCt.style.maxHeight = accordCt.scrollHeight + "px";
+        }
+    }
+});

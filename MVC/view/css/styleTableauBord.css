@@ -81,11 +81,11 @@
   color : white;
 }
 
-
 .capt-status.capt-error {
     border: 5px solid crimson;
     background-color: red;
 }
+
 .capt-gen{
     width: 250px;
     height: 170px;
@@ -101,10 +101,11 @@
 }
 
 .capt-gen .capt-content {
+    height: 140px;
     padding: 2px;
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 45% 45% 10%;
+    grid-template-rows: 37.5% 37.5% 25%;
     align-items: center;
     grid-template-areas:
     "capt-menu capt-data-desired capt-buttons"
@@ -119,9 +120,9 @@
     justify-content: center;
 }
 
-.capt-gen .capt-auto-manual {
+/* .capt-gen .capt-auto-manual {
     width: auto;
-}
+} */
 
 .capt-gen .capt-auto-manual button {
     padding: 10px;

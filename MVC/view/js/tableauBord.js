@@ -1,3 +1,6 @@
+const order = ['temp', 'lum', 'shut'];
+let count = null;
+
 function recupDonnéesMaison(event){
     let idMaison = parseInt(event.target.value);
     if(isNaN(idMaison))
@@ -16,6 +19,7 @@ function recupDonnéesMaison(event){
             console.log(retour);
             build_pieces(retour.pieces);
             build_capteurs(retour);
+            displayGeneralView(retour.pieces, retour.context);
             $('.tablink.active').trigger('click');
         },
         error: function(error){
@@ -49,7 +53,6 @@ function inflate_piece(data){
 }
 
 function build_capteurs(data){
-    let order = ['temp', 'lum', 'shut'];
     for (piece of data.pieces) {
         for (categorie of order) {
             if(data.context[piece.id][categorie]['int']!=null){
@@ -151,6 +154,55 @@ function inflate_capteur(grouped, id, data, categorie, ext){
 
 function openAccordions(event){
     $($('.tabpage')[$(this).index()]).find('.piece:not(.accord-opened) label').trigger('click');
+}
+
+function displayGeneralView(pieces, context){
+    const links = { lumint: 'lightbulb.png', lumext: 'lightbulb.png', tempint: 'thermometer.png', tempext: 'thermometer.png', shutint: 'blinds.png'}
+    count = {lumint: null, lumext: null, tempint: null, tempext: null, shut: null};
+    const countOrder=['lumint', 'lumext', 'tempint', 'tempext', 'shut'];
+
+    for(let piece of pieces){
+        for(let categ of order){
+            let data = context[piece['id']][categ]['int'];
+            if(data != null && count.hasOwnProperty(categ+'int')){
+                if(count[categ+'int'] == null){
+                    count[categ+'int'] = {capteur: data.capteur, actionneur: data.actionneur, libelle: data.libelleGroupBy};
+                }else{
+                    count[categ+'int'].capteur.push.apply(count[categ+'int'].capteur, data.capteur);
+                    count[categ+'int'].actionneur.push.apply(count[categ+'int'].actionneur, data.actionneur);
+                }
+            }
+            data = context[piece['id']][categ]['ext'];
+            if(data != null && count.hasOwnProperty(categ+'ext')){
+                if(count[categ+'ext'] == null){
+                    count[categ+'ext'] = {capteur: data.capteur, actionneur: data.actionneur, libelle: data.libelleGroupBy};
+                }else{
+                    count[categ+'ext'].capteur.push.apply(count[categ+'ext'].capteur, data.capteur);
+                    count[categ+'ext'].actionneur.push.apply(count[categ+'ext'].actionneur, data.actionneur);
+                }
+            }
+        }
+    }
+
+    for(let order of countOrder){
+        if(count[order] != null){
+            let summary = $(`
+                <div class="data-summary" id="${order}">
+                    <div class="summary-left">
+                        <img src="./view/img/${links[order]}"></img>
+                        <p>${count[order].libelle}</p>
+                    </div>
+                    <div class="summary-right">
+                        <p>Moyenne : </p>
+                        <p>Capteurs : ${count[order].capteur.length}</p>
+                        <p>Actionneurs : ${count[order].actionneur.length}</p>
+                    </div>
+                </div>
+            `);
+            summary.data('cemacs', count[order]);
+            $("#tabpage-gen").append(summary);
+        }
+    }
 }
 
 $("#house-select").on('change', recupDonnéesMaison);

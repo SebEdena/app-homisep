@@ -150,6 +150,21 @@
                   </form>
 								</div>
 								<div class="tabpage" id="tabpage-Capteur">
+                  <form class="ajoutFormulaire" id="CapteurForm" action="" method="post">
+                    <label for="numSerieCapteur">Numéro de série :</label>
+                    <input type="text" id="numSerieCapteur" placeholder="Entrez le numéro" name="numSerieCapteur" value="">
+                    <label for="statusCapteur">Statut : </label>
+                    <input type="text" id="statusCapteur" placeholder="Status" name="statusCapteur" value="">
+                    <label for="typeCemac">Type Cemac : </label>
+                    <input type="text" id="typeCemac" placeholder="Entrez le type de Cemac" name="typeCemac" value="">
+                    <label for="property">Propriété : </label>
+                    <input type="text" id="property" placeholder="Entrez le type" name="property" value="">
+                    <div class="boutonRight">
+                      <button>Annuler</button>
+                      <button>Modifier</button>
+                      <button>Valider</button>
+                  	</div>
+                  </form>
 								</div>
 							</div>
 						</div>

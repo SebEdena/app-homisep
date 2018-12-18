@@ -81,6 +81,8 @@ function buildCapteurGestion(cemacs)
     }
     htmlCapteur += "</select>";
     $("#capteur").html(htmlCapteur);
+    $("#capteur-select-gestion").on('change', recupDonneesCapteurGestion);
+    $("#capteur-select-gestion").trigger('change');
   }
 }
 
@@ -128,6 +130,33 @@ function recupDonneesPieceGestion(event)
   });
 }
 
+function recupDonneesCapteurGestion(event)
+{
+  let idCapteur = parseInt(event.target.value);
+  if(isNaN(idCapteur))
+  {
+    return;
+  }
+  console.log(idCapteur);
+
+  $.ajax({
+      url: "index.php?control=relationClient&action=getInfoCapteur",
+      type: "POST",
+      dataType: "json",
+      data: {
+          idCapteur: idCapteur
+      },
+      success: function(retour){
+          console.log(retour);
+          afficherInformation("capteur",retour[0]);
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
 function afficherInformation($string,$donnees)
 {
   switch ($string) {
@@ -135,11 +164,50 @@ function afficherInformation($string,$donnees)
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
       document.getElementById("maisonCodePostal").value = $donnees.codePostal;
+      openTab(document.getElementById("tabpage-Maison"));
+      mediaQueryGestionMaisonPieceCapteur();
       break;
     case "piece":
       document.getElementById("pieceNom").value = $donnees.nom;
+      openTab(document.getElementById("tabpage-Piece"));
+      mediaQueryGestionMaisonPieceCapteur();
       break;
+    case "capteur":
+      document.getElementById("numSerieCapteur").value = $donnees.numeroSerie;
+      if($donnees.statut == 0)
+      {
+        document.getElementById("statusCapteur").value = "Hors service";
+      }
+      else
+      {
+        document.getElementById("statusCapteur").value = "En service";
+      }
+      document.getElementById("typeCemac").value = $donnees.type
+      document.getElementById("property").value = $donnees.libelleGroupBy;
+      openTab(document.getElementById("tabpage-Capteur"));
+      mediaQueryGestionMaisonPieceCapteur();
     default:
       break;
   }
 }
+
+function mediaQueryGestionMaisonPieceCapteur()
+{
+  if(document.getElementById("piece-select-gestion") && document.getElementById("capteur-select-gestion"))
+  {
+    if ($(window).width() < 850)
+    {
+      document.getElementById("piece-select-gestion").size = 1;
+      document.getElementById("capteur-select-gestion").size = 1;
+    }
+    else
+    {
+      document.getElementById("piece-select-gestion").size = 10;
+      document.getElementById("capteur-select-gestion").size = 10;
+    }
+  }
+}
+
+$(window).resize(function() {
+    mediaQueryGestionMaisonPieceCapteur();
+});

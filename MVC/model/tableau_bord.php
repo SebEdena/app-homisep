@@ -137,4 +137,15 @@ function getInfoPieceBD($idPiece)
   return $res;
 }
 
+function getInfoCapteurBD($idCapteur)
+{
+  require('./model/config.php');
+  require('./model/classes/cemac.php');
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole from cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ?');
+  $query -> bindParam(1, $idCapteur);
+  $query -> execute();
+
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $res;
+}
 ?>

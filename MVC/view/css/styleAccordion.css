@@ -45,7 +45,6 @@ ACCORDION
 	font-weight: bold;
 	text-shadow: 0 1px 0 rgba(255,255,255,.5);
 	transition: all .15s ease-out;
-	border-bottom: 1px solid var(--color-darkgrey);
 }
 
 /* Éviter de sélectionner le texte en cliquant plusieurs fois */
@@ -59,7 +58,8 @@ ACCORDION
 
 /* Style du label si l'accodéon est ouvert*/
 .accord.accord-opened label{
-	border-color: #1a2e6d;
+	border-color: var(--color-darkblue);
+	color: var(--color-darkblue);
 	box-shadow: 0 0 1px rgba(0,0,0,.4);
 }
 

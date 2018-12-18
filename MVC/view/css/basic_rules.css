@@ -13,6 +13,7 @@
     --font-title: Libel Suit;
 
     --color-lightgrey: #CECECE;
+    --color-lightgrey2: #DCDCDC;
     --color-grey: #C0C3C5;
     --color-darkgrey: #464B4E;
     --color-green: #90c843;
@@ -40,6 +41,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-title);
+    color: var(--color-green);
 }
 
 #content{

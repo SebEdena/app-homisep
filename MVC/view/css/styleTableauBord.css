@@ -54,8 +54,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-lightgrey);
-    border: 1px solid var(--color-darkgrey);
+    background-color: var(--color-green);
+    border-radius: 30%;
+    border: none;
 }
 
 .capt-menu > button > img {
@@ -75,6 +76,12 @@
     background-color: lime;
 }
 
+.capt-title{
+  background-color: var(--color-green);
+  color : white;
+}
+
+
 .capt-status.capt-error {
     border: 5px solid crimson;
     background-color: red;
@@ -82,13 +89,15 @@
 .capt-gen{
     width: 250px;
     height: 170px;
-    border: 1px solid black;
+    background-color: var(--color-darkgrey);
+    border-radius: 5px;
+    color : white;
 }
 
 .capt-gen .capt-title {
     padding: 2px;
     text-align: center;
-    border-bottom: 1px solid black;
+    border-radius: 5px 5px 0 0;
 }
 
 .capt-gen .capt-content {
@@ -117,6 +126,8 @@
 .capt-gen .capt-auto-manual button {
     padding: 10px;
     background-color: var(--color-grey);
+    border-radius: 30%;
+    border : none;
     border: 0;
     color: white;
     font-size: 1.1em;
@@ -154,6 +165,7 @@
 }
 
 .capt-buttons{
+    border-radius: 30%;
     grid-area: capt-buttons;
     height: match-parent;
     display: flex;
@@ -167,8 +179,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-lightgrey);
-    border: 1px solid var(--color-darkgrey);
+    background-color: var(--color-green);
+    border-radius: 30%;
+    border : none;
 }
 
 .capt-buttons > button > img {
@@ -179,14 +192,16 @@
 .capt-solo {
     width: 150px;
     height: 170px;
-    border: 1px solid black;
+    background-color: var(--color-darkgrey);
+    color: white;
+    border-radius : 5px;
 }
 
 .capt-solo .capt-title {
     padding: 2px;
     font-size: 0.9em;
     text-align: center;
-    border-bottom: 1px solid black;
+    border-radius : 5px 5px 0 0;
 }
 
 .capt-solo .capt-content {

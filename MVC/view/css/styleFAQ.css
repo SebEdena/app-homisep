@@ -99,8 +99,9 @@
 /* Style du label si le checkbox est coché */
 .faq-section input[type=checkbox]:checked~label{
         border-color: #1a2e6d;
-        background-image: linear-gradient(to bottom, #fff, #b5cde1);
+        background-color: rgb(181, 205, 225);
         box-shadow: 0 0 1px rgba(0,0,0,.4);
+				color : #1a2e6d;
 }
 
 /* Flèche du label par défaut */

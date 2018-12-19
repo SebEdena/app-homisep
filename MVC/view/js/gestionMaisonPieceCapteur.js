@@ -70,19 +70,20 @@ function buildCapteurGestion(cemacs)
 {
   if(cemacs.length === 0)
   {
-    $("#capteur").html("<h2>Pas de capteur.</h2>");
+    $("#cemac").html("<h2>Pas de capteur.</h2>");
   }
   else
   {
-    let htmlCapteur ="<select id='capteur-select-gestion' size=10>";
+    let htmlCemac ="<select id='cemac-select-gestion' size=10>";
     for(cemac of cemacs)
     {
-      htmlCapteur += "<option value='" + cemac.id + "'>" + cemac.numeroSerie + " - " + cemac.typeCapteur.type + " " + cemac.typeCapteur.libelleGroupBy + "</option>";
+      htmlCemac += "<option value='" + cemac.id + "'>" + cemac.numeroSerie + " - " + cemac.typeCapteur.type + " " + cemac.typeCapteur.libelleGroupBy + "</option>";
     }
-    htmlCapteur += "</select>";
-    $("#capteur").html(htmlCapteur);
-    $("#capteur-select-gestion").on('change', recupDonneesCapteurGestion);
-    $("#capteur-select-gestion").trigger('change');
+    htmlCemac += "</select>";
+    $("#cemac").html(htmlCemac);
+    $("#cemac-select-gestion").on('change', recupDonneesCapteurGestion);
+    $("#cemac-select-gestion").trigger('change');
+    mediaQueryGestionMaisonPieceCapteur();
   }
 }
 
@@ -148,7 +149,7 @@ function recupDonneesCapteurGestion(event)
       },
       success: function(retour){
           console.log(retour);
-          afficherInformation("capteur",retour[0]);
+          afficherInformation("cemac",retour[0]);
       },
       error: function(error){
           console.error(error);
@@ -161,6 +162,7 @@ function afficherInformation($string,$donnees)
 {
   switch ($string) {
     case "maison":
+      document.getElementById("maisonId").value = $donnees.idMaison;
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
       document.getElementById("maisonCodePostal").value = $donnees.codePostal;
@@ -168,23 +170,25 @@ function afficherInformation($string,$donnees)
       mediaQueryGestionMaisonPieceCapteur();
       break;
     case "piece":
+      document.getElementById("pieceId").value = $donnees.idPiece;
       document.getElementById("pieceNom").value = $donnees.nom;
       openTab(document.getElementById("tabpage-Piece"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
-    case "capteur":
-      document.getElementById("numSerieCapteur").value = $donnees.numeroSerie;
+    case "cemac":
+      document.getElementById("cemacId").value = $donnees.idCemac;
+      document.getElementById("numSerieCemac").value = $donnees.numeroSerie;
       if($donnees.statut == 0)
       {
-        document.getElementById("statusCapteur").value = "Hors service";
+        document.getElementById("statusCemac").value = "Hors service";
       }
       else
       {
-        document.getElementById("statusCapteur").value = "En service";
+        document.getElementById("statusCemac").value = "En service";
       }
-      document.getElementById("typeCemac").value = $donnees.type
+      document.getElementById("typeCemac").value = $donnees.type;
       document.getElementById("property").value = $donnees.libelleGroupBy;
-      openTab(document.getElementById("tabpage-Capteur"));
+      openTab(document.getElementById("tabpage-Cemac"));
       mediaQueryGestionMaisonPieceCapteur();
     default:
       break;
@@ -198,13 +202,37 @@ function mediaQueryGestionMaisonPieceCapteur()
     if ($(window).width() < 850)
     {
       document.getElementById("piece-select-gestion").size = 1;
-      document.getElementById("capteur-select-gestion").size = 1;
+      document.getElementById("cemac-select-gestion").size = 1;
     }
     else
     {
       document.getElementById("piece-select-gestion").size = 10;
-      document.getElementById("capteur-select-gestion").size = 10;
+      document.getElementById("cemac-select-gestion").size = 10;
     }
+  }
+}
+
+function deleteFunction($string)
+{
+  switch ($string)
+  {
+    case "maison":
+      document.getElementById("maisonId").value = "";
+      document.getElementById("maisonAdresse").value = "";
+      document.getElementById("maisonVille").value = "";
+      document.getElementById("maisonCodePostal").value = "";
+      break;
+    case "piece":
+      document.getElementById("pieceId").value = "";
+      document.getElementById("pieceNom").value = "";
+      break;
+    case "cemac":
+      document.getElementById("cemacId").value = "";
+      document.getElementById("numSerieCemac").value = "";
+      document.getElementById("statusCemac").value = "";
+      document.getElementById("typeCemac").value = "";
+      document.getElementById("property").value = "";
+      break;
   }
 }
 

@@ -111,8 +111,8 @@
             <label class="header" id="headerPiece">Pièce</label>
             <div id="piece">
             </div>
-            <label class="header" id="headerCapteur">Capteurs / Effecteurs</label>
-            <div id="capteur">
+            <label class="header" id="headerCemac">Cemacs</label>
+            <div id="cemac">
             </div>
             <label class="header" id="headerInformation">Information</label>
             <div id="information">
@@ -120,19 +120,20 @@
 			         <div class="tablist">
 								<a class="tablink defaultOpen" id="tabpage-Maison">Maison</a>
 								<a class="tablink" id="tabpage-Piece">Pièce</a>
-								<a class="tablink" id="tabpage-Capteur">Capteur</a>
+								<a class="tablink" id="tabpage-Cemac">Cemacs</a>
 	            </div>
 							<div class="tabcontent">
 								<div class="tabpage" id="tabpage-Maison">
 									<form class="ajoutFormulaire" id="maisonForm" action="" method="post">
+                    <input type="text" class="hiddenId" id="maisonId" name="idMaison">
                     <label for="adresse">Adresse :</label>
                     <input type="text" id="maisonAdresse" placeholder="Entrez l'adresse" name="adresse" value="">
                     <label for="ville">Ville :</label>
                     <input type="text" id="maisonVille" placeholder="Entrez la ville" name="ville" value="">
-                    <label for="codePostal">Adresse :</label>
+                    <label for="codePostal">CodePostal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
                     <div class="boutonRight">
-                      <button>Annuler</button>
+                      <button type="button" onclick="deleteFunction('maison')">Annuler</button>
                       <button>Modifier</button>
                       <button>Valider</button>
                   	</div>
@@ -140,27 +141,29 @@
 								</div>
 								<div class="tabpage" id="tabpage-Piece">
                   <form class="ajoutFormulaire" id="pieceForm" action="" method="post">
+                    <input type="text" class="hiddenId" id="pieceId" name="idPiece">
                     <label for="adresse">Nom :</label>
                     <input type="text" id="pieceNom" placeholder="Entrez le nom" name="nomPiece" value="">
                     <div class="boutonRight">
-                      <button>Annuler</button>
+                      <button type="button" onclick="deleteFunction('piece')">Annuler</button>
                       <button>Modifier</button>
                       <button>Valider</button>
                   	</div>
                   </form>
 								</div>
-								<div class="tabpage" id="tabpage-Capteur">
-                  <form class="ajoutFormulaire" id="CapteurForm" action="" method="post">
-                    <label for="numSerieCapteur">Numéro de série :</label>
-                    <input type="text" id="numSerieCapteur" placeholder="Entrez le numéro" name="numSerieCapteur" value="">
+								<div class="tabpage" id="tabpage-Cemac">
+                  <form class="ajoutFormulaire" id="CemacForm" action="" method="post">
+                    <input type="text" class="hiddenId" id="cemacId" name="idCemac">
+                    <label for="numSerieCemac">Numéro de série :</label>
+                    <input type="text" id="numSerieCemac" placeholder="Entrez le numéro" name="numSerieCemac" value="">
                     <label for="statusCapteur">Statut : </label>
-                    <input type="text" id="statusCapteur" placeholder="Status" name="statusCapteur" value="">
+                    <input type="text" id="statusCemac" placeholder="statusCemac" name="statusCemac" value="">
                     <label for="typeCemac">Type Cemac : </label>
                     <input type="text" id="typeCemac" placeholder="Entrez le type de Cemac" name="typeCemac" value="">
                     <label for="property">Propriété : </label>
                     <input type="text" id="property" placeholder="Entrez le type" name="property" value="">
                     <div class="boutonRight">
-                      <button>Annuler</button>
+                      <button type="button" onclick="deleteFunction('cemac')">Annuler</button>
                       <button>Modifier</button>
                       <button>Valider</button>
                   	</div>

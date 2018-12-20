@@ -162,6 +162,7 @@ function afficherInformation($string,$donnees)
 {
   switch ($string) {
     case "maison":
+      $("#maisonId").data("maison",$donnees);
       document.getElementById("maisonId").value = $donnees.idMaison;
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
@@ -170,12 +171,15 @@ function afficherInformation($string,$donnees)
       mediaQueryGestionMaisonPieceCapteur();
       break;
     case "piece":
+      $("#pieceId").data("piece",$donnees);
       document.getElementById("pieceId").value = $donnees.idPiece;
       document.getElementById("pieceNom").value = $donnees.nom;
+      document.getElementById("pieceMaison").value = $donnees.adresse + " - " + $donnees.codePostal + " " + $donnees.ville;
       openTab(document.getElementById("tabpage-Piece"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
     case "cemac":
+      $("#cemacId").data("cemac",$donnees);
       document.getElementById("cemacId").value = $donnees.idCemac;
       document.getElementById("numSerieCemac").value = $donnees.numeroSerie;
       if($donnees.statut == 0)
@@ -188,6 +192,7 @@ function afficherInformation($string,$donnees)
       }
       document.getElementById("typeCemac").value = $donnees.type;
       document.getElementById("property").value = $donnees.libelleGroupBy;
+      document.getElementById("pieceCemac").value = $donnees.nom;
       openTab(document.getElementById("tabpage-Cemac"));
       mediaQueryGestionMaisonPieceCapteur();
     default:
@@ -217,22 +222,46 @@ function deleteFunction($string)
   switch ($string)
   {
     case "maison":
+      console.log($("#maisonId").data("maison"));
       document.getElementById("maisonId").value = "";
       document.getElementById("maisonAdresse").value = "";
       document.getElementById("maisonVille").value = "";
       document.getElementById("maisonCodePostal").value = "";
       break;
     case "piece":
+      console.log($("#pieceId").data("piece"));
       document.getElementById("pieceId").value = "";
       document.getElementById("pieceNom").value = "";
+      document.getElementById("pieceMaison").value = "";
       break;
     case "cemac":
+      console.log($("#cemacId").data("cemac"));
       document.getElementById("cemacId").value = "";
       document.getElementById("numSerieCemac").value = "";
       document.getElementById("statusCemac").value = "";
       document.getElementById("typeCemac").value = "";
       document.getElementById("property").value = "";
+      document.getElementById("pieceCemac").value = "";
       break;
+  }
+}
+
+function backFunction($string)
+{
+  console.log($("#"+$string+"Id").data(""+$string+""));
+  afficherInformation($string,$("#"+$string+"Id").data(""+$string+""));
+}
+
+function validateFunction($string)
+{
+  switch($string)
+  {
+    case "maison":
+    break;
+    case "piece":
+    break;
+    case "cemac":
+    break;
   }
 }
 

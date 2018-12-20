@@ -133,8 +133,8 @@
                     <label for="codePostal">CodePostal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
                     <div class="boutonRight">
-                      <button type="button" onclick="deleteFunction('maison')">Annuler</button>
-                      <button>Modifier</button>
+                      <button type="button" onclick="backFunction('maison')">Annuler</button>
+                      <button type="button" onclick="deleteFunction('maison')">Nouveau</button>
                       <button>Valider</button>
                   	</div>
                   </form>
@@ -142,11 +142,13 @@
 								<div class="tabpage" id="tabpage-Piece">
                   <form class="ajoutFormulaire" id="pieceForm" action="" method="post">
                     <input type="text" class="hiddenId" id="pieceId" name="idPiece">
-                    <label for="adresse">Nom :</label>
+                    <label for="pieceNom">Nom :</label>
                     <input type="text" id="pieceNom" placeholder="Entrez le nom" name="nomPiece" value="">
+                    <label for="pieceMaison">Adresse de la maison :</label>
+                    <input type="text" id="pieceMaison" placeholder="Entrez l'adresse de la maison" name="pieceMaison" value="">
                     <div class="boutonRight">
-                      <button type="button" onclick="deleteFunction('piece')">Annuler</button>
-                      <button>Modifier</button>
+                      <button type="button" onclick="backFunction('piece')">Annuler</button>
+                      <button type="button" onclick="deleteFunction('piece')">Nouveau</button>
                       <button>Valider</button>
                   	</div>
                   </form>
@@ -162,9 +164,11 @@
                     <input type="text" id="typeCemac" placeholder="Entrez le type de Cemac" name="typeCemac" value="">
                     <label for="property">Propriété : </label>
                     <input type="text" id="property" placeholder="Entrez le type" name="property" value="">
+                    <label for="pieceCemac">Piece : </label>
+                    <input type="text" id="pieceCemac" placeholder="Entrez le nom d'une pièce" name="pieceCemac" value="">
                     <div class="boutonRight">
-                      <button type="button" onclick="deleteFunction('cemac')">Annuler</button>
-                      <button>Modifier</button>
+                      <button type="button" onclick="backFunction('cemac')">Annuler</button>
+                      <button type="button" onclick="deleteFunction('cemac')">Nouveau</button>
                       <button>Valider</button>
                   	</div>
                   </form>

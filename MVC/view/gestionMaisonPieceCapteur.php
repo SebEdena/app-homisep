@@ -135,7 +135,7 @@
                     <div class="boutonRight">
                       <button type="button" onclick="backFunction('maison')">Annuler</button>
                       <button type="button" onclick="deleteFunction('maison')">Nouveau</button>
-                      <button>Valider</button>
+                      <button type="button" onclick="validateFunction('maison')">Valider</button>
                   	</div>
                   </form>
 								</div>
@@ -149,7 +149,7 @@
                     <div class="boutonRight">
                       <button type="button" onclick="backFunction('piece')">Annuler</button>
                       <button type="button" onclick="deleteFunction('piece')">Nouveau</button>
-                      <button>Valider</button>
+                      <button type="button" onclick="validateFunction('piece')">Valider</button>
                   	</div>
                   </form>
 								</div>
@@ -169,7 +169,7 @@
                     <div class="boutonRight">
                       <button type="button" onclick="backFunction('cemac')">Annuler</button>
                       <button type="button" onclick="deleteFunction('cemac')">Nouveau</button>
-                      <button>Valider</button>
+                      <button type="button" onclick="validateFunction('cemac')">Valider</button>
                   	</div>
                   </form>
 								</div>

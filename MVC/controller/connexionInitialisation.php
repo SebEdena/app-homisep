@@ -3,7 +3,7 @@
   {
     require("./model/mailConfig.php");
     require("./model/util.php");
-    sendMail();
+    //sendMail();
     require("./view/indexVue.tpl");
   }
 

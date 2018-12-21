@@ -261,10 +261,13 @@ function validateFunction($string)
   switch($string)
   {
     case "maison":
+      console.log("maison");
     break;
     case "piece":
+      console.log("piece");
     break;
     case "cemac":
+      console.log("cemac");
     break;
   }
 }

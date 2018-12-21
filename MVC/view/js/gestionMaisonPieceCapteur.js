@@ -70,17 +70,20 @@ function buildCapteurGestion(cemacs)
 {
   if(cemacs.length === 0)
   {
-    $("#capteur").html("<h2>Pas de capteur.</h2>");
+    $("#cemac").html("<h2>Pas de capteur.</h2>");
   }
   else
   {
-    let htmlCapteur ="<select id='capteur-select-gestion' size=10>";
+    let htmlCemac ="<select id='cemac-select-gestion' size=10>";
     for(cemac of cemacs)
     {
-      htmlCapteur += "<option value='" + cemac.id + "'>" + cemac.numeroSerie + " - " + cemac.typeCapteur.type + " " + cemac.typeCapteur.libelleGroupBy + "</option>";
+      htmlCemac += "<option value='" + cemac.id + "'>" + cemac.numeroSerie + " - " + cemac.typeCapteur.type + " " + cemac.typeCapteur.libelleGroupBy + "</option>";
     }
-    htmlCapteur += "</select>";
-    $("#capteur").html(htmlCapteur);
+    htmlCemac += "</select>";
+    $("#cemac").html(htmlCemac);
+    $("#cemac-select-gestion").on('change', recupDonneesCapteurGestion);
+    $("#cemac-select-gestion").trigger('change');
+    mediaQueryGestionMaisonPieceCapteur();
   }
 }
 
@@ -128,18 +131,140 @@ function recupDonneesPieceGestion(event)
   });
 }
 
+function recupDonneesCapteurGestion(event)
+{
+  let idCapteur = parseInt(event.target.value);
+  if(isNaN(idCapteur))
+  {
+    return;
+  }
+  console.log(idCapteur);
+
+  $.ajax({
+      url: "index.php?control=relationClient&action=getInfoCapteur",
+      type: "POST",
+      dataType: "json",
+      data: {
+          idCapteur: idCapteur
+      },
+      success: function(retour){
+          console.log(retour);
+          afficherInformation("cemac",retour[0]);
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
 function afficherInformation($string,$donnees)
 {
   switch ($string) {
     case "maison":
+      $("#maisonId").data("maison",$donnees);
+      document.getElementById("maisonId").value = $donnees.idMaison;
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
       document.getElementById("maisonCodePostal").value = $donnees.codePostal;
+      openTab(document.getElementById("tabpage-Maison"));
+      mediaQueryGestionMaisonPieceCapteur();
       break;
     case "piece":
+      $("#pieceId").data("piece",$donnees);
+      document.getElementById("pieceId").value = $donnees.idPiece;
       document.getElementById("pieceNom").value = $donnees.nom;
+      document.getElementById("pieceMaison").value = $donnees.adresse + " - " + $donnees.codePostal + " " + $donnees.ville;
+      openTab(document.getElementById("tabpage-Piece"));
+      mediaQueryGestionMaisonPieceCapteur();
       break;
+    case "cemac":
+      $("#cemacId").data("cemac",$donnees);
+      document.getElementById("cemacId").value = $donnees.idCemac;
+      document.getElementById("numSerieCemac").value = $donnees.numeroSerie;
+      if($donnees.statut == 0)
+      {
+        document.getElementById("statusCemac").value = "Hors service";
+      }
+      else
+      {
+        document.getElementById("statusCemac").value = "En service";
+      }
+      document.getElementById("typeCemac").value = $donnees.type;
+      document.getElementById("property").value = $donnees.libelleGroupBy;
+      document.getElementById("pieceCemac").value = $donnees.nom;
+      openTab(document.getElementById("tabpage-Cemac"));
+      mediaQueryGestionMaisonPieceCapteur();
     default:
       break;
   }
 }
+
+function mediaQueryGestionMaisonPieceCapteur()
+{
+  if(document.getElementById("piece-select-gestion") && document.getElementById("capteur-select-gestion"))
+  {
+    if ($(window).width() < 850)
+    {
+      document.getElementById("piece-select-gestion").size = 1;
+      document.getElementById("cemac-select-gestion").size = 1;
+    }
+    else
+    {
+      document.getElementById("piece-select-gestion").size = 10;
+      document.getElementById("cemac-select-gestion").size = 10;
+    }
+  }
+}
+
+function deleteFunction($string)
+{
+  switch ($string)
+  {
+    case "maison":
+      console.log($("#maisonId").data("maison"));
+      document.getElementById("maisonId").value = "";
+      document.getElementById("maisonAdresse").value = "";
+      document.getElementById("maisonVille").value = "";
+      document.getElementById("maisonCodePostal").value = "";
+      break;
+    case "piece":
+      console.log($("#pieceId").data("piece"));
+      document.getElementById("pieceId").value = "";
+      document.getElementById("pieceNom").value = "";
+      document.getElementById("pieceMaison").value = "";
+      break;
+    case "cemac":
+      console.log($("#cemacId").data("cemac"));
+      document.getElementById("cemacId").value = "";
+      document.getElementById("numSerieCemac").value = "";
+      document.getElementById("statusCemac").value = "";
+      document.getElementById("typeCemac").value = "";
+      document.getElementById("property").value = "";
+      document.getElementById("pieceCemac").value = "";
+      break;
+  }
+}
+
+function backFunction($string)
+{
+  console.log($("#"+$string+"Id").data(""+$string+""));
+  afficherInformation($string,$("#"+$string+"Id").data(""+$string+""));
+}
+
+function validateFunction($string)
+{
+  switch($string)
+  {
+    case "maison":
+    break;
+    case "piece":
+    break;
+    case "cemac":
+    break;
+  }
+}
+
+$(window).resize(function() {
+    mediaQueryGestionMaisonPieceCapteur();
+});

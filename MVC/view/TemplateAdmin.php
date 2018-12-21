@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,7 +34,7 @@
 
 <br/>
 <footer>
-    <p>&#9400; Homisep 2018, tous droits réservés.</p>
+    <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
 </footer>
 
 <?php if(isset($modals)) { ?>

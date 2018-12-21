@@ -13,7 +13,7 @@ ul {
 	overflow: hidden;
 	background-color: var(--color-lightgrey);
 	height: 75px;
-  border-bottom: 2px solid #254672;
+  	border-bottom: 2px solid #254672;
 	box-sizing: border-box;
 	display: flex;
 }

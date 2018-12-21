@@ -38,6 +38,51 @@
     }
 }
 
+#tabpage-gen {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/*
+    Style vue générale
+*/
+
+.data-summary {
+    width: 340px;
+    height: 180px;
+    background-color: var(--color-darkblue);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.summary-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+        width: 40%;
+        margin: 5%;
+}
+
+.summary-left img {
+    width: 70%;
+}
+
+.summary-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+        width: 40%;
+        margin: 5%;
+}
+
 /*
     Style Blocs Capteurs
 */
@@ -81,11 +126,11 @@
   color : white;
 }
 
-
 .capt-status.capt-error {
     border: 5px solid crimson;
     background-color: red;
 }
+
 .capt-gen{
     width: 250px;
     height: 170px;
@@ -101,10 +146,11 @@
 }
 
 .capt-gen .capt-content {
+    height: 140px;
     padding: 2px;
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 45% 45% 10%;
+    grid-template-rows: 37.5% 37.5% 25%;
     align-items: center;
     grid-template-areas:
     "capt-menu capt-data-desired capt-buttons"
@@ -117,10 +163,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.capt-gen .capt-auto-manual {
-    width: auto;
 }
 
 .capt-gen .capt-auto-manual button {

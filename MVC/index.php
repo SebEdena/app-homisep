@@ -5,7 +5,7 @@
     require("./view/error.tpl");
     die();
   }
-  
+
   session_start();
 
   $control = isset($_GET['control'])?$_GET['control']:'connexionInitialisation';

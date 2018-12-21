@@ -36,6 +36,7 @@
         </div>
         <div class="tabcontent">
             <div class="tabpage" id="tabpage-gen">
+                <div id="tabgen-content">HELLO</div>
             </div>
             <div class="tabpage" id="tabpage-lum">
             </div>

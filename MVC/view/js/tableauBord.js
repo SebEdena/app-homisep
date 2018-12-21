@@ -20,7 +20,7 @@ function recupDonnéesMaison(event){
             build_pieces(retour.pieces);
             build_capteurs(retour);
             displayGeneralView(retour.pieces, retour.context);
-            $('.tablink.active').trigger('click');
+            // $('.tablink.active').trigger('click');
         },
         error: function(error){
             console.error(error);
@@ -112,8 +112,8 @@ function inflate_capteur(grouped, id, data, categorie, ext){
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
         cemacGrouped.data('cemacGroup', context);
         cemacGrouped.data('idPiece', id);
-        $("#tabpage-gen, #tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
-        $("#tabpage-gen, #tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content').append(cemacGrouped);
+        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
+        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content').append(cemacGrouped);
     }else{
         let isCapteur = (data.typeCapteur.type==='capteur');
         let cemac = $(`
@@ -200,7 +200,8 @@ function displayGeneralView(pieces, context){
                 </div>
             `);
             summary.data('cemacs', count[order]);
-            $("#tabpage-gen").append(summary);
+            console.log(summary);
+            $("#tabgen-content").append(summary);
         }
     }
 }

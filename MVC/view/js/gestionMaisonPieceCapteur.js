@@ -202,7 +202,7 @@ function afficherInformation($string,$donnees)
 
 function mediaQueryGestionMaisonPieceCapteur()
 {
-  if(document.getElementById("piece-select-gestion") && document.getElementById("capteur-select-gestion"))
+  try
   {
     if ($(window).width() < 850)
     {
@@ -214,6 +214,10 @@ function mediaQueryGestionMaisonPieceCapteur()
       document.getElementById("piece-select-gestion").size = 10;
       document.getElementById("cemac-select-gestion").size = 10;
     }
+  }
+  catch(error)
+  {
+
   }
 }
 

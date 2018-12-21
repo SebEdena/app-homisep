@@ -39,8 +39,8 @@
 }
 
 #tabpage-gen {
-    display: flex !important;
-    flex-direction: row !important;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;

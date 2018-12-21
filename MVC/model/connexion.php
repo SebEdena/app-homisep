@@ -61,4 +61,8 @@ function Genere_mdp($size)
     }
     return $mot_de_passe;
 }
+
+function insere_mdp($mdp){
+    
+}
 ?>

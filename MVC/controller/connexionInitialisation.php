@@ -51,7 +51,8 @@
   function reset_mdp()
   {
     require ("./model/connexion.php");
-    echo Genere_mdp(8);
+    $mdp = Genere_mdp(8);
+    
     require ("./view/indexVue.tpl");
   }
 ?>

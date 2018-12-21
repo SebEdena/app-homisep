@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./view/css/styleModal.css"/>
   <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
   <link rel="stylesheet" href="./view/css/styleFooter.css"/>
-  <script src="./view/js/confMDPmodal.js"></script>
+  <script src="./view/js/jquery-3.3.1.min.js"></script>
   <title>Bienvenue - Homisep</title>
 </head>
 
@@ -26,7 +26,7 @@
 
         <label for="psw"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
-        <a href="index.php?control=connexionInitialisation&action=reset_mdp">Mot de passe oublié?</a>
+        <a id="reset_mdp_link">Mot de passe oublié?</a>
 
         <button type="submit">Se connecter</button>
           <p id="status_msg">
@@ -66,7 +66,21 @@
   <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
 </footer>
 
+<div class="modal-bg">
+        <div class="modal" id="modalresetmdp">
+            <div class="modal-head">
+                <span class="modal-close">&times;</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="modal-body">
+                <p>Bonjour</p>
+            </div>
+        </div>
+</div>
 
+
+<script src="./view/js/confMDPmodal.js"></script>
 <script src="./view/js/modal.js"></script>
+<script src="./view/js/connexion.js"></script>
 
 </html>

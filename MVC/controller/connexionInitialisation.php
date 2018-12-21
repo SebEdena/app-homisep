@@ -48,4 +48,10 @@
     $message = inscrireClient($_POST['email'],$_POST['pass']);
     require("./view/indexVue.tpl");
   }
+  function reset_mdp()
+  {
+    require ("./model/connexion.php");
+    echo Genere_mdp(8);
+    require ("./view/indexVue.tpl");
+  }
 ?>

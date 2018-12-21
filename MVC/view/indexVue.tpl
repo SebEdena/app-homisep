@@ -26,6 +26,7 @@
 
         <label for="psw"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
+        <a href="index.php?control=connexionInitialisation&action=reset_mdp">Mot de passe oublié?</a>
 
         <button type="submit">Se connecter</button>
           <p id="status_msg">

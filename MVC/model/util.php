@@ -5,16 +5,15 @@ function traitementCaractereSpeciaux($mot)
 }
 
 function sendMail(){
-    //use PHPMailer\PHPMailer\PHPMailer;
     require("./model/mailConfig.php");
 
     /* Open the try/catch block. */
     try {
         /* Set the mail sender. */
-        $mail->setFrom('sebedena@live.fr', 'Darth Vader');
+        $mail->setFrom('homisep@free.fr', "L'équipe Homisep");
 
         /* Add a recipient. */
-        $mail->addAddress('viguier.sebastien@orange.fr', 'Emperor');
+        $mail->addAddress('sebastien.viguier@isep.fr', 'Sébastien Viguier');
 
         /* Set the subject. */
         $mail->Subject = 'Force';

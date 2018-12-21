@@ -1,9 +1,6 @@
 <?php
   function page_connexion()
   {
-    require("./model/mailConfig.php");
-    require("./model/util.php");
-    sendMail();
     require("./view/indexVue.tpl");
   }
 

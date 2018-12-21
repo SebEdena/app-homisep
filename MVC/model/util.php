@@ -3,7 +3,11 @@ function traitementCaractereSpeciaux($mot)
 {
     return htmlspecialchars($mot);
 }
-
+/*
+require("./model/mailConfig.php");
+require("./model/util.php");
+sendMail();
+*/
 function sendMail(){
     require("./model/mailConfig.php");
 
@@ -13,13 +17,13 @@ function sendMail(){
         $mail->setFrom('homisep@free.fr', "L'équipe Homisep");
 
         /* Add a recipient. */
-        $mail->addAddress('sebastien.viguier@isep.fr', 'Sébastien Viguier');
-
+        $mail->addAddress('pierre.verbe@isep.fr', 'Pierre Verbe');
+        $mail->addAddress('pablo.grana@isep.fr', 'Pablo Grana');
         /* Set the subject. */
-        $mail->Subject = 'Force';
+        $mail->Subject = 'On voulait tester phpMailer désolé du spam';
 
         /* Set the mail message body. */
-        $mail->Body = 'There is a great disturbance in the Force.';
+        $mail->Body = 'TROLL By Laurent Yu';
 
         /* Finally send the mail. */
         $mail->send();

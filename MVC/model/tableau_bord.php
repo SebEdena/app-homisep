@@ -129,7 +129,7 @@ function getInfoPieceBD($idPiece)
 {
   require('./model/config.php');
   require('./model/classes/maison.php');
-  $query = $database -> prepare('select * from piece where idPiece= ?');
+  $query = $database -> prepare('select * from piece, maison where piece.idPiece= ? and piece.idMaison = maison.idMaison');
   $query -> bindParam(1, $idPiece);
   $query -> execute();
 
@@ -137,4 +137,15 @@ function getInfoPieceBD($idPiece)
   return $res;
 }
 
+function getInfoCapteurBD($idCapteur)
+{
+  require('./model/config.php');
+  require('./model/classes/cemac.php');
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
+  $query -> bindParam(1, $idCapteur);
+  $query -> execute();
+
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $res;
+}
 ?>

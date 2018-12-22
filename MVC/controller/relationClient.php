@@ -110,4 +110,20 @@ function getInfoCapteur()
   }
 }
 
+function creerNouvelleMaison()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = creerNouvelleMaisonBD($_SESSION["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
 ?>

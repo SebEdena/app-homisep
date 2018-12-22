@@ -148,4 +148,27 @@ function getInfoCapteurBD($idCapteur)
   $res = $query->fetchAll(PDO::FETCH_ASSOC);
   return $res;
 }
+
+function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $adresse = traitementCaractereSpeciaux($adresse);
+  $ville = traitementCaractereSpeciaux($ville);
+  $codePostal = traitementCaractereSpeciaux($codePostal);
+  $query = $database -> prepare('insert into maison(adresse,ville,codePostal,idClient) values(?,?,?,?)');
+  $query -> bindParam(1,$adresse);
+  $query -> bindParam(2,$ville);
+  $query -> bindParam(3,$codePostal);
+  $query -> bindParam(4,$idClient);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
 ?>

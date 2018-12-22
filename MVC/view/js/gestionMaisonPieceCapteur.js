@@ -258,16 +258,78 @@ function backFunction($string)
 
 function validateFunction($string)
 {
+  if($("#"+$string+"Id").val() == "")
+  {
+    nouveauFunction($string);
+  }
+  else
+  {
+    modifierFunction($string);
+  }
+}
+
+function nouveauFunction($string)
+{
   switch($string)
   {
     case "maison":
-      console.log("maison");
+    if(confirm("Voulez vous créer une nouvelle maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=creerNouvelleMaison",
+          type: "POST",
+          dataType: "json",
+          data: {
+            adresse : $("#maisonAdresse").val(),
+            ville : $("#maisonVille").val(),
+            codePostal : $("#maisonCodePostal").val()
+          },
+          success: function(retour){
+              console.log(retour);
+              if(retour)
+              {
+                $("#message").html("maison créée");
+                $("#message").css("color","green");
+                $("#message").fadeIn(500);
+                $("#message").css("display","none");
+              }
+              else
+              {
+                $("#message").html("maison non créée");
+                $("#message").css("color","red");
+                $("#message").fadeIn(500);
+                $("#message").css("display","none");
+              }
+
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
     break;
     case "piece":
-      console.log("piece");
+    console.log("no implemented nouvelle pièce");
     break;
     case "cemac":
-      console.log("cemac");
+    console.log("no implemented nouveau cemac");
+    break;
+  }
+}
+
+function modifierFunction($string)
+{
+  switch($string)
+  {
+    case "maison":
+    console.log("no implemented modifier maison");
+    break;
+    case "piece":
+    console.log("no implemented modifier pièce");
+    break;
+    case "cemac":
+    console.log("no implemented modifier cemac");
     break;
   }
 }

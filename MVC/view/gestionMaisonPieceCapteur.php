@@ -106,6 +106,7 @@
             <?php } ?>
             </select>
           <?php } ?>
+          <h2 id="message"></h2>
           </div>
           <div class="gridContainerMaisonPieceCapteur">
             <label class="header" id="headerPiece">Pièce</label>

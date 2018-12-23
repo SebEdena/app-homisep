@@ -12,6 +12,18 @@ function getMaisons()
     return $res;
 }
 
+function getMaisonsAssoc()
+{
+    require('./model/config.php');
+    require('./model/classes/maison.php');
+    $query = $database -> prepare('select * from maison where idClient=?');
+    $query -> bindParam(1, $_SESSION["id"]);
+    $query -> execute();
+
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $res;
+}
+
 function getPieces($idMaison){
     require('./model/config.php');
     require('./model/classes/piece.php');

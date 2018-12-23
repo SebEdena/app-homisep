@@ -285,22 +285,16 @@ function nouveauFunction($string)
             codePostal : $("#maisonCodePostal").val()
           },
           success: function(retour){
-              console.log(retour);
+              //console.log(retour);
               if(retour)
               {
-                $("#message").html("maison créée");
-                $("#message").css("color","green");
-                $("#message").fadeIn(500);
-                $("#message").css("display","none");
+                alert("La maison a été créée");
+                reloadMaison();
               }
               else
               {
-                $("#message").html("maison non créée");
-                $("#message").css("color","red");
-                $("#message").fadeIn(500);
-                $("#message").css("display","none");
+                alert("La maison n'a pas été créée");
               }
-
           },
           error: function(error){
               console.error(error);
@@ -334,6 +328,34 @@ function modifierFunction($string)
   }
 }
 
+function hideMessage()
+{
+  $("#message").css("display","none");
+}
+
 $(window).resize(function() {
     mediaQueryGestionMaisonPieceCapteur();
 });
+
+function reloadMaison()
+{
+  $.ajax({
+      url: "index.php?control=relationClient&action=reloadMaison",
+      type: "POST",
+      dataType: "json",
+      success: function(retour){
+          console.log(retour.maison);
+          let buildHtml = "";
+          for(maison of retour.maison)
+          {
+            console.log(maison);
+            buildHtml += "<option value='"+maison.id+"'>"+ maison.adresse + " - " + maison.ville + " - " + maison.codePostal + "</option>";
+          }
+          $("#house-select-gestion").html(buildHtml);
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}

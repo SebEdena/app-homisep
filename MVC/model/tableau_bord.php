@@ -15,9 +15,19 @@ function getMaisons()
 function getMaisonsAssoc()
 {
     require('./model/config.php');
-    require('./model/classes/maison.php');
     $query = $database -> prepare('select * from maison where idClient=?');
     $query -> bindParam(1, $_SESSION["id"]);
+    $query -> execute();
+
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $res;
+}
+
+function getPiecesAssoc($idPiece)
+{
+    require('./model/config.php');
+    $query = $database -> prepare('select * from piece where idMaison=?');
+    $query -> bindParam(1, $idPiece);
     $query -> execute();
 
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +49,6 @@ function getPieces($idMaison){
         $p -> fill($value);
         $res[$key] = $p->toArray();
     }
-
     return $res;
 }
 
@@ -173,6 +182,104 @@ function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal)
   $query -> bindParam(2,$ville);
   $query -> bindParam(3,$codePostal);
   $query -> bindParam(4,$idClient);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function modifierMaisonBD($idMaison,$adresse,$ville,$codePostal)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $idMaison = traitementCaractereSpeciaux($idMaison);
+  $adresse = traitementCaractereSpeciaux($adresse);
+  $ville = traitementCaractereSpeciaux($ville);
+  $codePostal = traitementCaractereSpeciaux($codePostal);
+  $query = $database -> prepare('update maison set adresse = ?, ville = ?, codePostal = ? where idMaison = ?');
+  $query -> bindParam(1,$adresse);
+  $query -> bindParam(2,$ville);
+  $query -> bindParam(3,$codePostal);
+  $query -> bindParam(4,$idMaison);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function supprimerMaisonBD($idMaison)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('delete from maison where idMaison = ?');
+  $query -> bindParam(1, $idMaison);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function creerNouvellePieceBD($idMaison,$nom)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $idMaison = traitementCaractereSpeciaux($idMaison);
+  $nom = traitementCaractereSpeciaux($nom);
+  $query = $database -> prepare('insert into piece(nom,idMaison) values(?,?)');
+  $query -> bindParam(1,$nom);
+  $query -> bindParam(2,$idMaison);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    echo($exception);
+    return false;
+  }
+}
+
+function modifierPieceBD($idPiece,$nom)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $idPiece = traitementCaractereSpeciaux($idPiece);
+  $nom = traitementCaractereSpeciaux($nom);
+
+  $query = $database -> prepare('update piece set nom = ? where idPiece = ?');
+  $query -> bindParam(1,$nom);
+  $query -> bindParam(2,$idPiece);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function supprimerPieceBD($idPiece)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('delete from piece where idPiece = ?');
+  $query -> bindParam(1, $idPiece);
   try
   {
     $query -> execute();

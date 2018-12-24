@@ -126,6 +126,86 @@ function creerNouvelleMaison()
   }
 }
 
+function modifierMaison()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = modifierMaisonBD($_POST["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function supprimerMaison()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = supprimerMaisonBD($_POST["id"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function creerNouvellePiece()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = creerNouvellePieceBD($_POST["idMaison"],$_POST["nom"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function modifierPiece()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = modifierPieceBD($_POST["id"],$_POST["nom"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function supprimerPiece()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = supprimerPieceBD($_POST["id"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
 function reloadMaison()
 {
   require("./model/tableau_bord.php");
@@ -134,6 +214,22 @@ function reloadMaison()
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode(array('maison' => $maisons));
+  }
+  catch(Exception $exception)
+  {
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+function reloadPiece()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $pieces = getPiecesAssoc($_POST["idMaison"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode(array('piece' => $pieces));
   }
   catch(Exception $exception)
   {

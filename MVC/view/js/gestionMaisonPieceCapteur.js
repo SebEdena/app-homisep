@@ -221,7 +221,7 @@ function mediaQueryGestionMaisonPieceCapteur()
   }
 }
 
-function deleteFunction($string)
+function eraseFunction($string)
 {
   switch ($string)
   {
@@ -304,7 +304,34 @@ function nouveauFunction($string)
     }
     break;
     case "piece":
-    console.log("no implemented nouvelle pièce");
+    if(confirm("Voulez vous créer une nouvelle pièce se nommant " + $("#pieceNom").val() + " dans la maison"))
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=creerNouvellePiece",
+          type: "POST",
+          dataType: "json",
+          data: {
+            nom : $("#pieceNom").val(),
+            idMaison : $("#house-select-gestion").val()
+          },
+          success: function(retour){
+              //console.log(retour);
+              if(retour)
+              {
+                alert("La pièce a été créée");
+                reloadPiece();
+              }
+              else
+              {
+                alert("La pièce n'a pas été créée");
+              }
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
     break;
     case "cemac":
     console.log("no implemented nouveau cemac");
@@ -317,13 +344,141 @@ function modifierFunction($string)
   switch($string)
   {
     case "maison":
-    console.log("no implemented modifier maison");
+    if(confirm("Voulez vous modifier la maison pour adresse : " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=modifierMaison",
+          type: "POST",
+          dataType: "json",
+          data: {
+            id : $("#maisonId").val(),
+            adresse : $("#maisonAdresse").val(),
+            ville : $("#maisonVille").val(),
+            codePostal : $("#maisonCodePostal").val()
+          },
+          success: function(retour){
+              //console.log(retour);
+              if(retour)
+              {
+                alert("La maison a été modifiée");
+                reloadMaison();
+              }
+              else
+              {
+                alert("La maison n'a pas été modifiée");
+              }
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
     break;
     case "piece":
-    console.log("no implemented modifier pièce");
+    if(confirm("Voulez vous modifier la pièce en " + $("#pieceNom").val()))
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=modifierPiece",
+          type: "POST",
+          dataType: "json",
+          data: {
+            id : $("#pieceId").val(),
+            nom : $("#pieceNom").val(),
+          },
+          success: function(retour){
+              //console.log(retour);
+              if(retour)
+              {
+                alert("La piece a été modifiée");
+                reloadPiece();
+              }
+              else
+              {
+                alert("La piece n'a pas été modifiée");
+              }
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
     break;
     case "cemac":
     console.log("no implemented modifier cemac");
+    break;
+  }
+}
+
+function deleteFunction($string)
+{
+  switch($string)
+  {
+    case "maison":
+    if(confirm("Voulez vous supprimer la maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+    console.log($("#maisonId").val());
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=supprimerMaison",
+          type: "POST",
+          dataType: "json",
+          data: {
+            id : $("#maisonId").val()
+          },
+          success: function(retour){
+              //console.log(retour);
+              if(retour)
+              {
+                alert("La maison a été supprimée");
+                reloadMaison();
+                eraseFunction("maison");
+              }
+              else
+              {
+                alert("La maison n'a pas été supprimée");
+              }
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
+    break;
+    case "piece":
+    if(confirm("Voulez vous supprimer la pièce " + $("#pieceNom").val()))
+    console.log($("#pieceId").val());
+    {
+      $.ajax({
+          url: "index.php?control=relationClient&action=supprimerPiece",
+          type: "POST",
+          dataType: "json",
+          data: {
+            id : $("#pieceId").val()
+          },
+          success: function(retour){
+              //console.log(retour);
+              if(retour)
+              {
+                alert("La pièce a été supprimée");
+                reloadPiece();
+                eraseFunction("piece");
+              }
+              else
+              {
+                alert("La pièce n'a pas été supprimée");
+              }
+          },
+          error: function(error){
+              console.error(error);
+              alert("Une erreur est survenue : " + error.message);
+          }
+      });
+    }
+    break;
+    case "cemac":
+    console.log("no implemented supprimer cemac");
     break;
   }
 }
@@ -352,6 +507,32 @@ function reloadMaison()
             buildHtml += "<option value='"+maison.id+"'>"+ maison.adresse + " - " + maison.ville + " - " + maison.codePostal + "</option>";
           }
           $("#house-select-gestion").html(buildHtml);
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
+function reloadPiece()
+{
+  $.ajax({
+      url: "index.php?control=relationClient&action=reloadPiece",
+      type: "POST",
+      dataType: "json",
+      data : {
+        idMaison : $("#house-select-gestion").val()
+      },
+      success: function(retour){
+          console.log(retour.piece);
+          let buildHtml = "";
+          for(piece of retour.piece)
+          {
+            console.log(piece);
+            buildHtml += "<option value='"+piece.idPiece+"'>"+ piece.nom + "</option>";
+          }
+          $("#piece-select-gestion").html(buildHtml);
       },
       error: function(error){
           console.error(error);

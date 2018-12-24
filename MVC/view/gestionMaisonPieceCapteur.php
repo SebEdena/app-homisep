@@ -133,8 +133,9 @@
                     <label for="codePostal">CodePostal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
                     <div class="boutonRight">
+                      <button type="button" onclick="deleteFunction('maison')">Supprimer</button>
                       <button type="button" onclick="backFunction('maison')">Annuler</button>
-                      <button type="button" onclick="deleteFunction('maison')">Nouveau</button>
+                      <button type="button" onclick="eraseFunction('maison')">Nouveau</button>
                       <button type="button" onclick="validateFunction('maison')">Valider</button>
                   	</div>
                   </form>
@@ -147,8 +148,9 @@
                     <label for="pieceMaison">Adresse de la maison :</label>
                     <input type="text" id="pieceMaison" placeholder="Entrez l'adresse de la maison" name="pieceMaison" value="">
                     <div class="boutonRight">
+                      <button type="button" onclick="deleteFunction('piece')">Supprimer</button>
                       <button type="button" onclick="backFunction('piece')">Annuler</button>
-                      <button type="button" onclick="deleteFunction('piece')">Nouveau</button>
+                      <button type="button" onclick="eraseFunction('piece')">Nouveau</button>
                       <button type="button" onclick="validateFunction('piece')">Valider</button>
                   	</div>
                   </form>
@@ -167,8 +169,9 @@
                     <label for="pieceCemac">Piece : </label>
                     <input type="text" id="pieceCemac" placeholder="Entrez le nom d'une pièce" name="pieceCemac" value="">
                     <div class="boutonRight">
+                      <button type="button" onclick="deleteFunction('cemac')">Supprimer</button>
                       <button type="button" onclick="backFunction('cemac')">Annuler</button>
-                      <button type="button" onclick="deleteFunction('cemac')">Nouveau</button>
+                      <button type="button" onclick="eraseFunction('cemac')">Nouveau</button>
                       <button type="button" onclick="validateFunction('cemac')">Valider</button>
                   	</div>
                   </form>

@@ -130,7 +130,7 @@
                     <input type="text" id="maisonAdresse" placeholder="Entrez l'adresse" name="adresse" value="">
                     <label for="ville">Ville :</label>
                     <input type="text" id="maisonVille" placeholder="Entrez la ville" name="ville" value="">
-                    <label for="codePostal">CodePostal :</label>
+                    <label for="codePostal">Code Postal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
                     <div class="boutonRight">
                       <button type="button" onclick="deleteFunction('maison')">Supprimer</button>

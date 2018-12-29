@@ -162,6 +162,7 @@ function afficherInformation($string,$donnees)
 {
   switch ($string) {
     case "maison":
+    {
       $("#maisonId").data("maison",$donnees);
       document.getElementById("maisonId").value = $donnees.idMaison;
       document.getElementById("maisonAdresse").value = $donnees.adresse;
@@ -170,7 +171,9 @@ function afficherInformation($string,$donnees)
       openTab(document.getElementById("tabpage-Maison"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
+    }
     case "piece":
+    {
       $("#pieceId").data("piece",$donnees);
       document.getElementById("pieceId").value = $donnees.idPiece;
       document.getElementById("pieceNom").value = $donnees.nom;
@@ -178,7 +181,9 @@ function afficherInformation($string,$donnees)
       openTab(document.getElementById("tabpage-Piece"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
+    }
     case "cemac":
+    {
       $("#cemacId").data("cemac",$donnees);
       document.getElementById("cemacId").value = $donnees.idCemac;
       document.getElementById("numSerieCemac").value = $donnees.numeroSerie;
@@ -195,8 +200,8 @@ function afficherInformation($string,$donnees)
       document.getElementById("pieceCemac").value = $donnees.nom;
       openTab(document.getElementById("tabpage-Cemac"));
       mediaQueryGestionMaisonPieceCapteur();
-    default:
       break;
+    }
   }
 }
 
@@ -226,19 +231,24 @@ function eraseFunction($string)
   switch ($string)
   {
     case "maison":
+    {
       console.log($("#maisonId").data("maison"));
       document.getElementById("maisonId").value = "";
       document.getElementById("maisonAdresse").value = "";
       document.getElementById("maisonVille").value = "";
       document.getElementById("maisonCodePostal").value = "";
       break;
+    }
     case "piece":
+    {
       console.log($("#pieceId").data("piece"));
       document.getElementById("pieceId").value = "";
       document.getElementById("pieceNom").value = "";
       document.getElementById("pieceMaison").value = "";
       break;
+    }
     case "cemac":
+    {
       console.log($("#cemacId").data("cemac"));
       document.getElementById("cemacId").value = "";
       document.getElementById("numSerieCemac").value = "";
@@ -247,6 +257,7 @@ function eraseFunction($string)
       document.getElementById("property").value = "";
       document.getElementById("pieceCemac").value = "";
       break;
+    }
   }
 }
 
@@ -273,69 +284,78 @@ function nouveauFunction($string)
   switch($string)
   {
     case "maison":
-    if(confirm("Voulez vous créer une nouvelle maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=creerNouvelleMaison",
-          type: "POST",
-          dataType: "json",
-          data: {
-            adresse : $("#maisonAdresse").val(),
-            ville : $("#maisonVille").val(),
-            codePostal : $("#maisonCodePostal").val()
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La maison a été créée");
-                reloadMaison();
+      if(verifierChamp($string))
+      {
+        if(confirm("Voulez vous créer une nouvelle maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+        {
+          $.ajax({
+              url: "index.php?control=relationClient&action=creerNouvelleMaison",
+              type: "POST",
+              dataType: "json",
+              data: {
+                adresse : $("#maisonAdresse").val(),
+                ville : $("#maisonVille").val(),
+                codePostal : $("#maisonCodePostal").val()
+              },
+              success: function(retour){
+                  //console.log(retour);
+                  if(retour)
+                  {
+                    alert("La maison a été créée");
+                    reloadMaison();
+                  }
+                  else
+                  {
+                    alert("La maison n'a pas été créée");
+                  }
+              },
+              error: function(error){
+                  console.error(error);
+                  alert("Une erreur est survenue : " + error.message);
               }
-              else
-              {
-                alert("La maison n'a pas été créée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+          });
+        }
+      }
+      break;
     }
-    break;
     case "piece":
-    if(confirm("Voulez vous créer une nouvelle pièce se nommant " + $("#pieceNom").val() + " dans la maison"))
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=creerNouvellePiece",
-          type: "POST",
-          dataType: "json",
-          data: {
-            nom : $("#pieceNom").val(),
-            idMaison : $("#house-select-gestion").val()
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La pièce a été créée");
-                reloadPiece();
-              }
-              else
-              {
-                alert("La pièce n'a pas été créée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+      if(confirm("Voulez vous créer une nouvelle pièce se nommant " + $("#pieceNom").val() + " dans la maison"))
+      {
+        $.ajax({
+            url: "index.php?control=relationClient&action=creerNouvellePiece",
+            type: "POST",
+            dataType: "json",
+            data: {
+              nom : $("#pieceNom").val(),
+              idMaison : $("#house-select-gestion").val()
+            },
+            success: function(retour){
+                //console.log(retour);
+                if(retour)
+                {
+                  alert("La pièce a été créée");
+                  reloadPiece();
+                }
+                else
+                {
+                  alert("La pièce n'a pas été créée");
+                }
+            },
+            error: function(error){
+                console.error(error);
+                alert("Une erreur est survenue : " + error.message);
+            }
+        });
+      }
+      break;
     }
-    break;
     case "cemac":
-    console.log("no implemented nouveau cemac");
-    break;
+    {
+      console.log("no implemented nouveau cemac");
+      break;
+    }
   }
 }
 
@@ -344,70 +364,79 @@ function modifierFunction($string)
   switch($string)
   {
     case "maison":
-    if(confirm("Voulez vous modifier la maison pour adresse : " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=modifierMaison",
-          type: "POST",
-          dataType: "json",
-          data: {
-            id : $("#maisonId").val(),
-            adresse : $("#maisonAdresse").val(),
-            ville : $("#maisonVille").val(),
-            codePostal : $("#maisonCodePostal").val()
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La maison a été modifiée");
-                reloadMaison();
+      if(verifierChamp($string))
+      {
+        if(confirm("Voulez vous modifier l'adresse de la maison pour : " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+        {
+          $.ajax({
+              url: "index.php?control=relationClient&action=modifierMaison",
+              type: "POST",
+              dataType: "json",
+              data: {
+                id : $("#maisonId").val(),
+                adresse : $("#maisonAdresse").val(),
+                ville : $("#maisonVille").val(),
+                codePostal : $("#maisonCodePostal").val()
+              },
+              success: function(retour){
+                  //console.log(retour);
+                  if(retour)
+                  {
+                    alert("La maison a été modifiée");
+                    reloadMaison();
+                  }
+                  else
+                  {
+                    alert("La maison n'a pas été modifiée");
+                  }
+              },
+              error: function(error){
+                  console.error(error);
+                  alert("Une erreur est survenue : " + error.message);
               }
-              else
-              {
-                alert("La maison n'a pas été modifiée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+          });
+        }
+      }
+      break;
     }
-    break;
     case "piece":
-    if(confirm("Voulez vous modifier la pièce en " + $("#pieceNom").val()))
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=modifierPiece",
-          type: "POST",
-          dataType: "json",
-          data: {
-            id : $("#pieceId").val(),
-            nom : $("#pieceNom").val(),
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La piece a été modifiée");
-                reloadPiece();
-              }
-              else
-              {
-                alert("La piece n'a pas été modifiée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+      if(confirm("Voulez vous modifier la pièce en " + $("#pieceNom").val()))
+      {
+        $.ajax({
+            url: "index.php?control=relationClient&action=modifierPiece",
+            type: "POST",
+            dataType: "json",
+            data: {
+              id : $("#pieceId").val(),
+              nom : $("#pieceNom").val(),
+            },
+            success: function(retour){
+                //console.log(retour);
+                if(retour)
+                {
+                  alert("La piece a été modifiée");
+                  reloadPiece();
+                }
+                else
+                {
+                  alert("La piece n'a pas été modifiée");
+                }
+            },
+            error: function(error){
+                console.error(error);
+                alert("Une erreur est survenue : " + error.message);
+            }
+        });
+      }
+      break;
     }
-    break;
     case "cemac":
-    console.log("no implemented modifier cemac");
-    break;
+    {
+      console.log("no implemented modifier cemac");
+      break;
+    }
   }
 }
 
@@ -416,70 +445,76 @@ function deleteFunction($string)
   switch($string)
   {
     case "maison":
-    if(confirm("Voulez vous supprimer la maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
-    console.log($("#maisonId").val());
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=supprimerMaison",
-          type: "POST",
-          dataType: "json",
-          data: {
-            id : $("#maisonId").val()
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La maison a été supprimée");
-                reloadMaison();
-                eraseFunction("maison");
-              }
-              else
-              {
-                alert("La maison n'a pas été supprimée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+      if(confirm("Voulez vous supprimer la maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+      console.log($("#maisonId").val());
+      {
+        $.ajax({
+            url: "index.php?control=relationClient&action=supprimerMaison",
+            type: "POST",
+            dataType: "json",
+            data: {
+              id : $("#maisonId").val()
+            },
+            success: function(retour){
+                //console.log(retour);
+                if(retour)
+                {
+                  alert("La maison a été supprimée");
+                  reloadMaison();
+                  eraseFunction("maison");
+                }
+                else
+                {
+                  alert("La maison n'a pas été supprimée");
+                }
+            },
+            error: function(error){
+                console.error(error);
+                alert("Une erreur est survenue : " + error.message);
+            }
+        });
+      }
+      break;
     }
-    break;
     case "piece":
-    if(confirm("Voulez vous supprimer la pièce " + $("#pieceNom").val()))
-    console.log($("#pieceId").val());
     {
-      $.ajax({
-          url: "index.php?control=relationClient&action=supprimerPiece",
-          type: "POST",
-          dataType: "json",
-          data: {
-            id : $("#pieceId").val()
-          },
-          success: function(retour){
-              //console.log(retour);
-              if(retour)
-              {
-                alert("La pièce a été supprimée");
-                reloadPiece();
-                eraseFunction("piece");
-              }
-              else
-              {
-                alert("La pièce n'a pas été supprimée");
-              }
-          },
-          error: function(error){
-              console.error(error);
-              alert("Une erreur est survenue : " + error.message);
-          }
-      });
+      if(confirm("Voulez vous supprimer la pièce " + $("#pieceNom").val()))
+      console.log($("#pieceId").val());
+      {
+        $.ajax({
+            url: "index.php?control=relationClient&action=supprimerPiece",
+            type: "POST",
+            dataType: "json",
+            data: {
+              id : $("#pieceId").val()
+            },
+            success: function(retour){
+                //console.log(retour);
+                if(retour)
+                {
+                  alert("La pièce a été supprimée");
+                  reloadPiece();
+                  eraseFunction("piece");
+                }
+                else
+                {
+                  alert("La pièce n'a pas été supprimée");
+                }
+            },
+            error: function(error){
+                console.error(error);
+                alert("Une erreur est survenue : " + error.message);
+            }
+        });
+      }
+      break;
     }
-    break;
     case "cemac":
-    console.log("no implemented supprimer cemac");
-    break;
+    {
+      console.log("no implemented supprimer cemac");
+      break;
+    }
   }
 }
 
@@ -539,4 +574,41 @@ function reloadPiece()
           alert("Une erreur est survenue : " + error.message);
       }
   });
+}
+
+function verifierChamp($string)
+{
+  switch($string)
+  {
+    case "maison" :
+    {
+      if(document.getElementById("maisonAdresse").value == "" ||
+      document.getElementById("maisonVille").value == "" ||
+      document.getElementById("maisonCodePostal").value == "")
+      {
+        alert("Veuillez remplir les champs vides");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    case "piece" :
+    {
+      if(document.getElementById("pieceNom").value == "")
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+    case "capteur" :
+    {
+      console.log("no implemented supprimer cemac");
+      return null;
+    }
+  }
 }

@@ -1,6 +1,9 @@
 $("#house-select-gestion").on('change', recupDonneesMaisonGestion);
 $("#house-select-gestion").trigger('change');
 
+$("#house-select-gestion").on('load', recupDonneesMaisonGestion);
+$("#house-select-gestion").trigger('load');
+
 function recupDonneesMaisonGestion(event)
 {
   let idMaison = parseInt(event.target.value);
@@ -538,8 +541,7 @@ function reloadMaison()
           let buildHtml = "";
           for(maison of retour.maison)
           {
-            console.log(maison);
-            buildHtml += "<option value='"+maison.id+"'>"+ maison.adresse + " - " + maison.ville + " - " + maison.codePostal + "</option>";
+            buildHtml += "<option value='"+maison.idMaison+"'>"+ maison.adresse + " - " + maison.ville + " - " + maison.codePostal + "</option>";
           }
           $("#house-select-gestion").html(buildHtml);
       },
@@ -567,7 +569,7 @@ function reloadPiece()
             console.log(piece);
             buildHtml += "<option value='"+piece.idPiece+"'>"+ piece.nom + "</option>";
           }
-          $("#piece-select-gestion").html(buildHtml);
+          $("#piece-select-gestion").append(buildHtml);
       },
       error: function(error){
           console.error(error);

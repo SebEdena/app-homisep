@@ -163,9 +163,7 @@
                     <label for="statusCapteur">Statut : </label>
                     <input type="text" id="statusCemac" placeholder="statusCemac" name="statusCemac" value="">
                     <label for="typeCemac">Type Cemac : </label>
-                    <input type="text" id="typeCemac" placeholder="Entrez le type de Cemac" name="typeCemac" value="">
-                    <label for="property">Propriété : </label>
-                    <input type="text" id="property" placeholder="Entrez le type" name="property" value="">
+                    <select id="typeCemac"></select>
                     <label for="pieceCemac">Piece : </label>
                     <input type="text" id="pieceCemac" placeholder="Entrez le nom d'une pièce" name="pieceCemac" value="">
                     <div class="boutonRight">

@@ -198,8 +198,8 @@ function afficherInformation($string,$donnees)
       {
         document.getElementById("statusCemac").value = "En service";
       }
-      document.getElementById("typeCemac").value = $donnees.type;
-      document.getElementById("property").value = $donnees.libelleGroupBy;
+      $("#typeCemac").html("<option value=" + $donnees.idTypeCapteur + ">" + $donnees.type + " - " + $donnees.libelleGroupBy + "</option>");
+      recupererOptionsTypeCemac($donnees.idTypeCapteur);
       document.getElementById("pieceCemac").value = $donnees.nom;
       openTab(document.getElementById("tabpage-Cemac"));
       mediaQueryGestionMaisonPieceCapteur();
@@ -441,6 +441,33 @@ function modifierFunction($string)
       break;
     }
   }
+}
+
+function recupererOptionsTypeCemac($idTypeCapteur)
+{
+  console.log($idTypeCapteur);
+  $.ajax({
+      url: "index.php?control=relationClient&action=recupererTypeCapteur",
+      type: "POST",
+      dataType: "json",
+      data: {
+        id : $idTypeCapteur
+      },
+      success: function(retour){
+          console.log(retour);
+          if(retour)
+          {
+            for(type of retour)
+            {
+              $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+            }
+          }
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
 }
 
 function deleteFunction($string)

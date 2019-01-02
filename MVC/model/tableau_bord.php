@@ -15,7 +15,7 @@ function getMaisons()
 function getMaisonsAssoc()
 {
     require('./model/config.php');
-    $query = $database -> prepare('select * from maison where idClient=?');
+    $query = $database -> prepare('select * from maison where idClient=? order by maisonPrincipale DESC');
     $query -> bindParam(1, $_SESSION["id"]);
     $query -> execute();
 
@@ -162,7 +162,7 @@ function getInfoCapteurBD($idCapteur)
 {
   require('./model/config.php');
   require('./model/classes/cemac.php');
-  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.idTypeCapteur, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
   $query -> bindParam(1, $idCapteur);
   $query -> execute();
 
@@ -289,5 +289,15 @@ function supprimerPieceBD($idPiece)
   {
     return false;
   }
+}
+
+function getTypeCapteur($idTypeCapteur)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('select * from typecapteur where idTypeCapteur <> ?');
+  $query -> bindParam(1, $idTypeCapteur);
+  $query -> execute();
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $res;
 }
 ?>

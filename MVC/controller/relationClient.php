@@ -239,4 +239,21 @@ function reloadPiece()
   }
 }
 
+function recupererTypeCapteur()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $typeCapteur = getTypeCapteur($_POST["id"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($typeCapteur);
+  }
+  catch(Exception $exception)
+  {
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
 ?>

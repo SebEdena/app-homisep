@@ -256,8 +256,6 @@ function eraseFunction($string)
       document.getElementById("cemacId").value = "";
       document.getElementById("numSerieCemac").value = "";
       document.getElementById("statusCemac").value = "";
-      document.getElementById("typeCemac").value = "";
-      document.getElementById("property").value = "";
       document.getElementById("pieceCemac").value = "";
       break;
     }
@@ -284,33 +282,68 @@ function validateFunction($string)
 
 function nouveauFunction($string)
 {
-  switch($string)
+  if(verifierChamp($string))
   {
-    case "maison":
+    switch($string)
     {
-      if(verifierChamp($string))
+      case "maison":
       {
-        if(confirm("Voulez vous créer une nouvelle maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+        if(verifierChamp($string))
+        {
+          if(confirm("Voulez vous créer une nouvelle maison se situant au " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+          {
+            $.ajax({
+                url: "index.php?control=relationClient&action=creerNouvelleMaison",
+                type: "POST",
+                dataType: "json",
+                data: {
+                  adresse : $("#maisonAdresse").val(),
+                  ville : $("#maisonVille").val(),
+                  codePostal : $("#maisonCodePostal").val()
+                },
+                success: function(retour){
+                    //console.log(retour);
+                    if(retour)
+                    {
+                      alert("La maison a été créée");
+                      reloadMaison();
+                    }
+                    else
+                    {
+                      alert("La maison n'a pas été créée");
+                    }
+                },
+                error: function(error){
+                    console.error(error);
+                    alert("Une erreur est survenue : " + error.message);
+                }
+            });
+          }
+        }
+        break;
+      }
+      case "piece":
+      {
+        if(confirm("Voulez vous créer une nouvelle pièce se nommant " + $("#pieceNom").val() + " dans la maison"))
         {
           $.ajax({
-              url: "index.php?control=relationClient&action=creerNouvelleMaison",
+              url: "index.php?control=relationClient&action=creerNouvellePiece",
               type: "POST",
               dataType: "json",
               data: {
-                adresse : $("#maisonAdresse").val(),
-                ville : $("#maisonVille").val(),
-                codePostal : $("#maisonCodePostal").val()
+                nom : $("#pieceNom").val(),
+                idMaison : $("#house-select-gestion").val()
               },
               success: function(retour){
                   //console.log(retour);
                   if(retour)
                   {
-                    alert("La maison a été créée");
-                    reloadMaison();
+                    alert("La pièce a été créée");
+                    reloadPiece();
                   }
                   else
                   {
-                    alert("La maison n'a pas été créée");
+                    alert("La pièce n'a pas été créée");
                   }
               },
               error: function(error){
@@ -319,79 +352,143 @@ function nouveauFunction($string)
               }
           });
         }
+        break;
       }
-      break;
-    }
-    case "piece":
-    {
-      if(confirm("Voulez vous créer une nouvelle pièce se nommant " + $("#pieceNom").val() + " dans la maison"))
+      case "cemac":
       {
-        $.ajax({
-            url: "index.php?control=relationClient&action=creerNouvellePiece",
-            type: "POST",
-            dataType: "json",
-            data: {
-              nom : $("#pieceNom").val(),
-              idMaison : $("#house-select-gestion").val()
-            },
-            success: function(retour){
-                //console.log(retour);
-                if(retour)
-                {
-                  alert("La pièce a été créée");
-                  reloadPiece();
-                }
-                else
-                {
-                  alert("La pièce n'a pas été créée");
-                }
-            },
-            error: function(error){
-                console.error(error);
-                alert("Une erreur est survenue : " + error.message);
-            }
-        });
+        if(confirm("Voulez vous créer un nouveau CeMac avec comme numéro de série : " + $("#numSerieCemac").val()))
+        {
+          $.ajax({
+              url: "index.php?control=relationClient&action=creerNouveauCemac",
+              type: "POST",
+              dataType: "json",
+              data: {
+                idPiece : $("#piece-select-gestion").val(),
+                numSerieCemac : $("#numSerieCemac").val(),
+                typeCemac : $("#typeCemac").val()
+              },
+              success: function(retour){
+                  //console.log(retour);
+                  if(retour)
+                  {
+                    alert("Le CeMac a été créé");
+                    reloadCemac();
+                  }
+                  else
+                  {
+                    alert("Le CeMac n'a pas été créé");
+                  }
+              },
+              error: function(error){
+                  console.error(error);
+                  alert("Une erreur est survenue : " + error.message);
+              }
+          });
+        }
+        break;
       }
-      break;
-    }
-    case "cemac":
-    {
-      console.log("no implemented nouveau cemac");
-      break;
     }
   }
 }
 
 function modifierFunction($string)
 {
-  switch($string)
+  if(verifierChamp($string))
   {
-    case "maison":
+    switch($string)
     {
-      if(verifierChamp($string))
+      case "maison":
       {
-        if(confirm("Voulez vous modifier l'adresse de la maison pour : " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+        if(verifierChamp($string))
+        {
+          if(confirm("Voulez vous modifier l'adresse de la maison pour : " + $("#maisonAdresse").val() + " dans la ville de " + $("#maisonVille").val()))
+          {
+            $.ajax({
+                url: "index.php?control=relationClient&action=modifierMaison",
+                type: "POST",
+                dataType: "json",
+                data: {
+                  id : $("#maisonId").val(),
+                  adresse : $("#maisonAdresse").val(),
+                  ville : $("#maisonVille").val(),
+                  codePostal : $("#maisonCodePostal").val()
+                },
+                success: function(retour){
+                    //console.log(retour);
+                    if(retour)
+                    {
+                      alert("La maison a été modifiée");
+                      reloadMaison();
+                    }
+                    else
+                    {
+                      alert("La maison n'a pas été modifiée");
+                    }
+                },
+                error: function(error){
+                    console.error(error);
+                    alert("Une erreur est survenue : " + error.message);
+                }
+            });
+          }
+        }
+        break;
+      }
+      case "piece":
+      {
+        if(confirm("Voulez vous modifier la pièce en " + $("#pieceNom").val()))
         {
           $.ajax({
-              url: "index.php?control=relationClient&action=modifierMaison",
+              url: "index.php?control=relationClient&action=modifierPiece",
               type: "POST",
               dataType: "json",
               data: {
-                id : $("#maisonId").val(),
-                adresse : $("#maisonAdresse").val(),
-                ville : $("#maisonVille").val(),
-                codePostal : $("#maisonCodePostal").val()
+                id : $("#pieceId").val(),
+                nom : $("#pieceNom").val(),
               },
               success: function(retour){
                   //console.log(retour);
                   if(retour)
                   {
-                    alert("La maison a été modifiée");
-                    reloadMaison();
+                    alert("La piece a été modifiée");
+                    reloadPiece();
                   }
                   else
                   {
-                    alert("La maison n'a pas été modifiée");
+                    alert("La piece n'a pas été modifiée");
+                  }
+              },
+              error: function(error){
+                  console.error(error);
+                  alert("Une erreur est survenue : " + error.message);
+              }
+          });
+        }
+        break;
+      }
+      case "cemac":
+      {
+        if(confirm("Voulez vous modifier le cemac ?"))
+        {
+          $.ajax({
+              url: "index.php?control=relationClient&action=modifierCemac",
+              type: "POST",
+              dataType: "json",
+              data: {
+                id : $("#cemacId").val(),
+                numSerieCemac : $("#numSerieCemac").val(),
+                typeCemac : $("#typeCemac").val()
+              },
+              success: function(retour){
+                  //console.log(retour);
+                  if(retour)
+                  {
+                    alert("Le Cemac a été modifié");
+                    reloadCemac();
+                  }
+                  else
+                  {
+                    alert("Le Cemac n'a pas été modifié");
                   }
               },
               error: function(error){
@@ -401,44 +498,6 @@ function modifierFunction($string)
           });
         }
       }
-      break;
-    }
-    case "piece":
-    {
-      if(confirm("Voulez vous modifier la pièce en " + $("#pieceNom").val()))
-      {
-        $.ajax({
-            url: "index.php?control=relationClient&action=modifierPiece",
-            type: "POST",
-            dataType: "json",
-            data: {
-              id : $("#pieceId").val(),
-              nom : $("#pieceNom").val(),
-            },
-            success: function(retour){
-                //console.log(retour);
-                if(retour)
-                {
-                  alert("La piece a été modifiée");
-                  reloadPiece();
-                }
-                else
-                {
-                  alert("La piece n'a pas été modifiée");
-                }
-            },
-            error: function(error){
-                console.error(error);
-                alert("Une erreur est survenue : " + error.message);
-            }
-        });
-      }
-      break;
-    }
-    case "cemac":
-    {
-      console.log("no implemented modifier cemac");
-      break;
     }
   }
 }
@@ -542,7 +601,35 @@ function deleteFunction($string)
     }
     case "cemac":
     {
-      console.log("no implemented supprimer cemac");
+      if(confirm("Voulez vous supprimer le Cemac " + $("#numSerieCemac").val()))
+      console.log($("#pieceId").val());
+      {
+        $.ajax({
+            url: "index.php?control=relationClient&action=supprimerCemac",
+            type: "POST",
+            dataType: "json",
+            data: {
+              id : $("#cemacId").val()
+            },
+            success: function(retour){
+                //console.log(retour);
+                if(retour)
+                {
+                  alert("Le Cemac a été supprimé");
+                  reloadCemac();
+                  eraseFunction("cemac");
+                }
+                else
+                {
+                  alert("Le Cemac n'a pas été supprimé");
+                }
+            },
+            error: function(error){
+                console.error(error);
+                alert("Une erreur est survenue : " + error.message);
+            }
+        });
+      }
       break;
     }
   }
@@ -605,6 +692,35 @@ function reloadPiece()
   });
 }
 
+function reloadCemac()
+{
+  $.ajax({
+      url: "index.php?control=relationClient&action=reloadCemac",
+      type: "POST",
+      dataType: "json",
+      data: {
+        id : $("#piece-select-gestion").val()
+      },
+      success: function(retour){
+          console.log(retour);
+          if(retour)
+          {
+            let buildHtml = "";
+            for(cemac of retour.cemac)
+            {
+              console.log(cemac);
+              buildHtml += "<option value='"+cemac.idCemac+"'>"+ cemac.numeroSerie + " - " + cemac.type + " " + cemac.libelleGroupBy + "</option>";
+            }
+            $("#cemac-select-gestion").html(buildHtml);
+          }
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
 function verifierChamp($string)
 {
   switch($string)
@@ -627,6 +743,7 @@ function verifierChamp($string)
     {
       if(document.getElementById("pieceNom").value == "")
       {
+        alert("Veuillez remplir le champ Nom");
         return false;
       }
       else
@@ -634,10 +751,17 @@ function verifierChamp($string)
         return true;
       }
     }
-    case "capteur" :
+    case "cemac" :
     {
-      console.log("no implemented supprimer cemac");
-      return null;
+      if(document.getElementById("numSerieCemac").value == "" || document.getElementById("piece-select-gestion").value == "")
+      {
+        alert("Veuillez remplir le champ numéro de série et choissisez une pièce");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
     }
   }
 }

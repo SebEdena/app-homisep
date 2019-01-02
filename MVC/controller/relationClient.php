@@ -206,6 +206,54 @@ function supprimerPiece()
   }
 }
 
+function creerNouveauCemac()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $statut = creerNouveauCemacBD($_POST['numSerieCemac'],$_POST['typeCemac'],$_POST['idPiece']);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($statut);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function modifierCemac()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = modifierCemacBD($_POST["id"],$_POST["numSerieCemac"],$_POST["typeCemac"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function supprimerCemac()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $status = supprimerCemacBD($_POST["id"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($status);
+  }
+  catch(Exception $exception){
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
 function reloadMaison()
 {
   require("./model/tableau_bord.php");
@@ -222,6 +270,7 @@ function reloadMaison()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function reloadPiece()
 {
   require("./model/tableau_bord.php");
@@ -230,6 +279,23 @@ function reloadPiece()
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode(array('piece' => $pieces));
+  }
+  catch(Exception $exception)
+  {
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function reloadCemac()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $cemacs = getCemacsAssoc($_POST["id"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode(array('cemac' => $cemacs));
   }
   catch(Exception $exception)
   {

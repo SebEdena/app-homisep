@@ -34,6 +34,17 @@ function getPiecesAssoc($idPiece)
     return $res;
 }
 
+function getCemacsAssoc($idPiece)
+{
+    require('./model/config.php');
+    $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.idTypeCapteur, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole from cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = ?');
+    $query -> bindParam(1, $idPiece);
+    $query -> execute();
+
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $res;
+}
+
 function getPieces($idMaison){
     require('./model/config.php');
     require('./model/classes/piece.php');
@@ -280,6 +291,67 @@ function supprimerPieceBD($idPiece)
   require('./model/config.php');
   $query = $database -> prepare('delete from piece where idPiece = ?');
   $query -> bindParam(1, $idPiece);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function creerNouveauCemacBD($numSerieCemac,$idTypeCapteur,$idPiece)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $numSerieCemac = traitementCaractereSpeciaux($numSerieCemac);
+  $idTypeCapteur = traitementCaractereSpeciaux($idTypeCapteur);
+  $idPiece = traitementCaractereSpeciaux($idPiece);
+  $query = $database -> prepare('insert into cemac(numeroSerie,statut,idTypeCapteur,idPiece) values(?,1,?,?)');
+  $query -> bindParam(1,$numSerieCemac);
+  $query -> bindParam(2,$idTypeCapteur);
+  $query -> bindParam(3,$idPiece);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    echo($exception);
+    return false;
+  }
+}
+
+function modifierCemacBD($id,$num,$type)
+{
+  require("./model/util.php");
+  require("./model/config.php");
+  $id = traitementCaractereSpeciaux($id);
+  $num = traitementCaractereSpeciaux($num);
+  $type = traitementCaractereSpeciaux($type);
+  $query = $database -> prepare('update cemac set numeroSerie = ?, idTypeCapteur = ? where idCemac = ?');
+  $query -> bindParam(1,$num);
+  $query -> bindParam(2,$type);
+  $query -> bindParam(3,$id);
+  try
+  {
+    $query -> execute();
+    return true;
+  }
+  catch(PDOException $exception)
+  {
+    return false;
+  }
+}
+
+function supprimerCemacBD($idCemac)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('delete from cemac where idCemac = ?');
+  $query -> bindParam(1, $idCemac);
   try
   {
     $query -> execute();

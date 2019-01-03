@@ -1,0 +1,18 @@
+
+SELECT *
+FROM client
+WHERE client.mail=''
+AND client.passe=''
+
+SELECT administrateur.idAdministrateur, administrateur.nom, administrateur.prenom, administrateur.mail, administrateur.passe, typeadministrateur.nom AS Type
+FROM administrateur, typeadministrateur
+WHERE administrateur.idTypeAdministrateur = typeadministrateur.idTypeAdministrateur
+AND administrateur.mail='' AND administrateur.passe=''
+
+SELECT *
+FROM maison
+WHERE maison.idClient = ''
+
+SELECT *
+FROM piece
+WHERE piece.idMaison = ''

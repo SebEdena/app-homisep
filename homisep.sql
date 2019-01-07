@@ -147,16 +147,17 @@ CREATE TABLE `maison` (
   `adresse` varchar(255) NOT NULL,
   `ville` varchar(255) NOT NULL,
   `codePostal` int(5) NOT NULL,
-  `idClient` int(11) NOT NULL
+  `idClient` int(11) NOT NULL,
+  `maisonPrincipale` bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `maison`
 --
 
-INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`) VALUES
-(1, '143 avenue de Versailles', 'Paris', 75016, 5),
-(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5);
+INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`,`maisonPrincipale`) VALUES
+(1, '143 avenue de Versailles', 'Paris', 75016, 5, b'1'),
+(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5, b'0');
 
 -- --------------------------------------------------------
 
@@ -166,13 +167,21 @@ INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`) 
 
 CREATE TABLE `message` (
   `idMessage` int(11) NOT NULL,
-  `sujet` varchar(255) NOT NULL,
+  `sujet` varchar(255) DEFAULT NULL,
   `objet` varchar(255) NOT NULL,
   `texte` varchar(1000) NOT NULL,
   `idClient` int(11) NOT NULL,
   `idAdministrateur` int(11) DEFAULT NULL,
-  `idTypeSujet` int(11) NOT NULL
+  `idTypeSujet` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `message`
+--
+
+INSERT INTO `message` (`idMessage`, `objet`, `texte`, `idClient`) VALUES
+(1, 'Bug', "Aidez moi il n'y a plus rien qui fonctionne !", 5),
+(2, 'Recrutement', "J'aimerais travailler avec vous.", 5);
 
 -- --------------------------------------------------------
 

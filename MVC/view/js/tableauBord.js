@@ -201,6 +201,13 @@ function displayGeneralView(pieces, context){
             `);
             summary.data('cemacs', count[order]);
             console.log(summary);
+            console.log(document.getElementById("tabgen-content") == undefined);
+            if(document.getElementById("tabgen-content") == undefined)
+            {
+              let divTabgen = document.createElement('div');
+              divTabgen.id = 'tabgen-content';
+              $("#tabpage-gen").append(divTabgen);
+            }
             $("#tabgen-content").append(summary);
         }
     }

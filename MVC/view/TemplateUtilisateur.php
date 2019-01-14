@@ -37,7 +37,8 @@
 
 <br/>
 <footer>
-    <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
+  <a href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
+  &#9400; 2018, Homisep un produit Domisep, tous droits réservés.
 </footer>
 
 <div class="modal-bg">
@@ -47,7 +48,7 @@
             <h1>Contact</h1>
         </div>
         <div class="modal-body">
-          <form class="contact" action="#" method="post" onsubmit="contactReceived();">
+          <form class="contact" action="#" method="post" onsubmit="contactReceived(event);">
             <div class="container">
 
               <label for="object" class="object"><b>Objet</b></label>
@@ -68,6 +69,7 @@
 <script src="./view/js/jquery-3.3.1.min.js"></script>
 <script src="./view/js/logo.js"></script>
 <script src="./view/js/modal.js"></script>
+<script src="./view/js/contact.js"></script>
 <?php foreach ($js as $value) { ?>
     <script src="./view/js/<?= $value ?>" /></script>
 <?php } ?>

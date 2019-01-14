@@ -9,7 +9,7 @@ $jsonpage = null;
 ?>
 <?php ob_start(); ?>
 <h1 class="titre">Foire aux questions</h1>
-<button class="contactbutton"> Nous contacter </button>
+<button class="contactbutton" onclick="displayContact()"> Nous contacter </button>
 
 <section class="faq-section">
   <input type="checkbox" id="q1">

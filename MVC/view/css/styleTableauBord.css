@@ -21,6 +21,40 @@
 
 #house-select{
     max-width: 100%;
+    border: 2px solid var(--color-darkblue);
+    background-color: var(--color-blue);
+    appearance: none;
+    cursor: pointer;
+
+   -webkit-appearance: none;
+   -moz-appearance: none;
+}
+
+#house-select:hover {
+    background-color: #AAAAFF;
+    transition: background-color 0.5s;
+}
+
+#house-select option {
+    background-color: white;
+}
+
+#house-select:hover option {
+    background-color: white;
+}
+
+#save-tdb{
+    padding: 10px;
+    background: var(--color-green);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#save-tdb:hover {
+    background-color: #30B030;
+    transition: background-color 0.5s;
 }
 
 #noMaison{
@@ -50,7 +84,7 @@
 }
 
 /*
-    Style vue générale
+Style vue générale
 */
 
 .data-summary {
@@ -70,8 +104,8 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-        width: 40%;
-        margin: 5%;
+    width: 40%;
+    margin: 5%;
 }
 
 .summary-left img {
@@ -84,12 +118,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-        width: 60%;
-        margin: 5%;
+    width: 60%;
+    margin: 5%;
 }
 
 /*
-    Style Blocs Capteurs
+Style Blocs Capteurs
 */
 .capt-menu{
     grid-area: capt-menu;
@@ -127,8 +161,8 @@
 }
 
 .capt-title{
-  background-color: var(--color-green);
-  color : white;
+    background-color: var(--color-green);
+    color : white;
 }
 
 .capt-status.capt-error {

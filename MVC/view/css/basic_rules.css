@@ -32,6 +32,8 @@ body {
     position: relative;
     background-image: url("../img/fond.jpg");
     background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment:fixed;
     object-fit: cover;
 }
 

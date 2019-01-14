@@ -7,7 +7,6 @@ function recupDonnéesMaison(event){
     {
       return;
     }
-    console.log(idMaison);
     $.ajax({
         url: "index.php?control=relationClient&action=getDonneesMaison",
         type: "POST",
@@ -19,7 +18,7 @@ function recupDonnéesMaison(event){
             console.log(retour);
             build_pieces(retour.pieces);
             build_capteurs(retour);
-            displayGeneralView(retour.pieces, retour.context);
+            displayGeneralView(retour.pieces, retour.context, retour.cemacs);
             // $('.tablink.active').trigger('click');
         },
         error: function(error){
@@ -56,24 +55,27 @@ function build_capteurs(data){
     for (piece of data.pieces) {
         for (categorie of order) {
             if(data.context[piece.id][categorie]['int']!=null){
-                inflate_capteur(true, piece.id, data, categorie, 'int');
+                let context = data.context[piece.id][categorie]['int'];
+                let hasActionneurs = (context.actionneur.length != 0);
+                let hasCapteurs = (context.capteur.length != 0);
+                inflate_capteur(true, null, piece.id, context, categorie, 'int', hasActionneurs, hasCapteurs);
             }
             if(data.context[piece.id][categorie]['ext']!=null){
-                inflate_capteur(true, piece.id, data, categorie, 'ext');
+                let context = data.context[piece.id][categorie]['ext'];
+                let hasActionneurs = (context.actionneur.length != 0);
+                let hasCapteurs = (context.capteur.length != 0);
+                inflate_capteur(true, null, piece.id, context, categorie, 'ext', hasActionneurs, hasCapteurs);
             }
         }
     }
     for (cemac of data.cemacs) {
-        inflate_capteur(false, cemac.id, cemac, cemac.typeCapteur.categorie, cemac.typeCapteur.categorie.exterieur);
+        inflate_capteur(false, null, cemac.id, cemac, cemac.typeCapteur.categorie, cemac.typeCapteur.categorie.exterieur);
     }
 }
 
-function inflate_capteur(grouped, id, data, categorie, ext){
+function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
-        let context = data.context[id][categorie][ext];
-        let hasActionneurs = (context.actionneur.length != 0);
-        let hasCapteurs = (context.capteur.length != 0);
         let cemacGrouped = $(`
             <div class="capt-gen">
                 <div class="capt-title">${context.libelleGroupBy}</div>
@@ -111,14 +113,19 @@ function inflate_capteur(grouped, id, data, categorie, ext){
         }
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
         cemacGrouped.data('cemacGroup', context);
-        cemacGrouped.data('idPiece', id);
-        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
-        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content').append(cemacGrouped);
+        if(id !== null){
+            cemacGrouped.data('idPiece', id);
+            $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
+            $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content').append(cemacGrouped);
+        }else{
+            target.append(cemacGrouped);
+        }
     }else{
-        let isCapteur = (data.typeCapteur.type==='capteur');
+        console.log(context);
+        let isCapteur = (context.typeCapteur.type==='capteur');
         let cemac = $(`
             <div class="capt-solo" data-capt-id=${id}>
-                <div class="capt-title">${isCapteur?'Capteur':'Actionneur'} ${data.numeroSerie}</div>
+                <div class="capt-title">${isCapteur?'Capteur':'Actionneur'} ${context.numeroSerie}</div>
                 <div class="capt-content">
                     <div class="capt-menu-data-container">
                         <div class="capt-menu">
@@ -146,9 +153,9 @@ function inflate_capteur(grouped, id, data, categorie, ext){
         }else{
             cemac.find('.capt-data-real').remove();
         }
-        if(data.statut){cemac.find('.capt-status').removeClass('capt-error');}
-        cemac.data('cemac', data);
-        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + data.idPiece +'] > .accord-content').append(cemac);
+        if(context.statut){cemac.find('.capt-status').removeClass('capt-error');}
+        cemac.data('cemac', context);
+        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + context.idPiece +'] > .accord-content').append(cemac);
     }
 }
 
@@ -156,59 +163,46 @@ function openAccordions(event){
     $($('.tabpage')[$(this).index()]).find('.piece:not(.accord-opened) label').trigger('click');
 }
 
-function displayGeneralView(pieces, context){
-    const links = { lumint: 'lightbulb.png', lumext: 'lightbulb.png', tempint: 'thermometer.png', tempext: 'thermometer.png', shutint: 'blinds.png'}
+function displayGeneralView(pieces, context, cemacs){
+    console.log("disp");
+    const links = { lumint: 'lightbulb.png', lumext: 'lightbulb.png', tempint: 'thermometer.png', tempext: 'thermometer.png', shut: 'blinds.png'}
     count = {lumint: null, lumext: null, tempint: null, tempext: null, shut: null};
     const countOrder=['lumint', 'lumext', 'tempint', 'tempext', 'shut'];
 
-    for(let piece of pieces){
-        for(let categ of order){
-            let data = context[piece['id']][categ]['int'];
-            if(data != null && count.hasOwnProperty(categ+'int')){
-                if(count[categ+'int'] == null){
-                    count[categ+'int'] = {capteur: data.capteur, actionneur: data.actionneur, libelle: data.libelleGroupBy};
-                }else{
-                    count[categ+'int'].capteur.push.apply(count[categ+'int'].capteur, data.capteur);
-                    count[categ+'int'].actionneur.push.apply(count[categ+'int'].actionneur, data.actionneur);
-                }
-            }
-            data = context[piece['id']][categ]['ext'];
-            if(data != null && count.hasOwnProperty(categ+'ext')){
-                if(count[categ+'ext'] == null){
-                    count[categ+'ext'] = {capteur: data.capteur, actionneur: data.actionneur, libelle: data.libelleGroupBy};
-                }else{
-                    count[categ+'ext'].capteur.push.apply(count[categ+'ext'].capteur, data.capteur);
-                    count[categ+'ext'].actionneur.push.apply(count[categ+'ext'].actionneur, data.actionneur);
-                }
-            }
+    for(let cemac of cemacs){
+        let aggreg = cemac.typeCapteur.categorie;
+        if(cemac.typeCapteur.categorie !== "shut"){
+            aggreg += cemac.typeCapteur.exterieur;
         }
+        if(count[aggreg] == null){
+            count[aggreg] = {capteur:[], actionneur:[], libelleGroupBy:cemac.typeCapteur.libelleGroupBy, status:true}
+        }
+        count[aggreg][cemac.typeCapteur.type].push(cemac.id);
+        count[aggreg].status = count[aggreg].status && cemac.statut;
     }
+
+
+    console.log(count);
 
     for(let order of countOrder){
         if(count[order] != null){
+            let gen_status = $("<div class='gen-status'></div>");
             let summary = $(`
                 <div class="data-summary" id="${order}">
                     <div class="summary-left">
                         <img src="./view/img/${links[order]}"></img>
-                        <p>${count[order].libelle}</p>
+                        <p>${count[order].libelleGroupBy}</p>
                     </div>
                     <div class="summary-right">
-                        <p>Moyenne : </p>
                         <p>Capteurs : ${count[order].capteur.length}</p>
                         <p>Actionneurs : ${count[order].actionneur.length}</p>
                     </div>
                 </div>
             `);
             summary.data('cemacs', count[order]);
-            console.log(summary);
-            console.log(document.getElementById("tabgen-content") == undefined);
-            if(document.getElementById("tabgen-content") == undefined)
-            {
-              let divTabgen = document.createElement('div');
-              divTabgen.id = 'tabgen-content';
-              $("#tabpage-gen").append(divTabgen);
-            }
-            $("#tabgen-content").append(summary);
+            gen_status.append(summary);
+            inflate_capteur(true, gen_status, null, count[order], null, null, count[order].actionneur.length !== 0, count[order].capteur.length !== 0);
+            $("#tabpage-gen").append(gen_status);
         }
     }
 }

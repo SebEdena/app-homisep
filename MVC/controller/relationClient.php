@@ -174,7 +174,7 @@ function modifierPiece()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = modifierPieceBD($_POST["id"],$_POST["nom"]);
+    $status = modifierPieceBD($_POST["id"],$_POST["nom"],$_POST["idMaison"]);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);
@@ -219,7 +219,7 @@ function modifierCemac()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = modifierCemacBD($_POST["id"],$_POST["numSerieCemac"],$_POST["typeCemac"]);
+    $status = modifierCemacBD($_POST["id"],$_POST["numSerieCemac"],$_POST["typeCemac"],$_POST["idPiece"]);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);
@@ -302,6 +302,40 @@ function recupererTypeCapteur()
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($typeCapteur);
+  }
+  catch(Exception $exception)
+  {
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function recupererOptionsPiece()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $piece = getOptionsPieces($_POST["idMaison"],$_POST["idPiece"]);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($piece);
+  }
+  catch(Exception $exception)
+  {
+      http_response_code(500);
+      header('Content-Type: application/json; charset=UTF-8');
+      print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+  }
+}
+
+function recupererOptionsMaison()
+{
+  require("./model/tableau_bord.php");
+  try{
+    $maison = getOptionsMaisons($_SESSION['id'], $_POST['idMaison']);
+    http_response_code(200);
+    header('Content-Type: application/json; charset=UTF-8');
+    print json_encode($maison);
   }
   catch(Exception $exception)
   {

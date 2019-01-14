@@ -141,7 +141,7 @@ function getInfoCapteurBD($idCapteur)
 {
   require('./model/config.php');
   require('./model/classes/cemac.php');
-  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, tc.idTypeCapteur, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.idTypeCapteur, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
   $query -> bindParam(1, $idCapteur);
   $query -> execute();
   $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -256,15 +256,16 @@ function creerNouvellePieceBD($idMaison,$nom)
     return false;
   }
 }
-function modifierPieceBD($idPiece,$nom)
+function modifierPieceBD($idPiece,$nom,$idMaison)
 {
   require("./model/util.php");
   require("./model/config.php");
   $idPiece = traitementCaractereSpeciaux($idPiece);
   $nom = traitementCaractereSpeciaux($nom);
-  $query = $database -> prepare('update piece set nom = ? where idPiece = ?');
+  $query = $database -> prepare('update piece set nom = ?, idMaison = ? where idPiece = ?');
   $query -> bindParam(1,$nom);
-  $query -> bindParam(2,$idPiece);
+  $query -> bindParam(2,$idMaison);
+  $query -> bindParam(3,$idPiece);
   try
   {
     $query -> execute();
@@ -312,17 +313,18 @@ function creerNouveauCemacBD($numSerieCemac,$idTypeCapteur,$idPiece)
     return false;
   }
 }
-function modifierCemacBD($id,$num,$type)
+function modifierCemacBD($id,$num,$type,$idPiece)
 {
   require("./model/util.php");
   require("./model/config.php");
   $id = traitementCaractereSpeciaux($id);
   $num = traitementCaractereSpeciaux($num);
   $type = traitementCaractereSpeciaux($type);
-  $query = $database -> prepare('update cemac set numeroSerie = ?, idTypeCapteur = ? where idCemac = ?');
+  $query = $database -> prepare('update cemac set numeroSerie = ?, idTypeCapteur = ?, idPiece = ? where idCemac = ?');
   $query -> bindParam(1,$num);
   $query -> bindParam(2,$type);
-  $query -> bindParam(3,$id);
+  $query -> bindParam(3,$idPiece);
+  $query -> bindParam(4,$id);
   try
   {
     $query -> execute();
@@ -356,6 +358,28 @@ function getTypeCapteur($idTypeCapteur)
   $query -> bindParam(1, $idTypeCapteur);
   $query -> execute();
   $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $res;
+}
+
+function getOptionsPieces($idMaison, $idPiece)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('select * from piece where idPiece <> ? and idMaison = ?');
+  $query -> bindParam(1, $idPiece);
+  $query -> bindParam(2, $idMaison);
+  $query -> execute();
+  $res = $query-> fetchAll(PDO::FETCH_ASSOC);
+  return $res;
+}
+
+function getOptionsMaisons($idClient, $idMaison)
+{
+  require('./model/config.php');
+  $query = $database -> prepare('select * from maison where idMaison <> ? and idClient = ?');
+  $query -> bindParam(1, $idMaison);
+  $query -> bindParam(2, $idClient);
+  $query -> execute();
+  $res = $query-> fetchAll(PDO::FETCH_ASSOC);
   return $res;
 }
 ?>

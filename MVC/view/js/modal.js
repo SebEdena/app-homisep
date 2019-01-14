@@ -14,9 +14,6 @@ for(let i = 0; i < modal_closers.length; i++){
     }
 }
 
-document.querySelector('.contactbutton').onclick = function(){
-    displayModal("#modalcontact");
-};
 
 let displayModal = function(id){
     var displayedModal = document.querySelector(id);
@@ -34,9 +31,4 @@ let hideModal = function(){
         modals[i].style.display = "none";
     }
     modal_bg.style.display = "none";
-}
-
-let contactReceived = function(){
-  alert("Votre demande a bien été prise en compte. Vous recevrez un mail de "
-  + "confirmation ainsi que la réponse de l'administrateur sur votre boîte de messagerie associée.")
 }

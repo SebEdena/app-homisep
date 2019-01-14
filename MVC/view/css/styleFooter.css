@@ -13,7 +13,9 @@ footer {
     border-top: 2px solid #254672;
     font-weight: bold;
     text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: inline-block;
+}
+
+footer a {
+  float : left;
 }

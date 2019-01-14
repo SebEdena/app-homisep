@@ -3,7 +3,7 @@
   function getDemandes()
   {
       require('./model/config.php');
-      require('./model/classes/client.php');
+      require('./model/classes/message.php');
       $query = $database -> prepare('select * from message');
 
       $query -> execute();
@@ -12,15 +12,15 @@
       return $res;
   }
 
-  function getClientDem($demandeClient){
+  function getClientDem($demandeIdClient){
     require('./model/config.php');
-    require('./model/classes/client.php');
+    require_once('./model/classes/client.php');
     $query = $database -> prepare("select * from client inner join message on "
-     . $demandeClient . " = client.idClient;");
+     . $demandeIdClient . " = client.idClient LIMIT 1;");
 
     $query -> execute();
 
     $res = $query->fetchAll(PDO::FETCH_CLASS, 'Client');
-    return $res;
+    return $res[0];
   }
 ?>

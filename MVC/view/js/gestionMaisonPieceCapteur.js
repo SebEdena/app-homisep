@@ -753,7 +753,7 @@ function verifierChamp($string)
     }
     case "cemac" :
     {
-      if(document.getElementById("numSerieCemac").value == "" || document.getElementById("piece-select-gestion").value == "")
+      if(document.getElementById("numSerieCemac").value == "")
       {
         alert("Veuillez remplir le champ numéro de série et choissisez une pièce");
         return false;

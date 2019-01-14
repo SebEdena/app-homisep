@@ -146,7 +146,7 @@
                     <label for="pieceNom">Nom :</label>
                     <input type="text" id="pieceNom" placeholder="Entrez le nom" name="nomPiece" value="">
                     <label for="pieceMaison">Adresse de la maison :</label>
-                    <input type="text" id="pieceMaison" placeholder="Entrez l'adresse de la maison" name="pieceMaison" value="">
+                    <select id="pieceMaison"></select>
                     <div class="boutonRight">
                       <button type="button" onclick="deleteFunction('piece')">Supprimer</button>
                       <button type="button" onclick="backFunction('piece')">Annuler</button>
@@ -165,7 +165,7 @@
                     <label for="typeCemac">Type Cemac : </label>
                     <select id="typeCemac"></select>
                     <label for="pieceCemac">Piece : </label>
-                    <input type="text" id="pieceCemac" placeholder="Entrez le nom d'une pièce" name="pieceCemac" value="">
+                    <select id="pieceCemac"></select>
                     <div class="boutonRight">
                       <button type="button" onclick="deleteFunction('cemac')">Supprimer</button>
                       <button type="button" onclick="backFunction('cemac')">Annuler</button>

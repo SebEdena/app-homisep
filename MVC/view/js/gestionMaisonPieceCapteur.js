@@ -181,6 +181,8 @@ function afficherInformation($string,$donnees)
       document.getElementById("pieceId").value = $donnees.idPiece;
       document.getElementById("pieceNom").value = $donnees.nom;
       document.getElementById("pieceMaison").value = $donnees.adresse + " - " + $donnees.codePostal + " " + $donnees.ville;
+      $("#pieceMaison").html("<option value=" + $donnees.idMaison + ">" + $donnees.adresse + " - " + $donnees.codePostal + " " + $donnees.ville + "</option>");
+      recupererOptionsMaison($donnees.idMaison);
       openTab(document.getElementById("tabpage-Piece"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
@@ -200,7 +202,8 @@ function afficherInformation($string,$donnees)
       }
       $("#typeCemac").html("<option value=" + $donnees.idTypeCapteur + ">" + $donnees.type + " - " + $donnees.libelleGroupBy + "</option>");
       recupererOptionsTypeCemac($donnees.idTypeCapteur);
-      document.getElementById("pieceCemac").value = $donnees.nom;
+      $("#pieceCemac").html("<option value=" + $donnees.idPiece + ">" + $donnees.nom + "</option>");
+      recupererOptionsPiece($donnees.idPiece);
       openTab(document.getElementById("tabpage-Cemac"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
@@ -247,7 +250,6 @@ function eraseFunction($string)
       console.log($("#pieceId").data("piece"));
       document.getElementById("pieceId").value = "";
       document.getElementById("pieceNom").value = "";
-      document.getElementById("pieceMaison").value = "";
       break;
     }
     case "cemac":
@@ -256,7 +258,6 @@ function eraseFunction($string)
       document.getElementById("cemacId").value = "";
       document.getElementById("numSerieCemac").value = "";
       document.getElementById("statusCemac").value = "";
-      document.getElementById("pieceCemac").value = "";
       break;
     }
   }
@@ -332,7 +333,7 @@ function nouveauFunction($string)
               dataType: "json",
               data: {
                 nom : $("#pieceNom").val(),
-                idMaison : $("#house-select-gestion").val()
+                idMaison : $("#pieceMaison").val()
               },
               success: function(retour){
                   //console.log(retour);
@@ -363,7 +364,7 @@ function nouveauFunction($string)
               type: "POST",
               dataType: "json",
               data: {
-                idPiece : $("#piece-select-gestion").val(),
+                idPiece : $("#pieceCemac").val(),
                 numSerieCemac : $("#numSerieCemac").val(),
                 typeCemac : $("#typeCemac").val()
               },
@@ -445,6 +446,7 @@ function modifierFunction($string)
               data: {
                 id : $("#pieceId").val(),
                 nom : $("#pieceNom").val(),
+                idMaison : $("#pieceMaison").val()
               },
               success: function(retour){
                   //console.log(retour);
@@ -477,7 +479,8 @@ function modifierFunction($string)
               data: {
                 id : $("#cemacId").val(),
                 numSerieCemac : $("#numSerieCemac").val(),
-                typeCemac : $("#typeCemac").val()
+                typeCemac : $("#typeCemac").val(),
+                idPiece : $("#pieceCemac").val()
               },
               success: function(retour){
                   //console.log(retour);
@@ -519,6 +522,61 @@ function recupererOptionsTypeCemac($idTypeCapteur)
             for(type of retour)
             {
               $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+            }
+          }
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
+function recupererOptionsPiece($idPiece)
+{
+  console.log($idPiece);
+  $.ajax({
+      url: "index.php?control=relationClient&action=recupererOptionsPiece",
+      type: "POST",
+      dataType: "json",
+      data: {
+        idMaison : $("#house-select-gestion").val(),
+        idPiece : $idPiece
+      },
+      success: function(retour){
+          console.log(retour);
+          if(retour)
+          {
+            for(piece of retour)
+            {
+              $("#pieceCemac").append("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
+            }
+          }
+      },
+      error: function(error){
+          console.error(error);
+          alert("Une erreur est survenue : " + error.message);
+      }
+  });
+}
+
+function recupererOptionsMaison($idMaison)
+{
+  console.log();
+  $.ajax({
+      url: "index.php?control=relationClient&action=recupererOptionsMaison",
+      type: "POST",
+      dataType: "json",
+      data: {
+        idMaison : $idMaison
+      },
+      success: function(retour){
+          console.log(retour);
+          if(retour)
+          {
+            for(maison of retour)
+            {
+              $("#pieceMaison").append("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
             }
           }
       },
@@ -683,7 +741,7 @@ function reloadPiece()
             console.log(piece);
             buildHtml += "<option value='"+piece.idPiece+"'>"+ piece.nom + "</option>";
           }
-          $("#piece-select-gestion").append(buildHtml);
+          $("#piece-select-gestion").html(buildHtml);
       },
       error: function(error){
           console.error(error);
@@ -741,7 +799,7 @@ function verifierChamp($string)
     }
     case "piece" :
     {
-      if(document.getElementById("pieceNom").value == "")
+      if(document.getElementById("pieceNom").value == "" || document.getElementById("pieceMaison").value == "")
       {
         alert("Veuillez remplir le champ Nom");
         return false;
@@ -753,7 +811,7 @@ function verifierChamp($string)
     }
     case "cemac" :
     {
-      if(document.getElementById("numSerieCemac").value == "" || document.getElementById("piece-select-gestion").value == "")
+      if(document.getElementById("numSerieCemac").value == "" || document.getElementById("typeCemac").value == "" || document.getElementById("pieceCemac").value == "")
       {
         alert("Veuillez remplir le champ numéro de série et choissisez une pièce");
         return false;

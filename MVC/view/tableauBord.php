@@ -27,6 +27,7 @@
             $maison->getVille()." - ".$maison->getCodePostal()?></option>
         <?php } ?>
     </select>
+    <button id="save-tdb">Enregistrer les modifications</button>
     <div class="tabcontainer">
         <div class="tablist">
             <a class="tablink defaultOpen" id="tablink-gen">Vue générale</a>

@@ -35,7 +35,7 @@ function getCemacs($idMaison){
     require('./model/config.php');
     require('./model/classes/cemac.php');
 
-    $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole from cemac c, typecapteur tc, grandeurphysique gp, piece p, maison m where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idMaison = m.idMaison and m.idClient = ? and m.idMaison = ? order by c.idPiece, c.idCemac');
+    $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.* from cemac c, typecapteur tc, grandeurphysique gp, piece p, maison m, programme pr where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idMaison = m.idMaison and pr.idCemac = c.idCemac and m.idClient = ? and m.idMaison = ? order by c.idPiece, c.idCemac');
     $query -> bindParam(1, $_SESSION["id"]);
     $query -> bindParam(2, $idMaison);
     $query -> execute();

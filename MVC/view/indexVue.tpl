@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
   <link rel="stylesheet" href="./view/css/styleFooter.css"/>
   <script src="./view/js/confMDPmodal.js"></script>
+  <script src="./view/js/jquery-3.3.1.min.js"></script>
   <title>Bienvenue - Homisep</title>
 </head>
 
@@ -52,20 +53,41 @@
             <svg width="12px" height="10px" viewbox="0 0 12 10">
               <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
             </svg></span>
-            <span id="cgu">J'ai lu et j'accepte les <a href="#">CGU</a> et la <a href="#">politique de confidentialité</a></span></label>
+            <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
         <button type="submit">S'enregistrer</button>
       </div>
 
     </form>
   </div>
-
+  <div class="modal-bg">
+      <div class="modal" id="modalCGU">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>CGU</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div id="contentCGU">
+              </div> 
+            </div>
+          </div>
+      </div>
+      <div class="modal" id="modalPolitique">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>Politique confidentialité</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+            </div>
+          </div>
+      </div>
+    </div>
 </body>
 <br/>
 <footer>
   <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
 </footer>
-
-
-<script src="./view/js/modal.js"></script>
-
+  <script src="./view/js/modal.js"></script>
+  <script src="./view/js/cgu.js"></script>
 </html>

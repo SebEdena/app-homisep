@@ -27,6 +27,7 @@
 
         <label for="psw"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
+        <a id="reset_mdp_link">Mot de passe oublié?</a>
 
         <button type="submit">Se connecter</button>
           <p id="status_msg">
@@ -60,6 +61,19 @@
     </form>
   </div>
   <div class="modal-bg">
+      <div class="modal" id="modalresetmdp">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h2>Réinitialisation de mot de passe</h2>
+          </div>
+          <div class="modal-body">
+            <form id="modal" action="index.php?control=connexionInitialisation&action=resetmdp" method="post">
+              <label for="mailResetMdp">Saisissez votre adresse mail</label>
+              <input id="mailResetMdp" type="email" name="mailResetMdp"></input>
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+      </div>
       <div class="modal" id="modalCGU">
           <div class="modal-head">
               <span class="modal-close">&times;</span>
@@ -68,7 +82,8 @@
           <div class="modal-body">
             <div class="container">
               <div id="contentCGU">
-              </div> 
+                <?php if(isset($cgu)){echo($cgu[0]['texteRegle']);} ?>
+              </div>
             </div>
           </div>
       </div>
@@ -79,6 +94,7 @@
           </div>
           <div class="modal-body">
             <div class="container">
+              <?php if(isset($politique)){print_r($politique[0]['texteRegle']);} ?>
             </div>
           </div>
       </div>
@@ -90,4 +106,5 @@
 </footer>
   <script src="./view/js/modal.js"></script>
   <script src="./view/js/cgu.js"></script>
+  <script src="./view/js/connexion.js"></script>
 </html>

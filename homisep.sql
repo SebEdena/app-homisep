@@ -101,7 +101,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`idClient`, `nom`, `prenom`, `adresse`, `ville`, `codePostal`, `mail`, `passe`, `dateNaissance`, `dateCreation`) VALUES
-(5, NULL, NULL, NULL, NULL, NULL, 'laurent@isep.fr', '$2y$10$I8tQPOD3Mjs4Bz4.1yAz8e/puk/ZoQRI9tH9Ianrv3pkGqa1oRLQy', NULL, NULL);
+(5, "Yu", "Laurent", NULL, NULL, NULL, 'laurent@isep.fr', '$2y$10$I8tQPOD3Mjs4Bz4.1yAz8e/puk/ZoQRI9tH9Ianrv3pkGqa1oRLQy', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -233,6 +233,27 @@ INSERT INTO `programme` (`idProgramme`, `dateDebut`, `valeur`, `idCemac`) VALUES
 (3, '2019-01-14 10:00:00', 20, 7),
 (4, '2019-01-14 10:00:00', 40, 9),
 (5, '2019-01-14 10:00:00', 50, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `regles`
+--
+
+CREATE TABLE `regle` (
+  `idRegle` int(11) NOT NULL,
+  `nomRegle` varchar(50) NOT NULL,
+  `dateMiseJour` datetime,
+  `texteRegle` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `regles`
+--
+INSERT INTO `regle` (`idRegle`, `nomRegle`, `dateMiseJour`, `texteRegle`) VALUES
+(1, 'CGU', '2019-01-15 10:00:00', "Condition générale d'utilisation"),
+(2, 'Politique', '2019-01-15 10:00:00', 'Politique de confidentialité');
+
 -- --------------------------------------------------------
 
 --

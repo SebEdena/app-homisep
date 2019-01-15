@@ -22,25 +22,7 @@
 #house-select{
     max-width: 100%;
     border: 2px solid var(--color-darkblue);
-    background-color: var(--color-blue);
-    appearance: none;
     cursor: pointer;
-
-   -webkit-appearance: none;
-   -moz-appearance: none;
-}
-
-#house-select:hover {
-    background-color: #AAAAFF;
-    transition: background-color 0.5s;
-}
-
-#house-select option {
-    background-color: white;
-}
-
-#house-select:hover option {
-    background-color: white;
 }
 
 #save-tdb{

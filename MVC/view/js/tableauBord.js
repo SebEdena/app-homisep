@@ -74,6 +74,9 @@ function build_capteurs(data){
 }
 
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
+    console.log(context);
+    console.log(grouped);
+    console.log("");
     let isGrouped = (grouped == true);
     if(isGrouped == true){
         let cemacGrouped = $(`
@@ -89,7 +92,7 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                     </div>
                     <div class="capt-data-desired">
                         <div class="capt-dd-label">Désiré</div>
-                        <div class="capt-value">80%</div>
+                        <div class="capt-value">${context.moyActionneur + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
@@ -121,7 +124,6 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
             target.append(cemacGrouped);
         }
     }else{
-        console.log(context);
         let isCapteur = (context.typeCapteur.type==='capteur');
         let cemac = $(`
             <div class="capt-solo" data-capt-id=${id}>
@@ -133,12 +135,12 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         </div>
                         <div class="capt-data-desired">
                             <div class="capt-dd-label">Désiré</div>
-                            <div class="capt-value">80%</div>
+                            <div class="capt-value">${context.typeCapteur.valeur + context.typeCapteur.grandeur.symbole}</div>
                         </div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">78%</div>
+                        <div class="capt-value">20${context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
                         <button disabled><img src="./view/img/chevron-arrow-up.png"></button>
@@ -155,6 +157,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         }
         if(context.statut){cemac.find('.capt-status').removeClass('capt-error');}
         cemac.data('cemac', context);
+        cemac.data('value', context.typeCapteur.valeur);
+
         $("#tabpage-"+categorie).find('.piece[data-piece-id=' + context.idPiece +'] > .accord-content').append(cemac);
     }
 }
@@ -164,7 +168,6 @@ function openAccordions(event){
 }
 
 function displayGeneralView(pieces, context, cemacs){
-    console.log("disp");
     const links = { lumint: 'lightbulb.png', lumext: 'lightbulb.png', tempint: 'thermometer.png', tempext: 'thermometer.png', shut: 'blinds.png'}
     count = {lumint: null, lumext: null, tempint: null, tempext: null, shut: null};
     const countOrder=['lumint', 'lumext', 'tempint', 'tempext', 'shut'];
@@ -180,9 +183,6 @@ function displayGeneralView(pieces, context, cemacs){
         count[aggreg][cemac.typeCapteur.type].push(cemac.id);
         count[aggreg].status = count[aggreg].status && cemac.statut;
     }
-
-
-    console.log(count);
 
     for(let order of countOrder){
         if(count[order] != null){

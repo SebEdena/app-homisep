@@ -22,7 +22,7 @@ class CeMac{
                 'borneSup' => (float)$data['borneSup']
             ),
             'libelleGroupBy' => $data['libelleGroupBy'],
-            'valeur' => $data['valeur']
+            'valeur' => (float)$data['valeur']
         );
         $this->idPiece = (int) $data['idPiece'];
     }

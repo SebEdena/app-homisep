@@ -78,6 +78,7 @@ function buildCemacsContext($pieces, $cemacs){
         $capt = $cemac['typeCapteur']['type'];
         $statut = (boolean) $cemac['statut'];
         $libelle = $cemac['typeCapteur']['libelleGroupBy'];
+        $valeur = isset($cemac['typeCapteur']['valeur'])?(float)$cemac['typeCapteur']['valeur']:null;
 
         if(!isset($context[$piece][$categ][$ext])){
             $context[$piece][$categ][$ext] = array(
@@ -85,12 +86,39 @@ function buildCemacsContext($pieces, $cemacs){
                 'capteur' => array(),
                 'cemacs' => array(),
                 'statut' => true,
-                'libelleGroupBy' => $libelle
+                'moyActionneur' => null,
+                'libelleGroupBy' => $libelle,
+                'grandeur' => $cemac['typeCapteur']['grandeur']
             );
         }
         array_push($context[$piece][$categ][$ext][$capt], $id);
         array_push($context[$piece][$categ][$ext]['cemacs'], $id);
         $context[$piece][$categ][$ext]['statut'] = $context[$piece][$categ][$ext]['statut'] && $statut;
+        if(isset($valeur)){
+            if($context[$piece][$categ][$ext]['moyActionneur'] == null){
+                $context[$piece][$categ][$ext]['moyActionneur'] = $valeur;
+            }else{
+                $context[$piece][$categ][$ext]['moyActionneur'] += $valeur;
+            }
+        }
+    }
+    foreach($pieces as $piece){
+        foreach($context[$piece['id']] as $categ){
+            if(isset($categ['int'])){
+                if(count($categ['int']['actionneur']) > 0){
+                    $categ['int']['moyActionneur'] = $categ['int']['moyActionneur']/count($categ['int']['actionneur']);
+                }else{
+                    $categ['int']['moyActionneur'] = null;
+                }
+            }
+            if(isset($categ['ext'])){
+                if(count($categ['ext']['actionneur']) > 0){
+                    $categ['ext']['moyActionneur'] = $categ['ext']['moyActionneur']/count($categ['ext']['actionneur']);
+                }else{
+                    $categ['ext']['moyActionneur'] = null;
+                }
+            }
+        }
     }
     return $context;
 }

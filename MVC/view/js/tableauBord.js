@@ -15,11 +15,11 @@ function recupDonnéesMaison(event){
             idMaison: idMaison
         },
         success: function(retour){
-            console.log(retour);
+            //console.log(retour);
             build_pieces(retour.pieces);
             build_capteurs(retour);
             displayGeneralView(retour.pieces, retour.context, retour.cemacs);
-            // $('.tablink.active').trigger('click');
+            $('.tablink.active').trigger('click');
         },
         error: function(error){
             console.error(error);
@@ -74,11 +74,9 @@ function build_capteurs(data){
 }
 
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
-    console.log(context);
-    console.log(grouped);
-    console.log("");
     let isGrouped = (grouped == true);
     if(isGrouped == true){
+    console.log(context);
         let cemacGrouped = $(`
             <div class="capt-gen">
                 <div class="capt-title">${context.libelleGroupBy}</div>
@@ -99,8 +97,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         <div class="capt-value">78%</div>
                     </div>
                     <div class="capt-buttons">
-                        <button disabled><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button disabled><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                 </div>
             </div>
@@ -116,6 +114,10 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         }
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
         cemacGrouped.data('cemacGroup', context);
+        cemacGrouped.data('cemac', context);
+        cemacGrouped.data('valeur', context.moyActionneur);
+        cemacGrouped.data('grandeur', context.grandeur);
+        cemacGrouped.find('.capt-buttons button').on('click', (event) => updateValue(cemacGrouped, true, (event.target.classList.contains('btnUp'))));
         if(id !== null){
             cemacGrouped.data('idPiece', id);
             $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
@@ -143,8 +145,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         <div class="capt-value">20${context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
-                        <button disabled><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button disabled><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                     <div class="capt-status capt-error"></div>
                 </div>
@@ -157,7 +159,9 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         }
         if(context.statut){cemac.find('.capt-status').removeClass('capt-error');}
         cemac.data('cemac', context);
-        cemac.data('value', context.typeCapteur.valeur);
+        cemac.data('valeur', context.typeCapteur.valeur);
+        cemac.data('grandeur', context.typeCapteur.grandeur);
+        cemac.find('.capt-buttons button').on('click', (event) => updateValue(cemac, false, (event.target.classList.contains('btnUp'))));
 
         $("#tabpage-"+categorie).find('.piece[data-piece-id=' + context.idPiece +'] > .accord-content').append(cemac);
     }
@@ -178,14 +182,21 @@ function displayGeneralView(pieces, context, cemacs){
             aggreg += cemac.typeCapteur.exterieur;
         }
         if(count[aggreg] == null){
-            count[aggreg] = {capteur:[], actionneur:[], libelleGroupBy:cemac.typeCapteur.libelleGroupBy, status:true}
+            count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
+            if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur = cemac.typeCapteur.valeur;
+        }else{
+            if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur += cemac.typeCapteur.valeur;
         }
         count[aggreg][cemac.typeCapteur.type].push(cemac.id);
+        count[aggreg].cemacs.push(cemac.id);
         count[aggreg].status = count[aggreg].status && cemac.statut;
     }
 
     for(let order of countOrder){
         if(count[order] != null){
+            if(count[order].actionneur.length !== 0){
+                count[order].moyActionneur = count[order].moyActionneur/count[order].actionneur.length;
+            }
             let gen_status = $("<div class='gen-status'></div>");
             let summary = $(`
                 <div class="data-summary" id="${order}">
@@ -199,10 +210,44 @@ function displayGeneralView(pieces, context, cemacs){
                     </div>
                 </div>
             `);
-            summary.data('cemacs', count[order]);
             gen_status.append(summary);
             inflate_capteur(true, gen_status, null, count[order], null, null, count[order].actionneur.length !== 0, count[order].capteur.length !== 0);
             $("#tabpage-gen").append(gen_status);
+        }
+    }
+}
+
+function updateValue(cemac, grouped, up){
+    let grandeur = cemac.data('grandeur')
+    console.log(grandeur);
+    let actualValue = cemac.data('valeur');
+    if(grouped){
+        let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);
+        cemac.data('valeur', value);
+        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        for(let id of cemac.data('cemac').actionneur){
+            let act = $(".capt-solo[data-capt-id=" + id + "]");
+            act.data('valeur', value),
+            act.find('.capt-data-desired .capt-value').text(value + grandeur.symbole);
+        }
+    }else{
+        cemac.data('valeur', computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur));
+        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+    }
+}
+
+function computeValue(value, up, grandeur){
+    if(up){
+        if(value >= grandeur.borneSup){
+            return grandeur.borneSup;
+        }else{
+            return value;
+        }
+    }else{
+        if(value <= grandeur.borneInf){
+            return grandeur.borneInf;
+        }else{
+            return value;
         }
     }
 }

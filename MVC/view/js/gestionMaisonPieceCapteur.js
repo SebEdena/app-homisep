@@ -47,6 +47,9 @@ function recupDonneesMaisonGestion(event)
           alert("Une erreur est survenue : " + error.message);
       }
   });
+  recupererOptionsMaison(0);
+  recupererOptionsPiece(0);
+  recupererOptionsTypeCemac(0);
 }
 
 function buildPieceGestion(pieces)
@@ -519,10 +522,12 @@ function recupererOptionsTypeCemac($idTypeCapteur)
           console.log(retour);
           if(retour)
           {
+            let html = "";
             for(type of retour)
             {
-              $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+              html += ("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
             }
+            $("#typeCemac").html(html);
           }
       },
       error: function(error){
@@ -547,10 +552,12 @@ function recupererOptionsPiece($idPiece)
           console.log(retour);
           if(retour)
           {
+            let html = "";
             for(piece of retour)
             {
-              $("#pieceCemac").append("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
+              html += ("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
             }
+            $("#pieceCemac").html(html);
           }
       },
       error: function(error){
@@ -574,10 +581,12 @@ function recupererOptionsMaison($idMaison)
           console.log(retour);
           if(retour)
           {
+            let html = "";
             for(maison of retour)
             {
-              $("#pieceMaison").append("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
+              html += ("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
             }
+            $("#pieceMaison").html(html);
           }
       },
       error: function(error){

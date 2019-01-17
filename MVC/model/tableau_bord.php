@@ -129,7 +129,7 @@ function getCemacsInPiece($idPiece)
   require('./model/config.php');
   require('./model/classes/cemac.php');
 
-  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole from cemac c, typecapteur tc, grandeurphysique gp, piece p where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idPiece = ? order by c.idCemac');
+  $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, gp.pas, gp.borneInf, gp.borneSup, pr.valeur from cemac c LEFT OUTER JOIN programme pr on ( pr.idCemac = c.idCemac and pr.dateDebut = (SELECT MAX(dateDebut) from programme where idCemac = c.idCemac )), typecapteur tc, grandeurphysique gp, piece p where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idPiece = ? order by c.idCemac');
   $query -> bindParam(1, $idPiece);
   $query -> execute();
 

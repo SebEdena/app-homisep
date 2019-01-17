@@ -114,7 +114,15 @@ function creerNouvelleMaison()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = creerNouvelleMaisonBD($_SESSION["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    if($_POST["maisonPrincipale"] === "true")
+    {
+      $maisonPrincipale = b'1';
+    }
+    else
+    {
+      $maisonPrincipale = b'0';
+    }
+    $status = creerNouvelleMaisonBD($_SESSION["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"],$maisonPrincipale);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);
@@ -129,7 +137,15 @@ function modifierMaison()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = modifierMaisonBD($_POST["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    if($_POST["maisonPrincipale"] === "true")
+    {
+      $maisonPrincipale = b'1';
+    }
+    else
+    {
+      $maisonPrincipale = b'0';
+    }
+    $status = modifierMaisonBD($_POST["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"],$maisonPrincipale);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);

@@ -208,18 +208,23 @@ function getCemacsAssoc($idPiece)
     return $res;
 }
 
-function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal)
+function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal,$maisonPrincipale)
 {
   require("./model/util.php");
   require("./model/config.php");
   $adresse = traitementCaractereSpeciaux($adresse);
   $ville = traitementCaractereSpeciaux($ville);
   $codePostal = traitementCaractereSpeciaux($codePostal);
-  $query = $database -> prepare('insert into maison(adresse,ville,codePostal,idClient) values(?,?,?,?)');
+  $query = $database -> prepare('insert into maison(adresse,ville,codePostal,idClient,maisonPrincipale) values(?,?,?,?,?)');
   $query -> bindParam(1,$adresse);
   $query -> bindParam(2,$ville);
   $query -> bindParam(3,$codePostal);
-  $query -> bindParam(4,$idClient);
+  $query -> bindParam(4,$maisonPrincipale);
+  $query -> bindParam(5,$idClient);
+  if($maisonPrincipale)
+  {
+    deleteTrueMaisonPrincipale();
+  }
   try
   {
     $query -> execute();
@@ -230,7 +235,7 @@ function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal)
     return false;
   }
 }
-function modifierMaisonBD($idMaison,$adresse,$ville,$codePostal)
+function modifierMaisonBD($idMaison,$adresse,$ville,$codePostal,$maisonPrincipale)
 {
   require("./model/util.php");
   require("./model/config.php");
@@ -238,11 +243,16 @@ function modifierMaisonBD($idMaison,$adresse,$ville,$codePostal)
   $adresse = traitementCaractereSpeciaux($adresse);
   $ville = traitementCaractereSpeciaux($ville);
   $codePostal = traitementCaractereSpeciaux($codePostal);
-  $query = $database -> prepare('update maison set adresse = ?, ville = ?, codePostal = ? where idMaison = ?');
+  $query = $database -> prepare('update maison set adresse = ?, ville = ?, codePostal = ?, maisonPrincipale = ? where idMaison = ?');
   $query -> bindParam(1,$adresse);
   $query -> bindParam(2,$ville);
   $query -> bindParam(3,$codePostal);
-  $query -> bindParam(4,$idMaison);
+  $query -> bindParam(4,$maisonPrincipale);
+  $query -> bindParam(5,$idMaison);
+  if($maisonPrincipale)
+  {
+    deleteTrueMaisonPrincipale();
+  }
   try
   {
     $query -> execute();
@@ -250,6 +260,7 @@ function modifierMaisonBD($idMaison,$adresse,$ville,$codePostal)
   }
   catch(PDOException $exception)
   {
+    echo($exception);
     return false;
   }
 }
@@ -341,7 +352,6 @@ function creerNouveauCemacBD($numSerieCemac,$idTypeCapteur,$idPiece)
   }
   catch(PDOException $exception)
   {
-    echo($exception);
     return false;
   }
 }
@@ -413,5 +423,12 @@ function getOptionsMaisons($idClient, $idMaison)
   $query -> execute();
   $res = $query-> fetchAll(PDO::FETCH_ASSOC);
   return $res;
+}
+
+function deleteTrueMaisonPrincipale()
+{
+  require('./model/config.php');
+  $query = $database -> prepare('update maison set maisonPrincipale = 0 where maisonPrincipale = 1');
+  $query -> execute();
 }
 ?>

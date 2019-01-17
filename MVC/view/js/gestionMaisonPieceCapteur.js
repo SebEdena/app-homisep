@@ -174,6 +174,14 @@ function afficherInformation($string,$donnees)
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
       document.getElementById("maisonCodePostal").value = $donnees.codePostal;
+      if($donnees.maisonPrincipale == 1)
+      {
+        $("#maisonPrincipale").prop('checked', true);
+      }
+      else
+      {
+        $("#maisonPrincipale").prop('checked', false);
+      }
       openTab(document.getElementById("tabpage-Maison"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
@@ -246,6 +254,7 @@ function eraseFunction($string)
       document.getElementById("maisonAdresse").value = "";
       document.getElementById("maisonVille").value = "";
       document.getElementById("maisonCodePostal").value = "";
+      $("#maisonPrincipale").prop('checked',false);
       break;
     }
     case "piece":
@@ -303,7 +312,8 @@ function nouveauFunction($string)
                 data: {
                   adresse : $("#maisonAdresse").val(),
                   ville : $("#maisonVille").val(),
-                  codePostal : $("#maisonCodePostal").val()
+                  codePostal : $("#maisonCodePostal").val(),
+                  maisonPrincipale : document.getElementById("maisonPrincipale").checked
                 },
                 success: function(retour){
                     //console.log(retour);
@@ -415,7 +425,8 @@ function modifierFunction($string)
                   id : $("#maisonId").val(),
                   adresse : $("#maisonAdresse").val(),
                   ville : $("#maisonVille").val(),
-                  codePostal : $("#maisonCodePostal").val()
+                  codePostal : $("#maisonCodePostal").val(),
+                  maisonPrincipale : document.getElementById("maisonPrincipale").checked
                 },
                 success: function(retour){
                     //console.log(retour);

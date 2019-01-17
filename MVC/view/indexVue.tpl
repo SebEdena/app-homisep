@@ -27,7 +27,7 @@
 
         <label for="psw"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
-        <a id="reset_mdp_link">Mot de passe oublié?</a>
+        <a href="#" id="reset_mdp_link">Mot de passe oublié?</a>
 
         <button type="submit">Se connecter</button>
           <p id="status_msg">
@@ -49,12 +49,8 @@
         <input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass"
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un nombre, une minuscule, une majuscule et au moins 8 caractères ou plus."required/>
         <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
-        <input class="inp-cbx" id="cbx" type="checkbox" style="display: none;"/>
-        <label class="cbx" for="cbx"><span>
-            <svg width="12px" height="10px" viewbox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span>
-            <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
+        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
+        <input class="inp-cbx" id="cbx" type="checkbox" required/></input>
         <button type="submit">S'enregistrer</button>
       </div>
 
@@ -82,7 +78,7 @@
           <div class="modal-body">
             <div class="container">
               <div id="contentCGU">
-                <?php if(isset($cgu)){echo($cgu[0]['texteRegle']);} ?>
+                <?php if(isset($cgu)){echo nl2br($cgu[0]['texteRegle']);} ?>
               </div>
             </div>
           </div>
@@ -94,7 +90,9 @@
           </div>
           <div class="modal-body">
             <div class="container">
-              <?php if(isset($politique)){print_r($politique[0]['texteRegle']);} ?>
+              <div id="contentPolitique">
+                <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+              </div>
             </div>
           </div>
       </div>

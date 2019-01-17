@@ -37,7 +37,9 @@
 
 <br/>
 <footer>
-  <a href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">Voir les conditions générales</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Voir la politique de confidentialité</a>
   &#9400; 2018, Homisep un produit Domisep, tous droits réservés.
 </footer>
 
@@ -62,6 +64,32 @@
           </form>
         </div>
     </div>
+    <div class="modal" id="modalCGU">
+        <div class="modal-head">
+            <span class="modal-close">&times;</span>
+            <h1>CGU</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div id="contentCGU">
+              <?php if(isset($cgu)){echo nl2br($cgu[0]['texteRegle']);} ?>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal" id="modalPolitique">
+        <div class="modal-head">
+            <span class="modal-close">&times;</span>
+            <h1>Politique confidentialité</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div id="contentPolitique">
+              <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 <?php if(isset($modals)) { ?>
     <?= $modals ?>
@@ -70,6 +98,7 @@
 <script src="./view/js/logo.js"></script>
 <script src="./view/js/modal.js"></script>
 <script src="./view/js/contact.js"></script>
+<script src="./view/js/cgu.js"></script>
 <?php foreach ($js as $value) { ?>
     <script src="./view/js/<?= $value ?>" /></script>
 <?php } ?>

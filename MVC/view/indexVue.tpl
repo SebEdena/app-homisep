@@ -49,6 +49,13 @@
         <input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass"
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un nombre, une minuscule, une majuscule et au moins 8 caractères ou plus."required/>
         <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
+<!--
+        <input class="inp-cbx" id="cbx" type="checkbox" style="display: none;"/>
+        <label class="cbx" for="cbx"><span>
+            <svg width="12px" height="10px" viewbox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span>
+            <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label> -->
         <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
         <input class="inp-cbx" id="cbx" type="checkbox" required/></input>
         <button type="submit">S'enregistrer</button>

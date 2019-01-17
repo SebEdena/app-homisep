@@ -533,12 +533,21 @@ function recupererOptionsTypeCemac($idTypeCapteur)
           console.log(retour);
           if(retour)
           {
-            let html = "";
-            for(type of retour)
+            if($idTypeCapteur == 0)
             {
-              html += ("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+              let html = "";
+              for(type of retour)
+              {
+                html += ("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+              }
+              $("#typeCemac").html(html);
             }
-            $("#typeCemac").html(html);
+            else {
+              for(type of retour)
+              {
+                $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
+              }
+            }
           }
       },
       error: function(error){
@@ -563,12 +572,22 @@ function recupererOptionsPiece($idPiece)
           console.log(retour);
           if(retour)
           {
-            let html = "";
-            for(piece of retour)
+            if($idPiece == 0)
             {
-              html += ("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
+              let html = "";
+              for(piece of retour)
+              {
+                html += ("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
+              }
+              $("#pieceCemac").html(html);
             }
-            $("#pieceCemac").html(html);
+            else
+            {
+              for(piece of retour)
+              {
+                $("#pieceCemac").append("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
+              }
+            }
           }
       },
       error: function(error){
@@ -592,12 +611,18 @@ function recupererOptionsMaison($idMaison)
           console.log(retour);
           if(retour)
           {
-            let html = "";
-            for(maison of retour)
+            if($idMaison == 0)
             {
-              html += ("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
+              let html = "";
+              for(maison of retour)
+              {
+                html += ("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
+              }
+              $("#pieceMaison").html(html);
             }
-            $("#pieceMaison").html(html);
+            else {
+              $("#pieceMaison").append("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
+            }
           }
       },
       error: function(error){

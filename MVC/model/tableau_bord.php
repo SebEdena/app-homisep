@@ -79,6 +79,7 @@ function buildCemacsContext($pieces, $cemacs){
         $statut = (boolean) $cemac['statut'];
         $libelle = $cemac['typeCapteur']['libelleGroupBy'];
         $valeur = isset($cemac['typeCapteur']['valeur'])?(float)$cemac['typeCapteur']['valeur']:null;
+        $grandeur = $cemac['typeCapteur']['grandeur'];
 
         if(!isset($context[$piece][$categ][$ext])){
             $context[$piece][$categ][$ext] = array(
@@ -88,7 +89,8 @@ function buildCemacsContext($pieces, $cemacs){
                 'statut' => true,
                 'moyActionneur' => null,
                 'libelleGroupBy' => $libelle,
-                'grandeur' => $cemac['typeCapteur']['grandeur']
+                'typeCapteur' => "" + $cemac['typeCapteur']['categorie'] + $cemac['typeCapteur']['exterieur'],
+                'grandeur' => $grandeur
             );
         }
         array_push($context[$piece][$categ][$ext][$capt], $id);

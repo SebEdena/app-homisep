@@ -15,7 +15,7 @@ function recupDonnéesMaison(event){
             idMaison: idMaison
         },
         success: function(retour){
-            //console.log(retour);
+            console.log(retour);
             build_pieces(retour.pieces);
             build_capteurs(retour);
             displayGeneralView(retour.pieces, retour.context, retour.cemacs);
@@ -76,9 +76,8 @@ function build_capteurs(data){
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
-    console.log(context);
         let cemacGrouped = $(`
-            <div class="capt-gen">
+            <div class="capt-gen ${categorie + ext}">
                 <div class="capt-title">${context.libelleGroupBy}</div>
                 <div class="capt-content">
                     <div class="capt-menu">
@@ -113,7 +112,6 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
             cemacGrouped.find('.capt-data-real').remove();
         }
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
-        cemacGrouped.data('cemacGroup', context);
         cemacGrouped.data('cemac', context);
         cemacGrouped.data('valeur', context.moyActionneur);
         cemacGrouped.data('grandeur', context.grandeur);
@@ -123,6 +121,7 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
             $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content > h2').remove();
             $("#tabpage-"+categorie).find('.piece[data-piece-id=' + id +'] > .accord-content').append(cemacGrouped);
         }else{
+            cemacGrouped.addClass('gen-view');
             target.append(cemacGrouped);
         }
     }else{
@@ -182,6 +181,7 @@ function displayGeneralView(pieces, context, cemacs){
             aggreg += cemac.typeCapteur.exterieur;
         }
         if(count[aggreg] == null){
+            // console.log(cemac.typeCapteur);
             count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur = cemac.typeCapteur.valeur;
         }else{
@@ -211,7 +211,7 @@ function displayGeneralView(pieces, context, cemacs){
                 </div>
             `);
             gen_status.append(summary);
-            inflate_capteur(true, gen_status, null, count[order], null, null, count[order].actionneur.length !== 0, count[order].capteur.length !== 0);
+            inflate_capteur(true, gen_status, null, count[order], order, "", count[order].actionneur.length !== 0, count[order].capteur.length !== 0);
             $("#tabpage-gen").append(gen_status);
         }
     }
@@ -219,8 +219,8 @@ function displayGeneralView(pieces, context, cemacs){
 
 function updateValue(cemac, grouped, up){
     let grandeur = cemac.data('grandeur')
-    console.log(grandeur);
     let actualValue = cemac.data('valeur');
+    let categ = cemac.data('cemac').typeCapteur.categorie + cemac.data('cemac').typeCapteur.exterieur;
     if(grouped){
         let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);
         cemac.data('valeur', value);
@@ -230,9 +230,12 @@ function updateValue(cemac, grouped, up){
             act.data('valeur', value),
             act.find('.capt-data-desired .capt-value').text(value + grandeur.symbole);
         }
+        if(cemac.hasClass("gen-view")) $(".capt-gen." + categ).each((index, elt)=>computeMean($(elt)));
     }else{
         cemac.data('valeur', computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur));
         cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        computeMean(cemac.parent().find('.capt-gen.'+categ));
+        computeMean($(".gen-view.capt-gen." + categ));
     }
 }
 
@@ -249,6 +252,29 @@ function computeValue(value, up, grandeur){
         }else{
             return value;
         }
+    }
+}
+
+function computeMean(cemac){
+    let mean = 0;
+    let actionneurs = cemac.data('cemac').actionneur;
+    if(actionneurs.length > 0){
+        for(cemacId of actionneurs){
+            mean += $(".capt-solo[data-capt-id=" + cemacId + "]").data('valeur')
+        }
+        mean = approxMean(mean/(actionneurs.length), cemac.data('grandeur'));
+        cemac.data('valeur', mean);
+        cemac.find('.capt-data-desired .capt-value').text(mean + cemac.data('grandeur').symbole);
+    }
+}
+
+function approxMean(valeur, grandeur){
+    let times = Math.floor(valeur / grandeur.pas)
+    let delta = (valeur - times*grandeur.pas);
+    if(delta < (grandeur.pas/2)){
+        return times*grandeur.pas;
+    }else{
+        return (times+1)*grandeur.pas;
     }
 }
 

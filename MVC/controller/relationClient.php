@@ -1,10 +1,16 @@
 <?php
 function afficherFAQ()
 {
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
     require("./view/FAQ.php");
 }
 
 function afficheTableauBord(){
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
     require("./model/tableau_bord.php");
     $maisons = getMaisons();
     require("./view/tableauBord.php");
@@ -34,6 +40,9 @@ function getDonneesMaison(){
 
 function afficheGestionCompte()
 {
+  require_once("./model/init.php");
+  $cgu = getRegle("CGU");
+  $politique = getRegle("Politique");
   require("./model/tableau_bord.php");
   $maisons = getMaisons();
   require("./view/gestionMaisonPieceCapteur.php");

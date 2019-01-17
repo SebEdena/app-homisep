@@ -27,7 +27,7 @@
 
         <label for="psw"><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
-        <a id="reset_mdp_link">Mot de passe oublié?</a>
+        <a href="#" id="reset_mdp_link">Mot de passe oublié?</a>
 
         <button type="submit">Se connecter</button>
           <p id="status_msg">
@@ -82,7 +82,7 @@
           <div class="modal-body">
             <div class="container">
               <div id="contentCGU">
-                <?php if(isset($cgu)){echo($cgu[0]['texteRegle']);} ?>
+                <?php if(isset($cgu)){echo nl2br($cgu[0]['texteRegle']);} ?>
               </div>
             </div>
           </div>
@@ -94,7 +94,9 @@
           </div>
           <div class="modal-body">
             <div class="container">
-              <?php if(isset($politique)){print_r($politique[0]['texteRegle']);} ?>
+              <div id="contentPolitique">
+                <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+              </div>
             </div>
           </div>
       </div>

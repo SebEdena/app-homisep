@@ -76,7 +76,6 @@ function build_capteurs(data){
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
-        console.log(context.grandeur);
         let moy = approxMean(context.moyActionneur, context.grandeur);
         let cemacGrouped = $(`
             <div class="capt-gen ${categorie + ext}">
@@ -183,7 +182,6 @@ function displayGeneralView(pieces, context, cemacs){
             aggreg += cemac.typeCapteur.exterieur;
         }
         if(count[aggreg] == null){
-            // console.log(cemac.typeCapteur);
             count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur = cemac.typeCapteur.valeur;
         }else{
@@ -228,7 +226,6 @@ function saveActionneurChanges(){
             }
         }
     });
-    console.log(values);
     $.ajax({
         url: "index.php?control=relationClient&action=updateActionneurs",
         type: "POST",
@@ -253,13 +250,10 @@ function updateValue(cemac, grouped, up){
     let categ = null;
     if(grouped){
         categ = cemac.data('cemac').typeCapteur;
-                    console.log(cemac.data('cemac'));
     } else {
         categ = cemac.data('cemac').typeCapteur.categorie + cemac.data('cemac').typeCapteur.exterieur;
 
     }
-
-        //console.log(categ);
     if(grouped){
         let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);
         cemac.data('valeur', value);

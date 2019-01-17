@@ -32,6 +32,21 @@ function getDonneesMaison(){
     }
 }
 
+function updateActionneurs(){
+    require('./model/tableau_bord.php');
+    $valeurs = $_POST['valeurs'];
+    try{
+        $status = updateProgrammes($valeurs);
+        http_response_code(200);
+        header('Content-Type: application/json; charset=UTF-8');
+        print json_encode(array('returnStatus' => $status));
+    }catch(Exception $exception){
+        http_response_code(500);
+        header('Content-Type: application/json; charset=UTF-8');
+        print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+    }
+}
+
 function afficheGestionCompte()
 {
   require("./model/tableau_bord.php");

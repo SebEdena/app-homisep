@@ -89,7 +89,7 @@ function buildCemacsContext($pieces, $cemacs){
                 'statut' => true,
                 'moyActionneur' => null,
                 'libelleGroupBy' => $libelle,
-                'typeCapteur' => "" + $cemac['typeCapteur']['categorie'] + $cemac['typeCapteur']['exterieur'],
+                'typeCapteur' => "" . $categ . $ext,
                 'grandeur' => $grandeur
             );
         }
@@ -206,6 +206,18 @@ function getCemacsAssoc($idPiece)
     $query -> execute();
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
     return $res;
+}
+
+function updateProgrammes($valeurs){
+    if(count($valeurs) == 0) return false;
+    require('/model/config.php');
+    $date = date('Y-m-d H:i:s');
+    $sql = "INSERT INTO `programme` (`idCemac`, `dateDebut`, `valeur`) VALUES (?,?,?)";
+    $query = $database->prepare($sql);
+    foreach($valeurs as $valeur){
+        $query->execute(array($valeur['idCemac'], $date, $valeur['valeur']));
+    }
+    return true;
 }
 
 function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal,$maisonPrincipale)

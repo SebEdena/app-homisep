@@ -151,7 +151,7 @@ CREATE TABLE `maison` (
   `ville` varchar(255) NOT NULL,
   `codePostal` int(5) NOT NULL,
   `idClient` int(11) NOT NULL,
-  `maisonPrincipale` bit(1) NOT NULL DEFAULT b'0'
+  `maisonPrincipale` boolean NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

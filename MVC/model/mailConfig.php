@@ -1,19 +1,27 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 /* Exception class. */
-require './model/PHPMailer/src/Exception.php';
+require_once('./model/PHPMailer/src/Exception.php');
 
 /* The main PHPMailer class. */
-require './model/PHPMailer/src/PHPMailer.php';
-
-echo class_exists('PHPMailer');
+require_once('./model/PHPMailer/src/PHPMailer.php');
 
 /* SMTP class, needed if you want to use SMTP. */
-require './model/PHPMailer/src/SMTP.php';
+require_once('./model/PHPMailer/src/SMTP.php');
 
-$mailSender = new PHPMailer(TRUE);
+$mail = new PHPMailer(TRUE);
+$mail->CharSet = 'UTF-8';
+$mail->ContentType = 'text/html';
+$mail->IsSMTP();
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'tls';
+$mail->SMTPDebug = 0;
 
+$mail->Host = 'smtp.free.fr';
+$mail->Port = 587;
+$mail->Username = "homisep@free.fr";
+$mail->Password = "homisep1";
+$mail->IsHTML(true);
 ?>

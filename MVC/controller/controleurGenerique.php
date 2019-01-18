@@ -14,6 +14,7 @@
   function deconnexion()
   {
     session_destroy();
-    require("./view/indexVue.tpl");
+    require('./controller/connexionInitialisation.php');
+    page_connexion("Vous vous êtes déconnectés");
   }
 ?>

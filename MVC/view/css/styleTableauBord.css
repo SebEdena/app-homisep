@@ -3,7 +3,7 @@
 }
 
 .tabcontent{
-    padding: 5px 5px 0 5px;
+    padding: 5px 5px 5px 5px;
 }
 
 .accord-content{
@@ -21,6 +21,23 @@
 
 #house-select{
     max-width: 100%;
+    border: 2px solid var(--color-darkblue);
+    cursor: pointer;
+}
+
+#save-tdb{
+    margin: 5px;
+    padding: 10px;
+    background: var(--color-green);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#save-tdb:hover {
+    background-color: #30B030;
+    transition: background-color 0.5s;
 }
 
 #noMaison{
@@ -36,18 +53,26 @@
     .tablink {
         font-size: 0.8em;
     }
+
+    #actions-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
-#tabpage-gen {
+.gen-status {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 /*
-    Style vue générale
+Style vue générale
 */
 
 .data-summary {
@@ -65,12 +90,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: center;
-        width: 40%;
-        margin: 5%;
+    width: 40%;
+    margin: 5%;
 }
 
 .summary-left img {
+    margin-top: 5%;
     width: 70%;
 }
 
@@ -79,12 +106,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-        width: 40%;
-        margin: 5%;
+    width: 60%;
+    margin: 5%;
 }
 
 /*
-    Style Blocs Capteurs
+Style Blocs Capteurs
 */
 .capt-menu{
     grid-area: capt-menu;
@@ -122,8 +149,8 @@
 }
 
 .capt-title{
-  background-color: var(--color-green);
-  color : white;
+    background-color: var(--color-green);
+    color : white;
 }
 
 .capt-status.capt-error {

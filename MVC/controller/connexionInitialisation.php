@@ -1,10 +1,59 @@
 <?php
   function page_connexion()
   {
-    require("./model/mailConfig.php");
-    require("./model/util.php");
-    sendMail();
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/indexVue.tpl");
+  }
+
+  function renvoi_page_connexion($message)
+  {
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
+    require("./view/indexVue.tpl");
+  }
+
+  function resetmdp()
+  {
+    require_once("./model/init.php");
+    if(verifyUser($_POST['mailResetMdp']))
+    {
+      $newMdp = Genere_mdp(9);
+      if(insere_mdp($newMdp,$_POST['mailResetMdp']))
+      {
+        send_mail_mdp($newMdp,$_POST['mailResetMdp']);
+        $message = "Votre mot de passe a été réinitialisé";
+      }
+      else
+      {
+        $message = "erreur dans la modification de mot de passe";
+      }
+    }
+    else
+    {
+      if(verifyAdmin($_POST['mailResetMdp']))
+      {
+        $newMdp = Genere_mdp(9);
+        if(insere_mdp_admin($newMdp,$_POST['mailResetMdp']))
+        {
+          send_mail_mdp($newMdp,$_POST['mailResetMdp']);
+          $message = "Votre mot de passe a été réinitialisé";
+        }
+        else
+        {
+          $message = "erreur dans la modification de mot de passe";
+        }
+      }
+      else
+      {
+        $message = "erreur dans le mail utilisateur";
+      }
+    }
+    renvoi_page_connexion($message);
   }
 
   function seConnecter()
@@ -20,11 +69,11 @@
         break;
       case "ErrorMDP":
         $message = "Mot de passe incorrect";
-        require("./view/indexVue.tpl");
+        renvoi_page_connexion($message);
         break;
       case "ErrorUser":
         $message = "Utilisateur Inconnu";
-        require("./view/indexVue.tpl");
+        renvoi_page_connexion($message);
         break;
     }
     // if($etat  == "null")
@@ -49,6 +98,6 @@
   {
     require("./model/inscription.php");
     $message = inscrireClient($_POST['email'],$_POST['pass']);
-    require("./view/indexVue.tpl");
+    page_connexion($message);
   }
 ?>

@@ -3,24 +3,27 @@ function traitementCaractereSpeciaux($mot)
 {
     return htmlspecialchars($mot);
 }
-
+/*
+require("./model/mailConfig.php");
+require("./model/util.php");
+sendMail();
+*/
 function sendMail(){
-    //use PHPMailer\PHPMailer\PHPMailer;
     require("./model/mailConfig.php");
 
     /* Open the try/catch block. */
     try {
         /* Set the mail sender. */
-        $mail->setFrom('sebedena@live.fr', 'Darth Vader');
+        $mail->setFrom('homisep@free.fr', "L'équipe Homisep");
 
         /* Add a recipient. */
-        $mail->addAddress('viguier.sebastien@orange.fr', 'Emperor');
-
+        $mail->addAddress('pierre.verbe@isep.fr', 'Pierre Verbe');
+        $mail->addAddress('pablo.grana@isep.fr', 'Pablo Grana');
         /* Set the subject. */
-        $mail->Subject = 'Force';
+        $mail->Subject = 'On voulait tester phpMailer désolé du spam';
 
         /* Set the mail message body. */
-        $mail->Body = 'There is a great disturbance in the Force.';
+        $mail->Body = 'TROLL By Laurent Yu';
 
         /* Finally send the mail. */
         $mail->send();

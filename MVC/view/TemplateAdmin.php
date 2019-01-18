@@ -17,7 +17,7 @@
     <ul id="#menu">
         <li class ="logo"><img src="./view/img/LogoAPP_short.png" alt="Homisep" class="avatar"></li>
         <li><a href="index.php?control=relationAdmin&action=afficheDonneesClients">Données</a></li>
-        <li><a href="#account">Messagerie</a></li>
+        <li><a href="index.php?control=relationAdmin&action=afficheMessagerie">Messagerie</a></li>
         <li class="logout">
             <a href="index.php?control=controleurGenerique&action=deconnexion">
                 <img src="./view/img/power_icon.png"></img>

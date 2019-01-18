@@ -32,6 +32,8 @@ body {
     position: relative;
     background-image: url("../img/fond.jpg");
     background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment:fixed;
     object-fit: cover;
 }
 
@@ -69,5 +71,13 @@ button:not(:disabled) {
     #content {
         width: 90%;
         margin: 2% 0 0 5%;
+    }
+}
+
+@media only screen and (max-width: 1900px)
+{
+	body{
+        background-size:auto;
+        background-width:100%;
     }
 }

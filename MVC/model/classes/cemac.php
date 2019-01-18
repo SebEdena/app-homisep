@@ -16,9 +16,13 @@ class CeMac{
             'exterieur' => $data['exterieur'],
             'grandeur' => array(
                 'nom' => $data['nom'],
-                'symbole' => $data['symbole']
+                'symbole' => $data['symbole'],
+                'pas' => (float)$data['pas'],
+                'borneInf' => (float)$data['borneInf'],
+                'borneSup' => (float)$data['borneSup']
             ),
-            'libelleGroupBy' => $data['libelleGroupBy']
+            'libelleGroupBy' => $data['libelleGroupBy'],
+            'valeur' => (float)$data['valeur']
         );
         $this->idPiece = (int) $data['idPiece'];
     }

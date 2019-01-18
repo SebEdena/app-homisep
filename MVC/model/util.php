@@ -6,10 +6,10 @@ function traitementCaractereSpeciaux($mot)
 /*
 require("./model/mailConfig.php");
 require("./model/util.php");
-sendMail();
+sendMail($dest, $nom, $prenom, $subject, $body);
 */
-function sendMail(){
-    require("./model/mailConfig.php");
+function sendMail($dest, $nom, $prenom, $subject, $body){
+    require_once("./model/mailConfig.php");
 
     /* Open the try/catch block. */
     try {
@@ -17,13 +17,12 @@ function sendMail(){
         $mail->setFrom('homisep@free.fr', "L'équipe Homisep");
 
         /* Add a recipient. */
-        $mail->addAddress('pierre.verbe@isep.fr', 'Pierre Verbe');
-        $mail->addAddress('pablo.grana@isep.fr', 'Pablo Grana');
+        $mail->addAddress($dest, $prenom.' '.$nom);
         /* Set the subject. */
-        $mail->Subject = 'On voulait tester phpMailer désolé du spam';
+        $mail->Subject = $subject;
 
         /* Set the mail message body. */
-        $mail->Body = 'TROLL By Laurent Yu';
+        $mail->Body = $body."</br></br>Cordialement,</br>L'équipe Homisep.";
 
         /* Finally send the mail. */
         $mail->send();

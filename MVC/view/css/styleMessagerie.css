@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-.messagerie:hover{
+.attendu:hover{
   opacity: 0.8;
 }
 
@@ -26,4 +26,8 @@
 
 .repondu{
   background:#90c843;
+}
+
+.repondu:hover{
+  cursor : initial;
 }

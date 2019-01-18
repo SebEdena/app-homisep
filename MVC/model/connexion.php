@@ -20,12 +20,14 @@ function connexionUtilisateur($username,$password)
         $res -> execute();
         $row = $res->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     if($row['mail'] <> "")
     {
         if(password_verify($password,$row["passe"]))
         {
             $_SESSION["mail"] = $row["mail"];
+            $_SESSION["nom"] = $row["nom"];
+            $_SESSION["prenom"] = $row["prenom"];
             $_SESSION["admin"] = $admin;
             $_SESSION["id"] = $admin?$row["idAdministrateur"]:$row["idClient"];
             return $admin?"admin":"client";

@@ -30,7 +30,7 @@
     box-sizing: border-box;
 }
 
-.contact #msg{
+.contact #msg, #objectDemande{
   width: 100%;
   height: 150px;
   padding: 12px 20px;

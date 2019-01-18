@@ -3,7 +3,7 @@
   function getDemandes()
   {
       require('./model/config.php');
-      require('./model/classes/message.php');
+      require_once('./model/classes/message.php');
       $query = $database -> prepare('select * from message');
 
       $query -> execute();

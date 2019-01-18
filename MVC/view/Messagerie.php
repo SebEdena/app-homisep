@@ -2,9 +2,13 @@
 $title = "Espace administrateur - Messagerie";
 $css = [
   "consultationDonnees.css",
-  "styleMessagerie.css"
+  "styleMessagerie.css",
+  "styleModal.css",
+  "styleContact.css"
 ];
-$js = [];
+$js = [
+  "modal.js"
+];
 $modals = null;
 $jsonpage = null;
 ?>
@@ -30,10 +34,11 @@ $jsonpage = null;
         <td><?= $client->getMail();?></td>
         <td><?= $message->getObjet();?></td>
         <td><?= $message->getTexte();?></td>
+        <td>
         <?php if($message->getIdAdministrateur() == null){ ?>
-            <td><button class="messagerie attendu">Réponse attendue</button></td>
+          <button class="messagerie attendu" onclick="formMail('<?= addslashes($message->getObjet())?>','<?= addslashes($message->getTexte())?>','<?= addslashes($client->getMail())?>','<?= addslashes($client->getNom())?>','<?= addslashes($client->getPrenom())?>');">Répondre</button></td>
         <?php } else { ?>
-            <td><button class="messagerie repondu">Répondu</button></td>
+          <button class="messagerie repondu" disabled>Répondu</button></td>
         <?php } ?>
       </tr>
     <?php } ?>

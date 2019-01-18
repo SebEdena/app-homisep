@@ -437,12 +437,22 @@ function recupererOptionsMaison()
 
 function setMessage(){
   require("./model/inscription.php");
+  require_once("./model/util.php");
+
   $obj = $_POST["object"];
   $txt = $_POST["message"];
+  $dest = $_SESSION["mail"];
+  $nom = $_SESSION["nom"];
+  $prenom = $_SESSION["prenom"];
+
+  $mailConf = 'Bonjour,</br></br>Nous avons bien reçu votre demande :</br></br>     "'.
+    $txt.'"</br></br>Nous vous répondrons dans les plus bref délais.';
+
   try {
     $status = inscrireMessage($obj, $txt);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
+    sendMail($dest, $nom, $prenom, $obj, $mailConf);
     print json_encode($status);
   }
   catch(Exception $exception){

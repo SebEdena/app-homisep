@@ -17,7 +17,7 @@ $mail->ContentType = 'text/html';
 $mail->IsSMTP();
 $mail->SMTPAuth = true;
 $mail->SMTPSecure = 'tls';
-$mail->SMTPDebug = 0;
+//$mail->SMTPDebug = 2;
 
 $mail->Host = 'smtp.free.fr';
 $mail->Port = 587;

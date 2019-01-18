@@ -31,9 +31,10 @@
   }
 
   function inscrireMessage($objet, $texte){
-    require("./model/util.php");
     require('./model/config.php');
-    
+    require_once("./model/util.php");
+
+
     $idClient = $_SESSION['id'];
     $objet = traitementCaractereSpeciaux($objet);
     $texte = traitementCaractereSpeciaux($texte);
@@ -46,5 +47,23 @@
     $query -> execute();
     return true;
 
+  }
+
+  function repondreMessage($objet, $texte, $nom){
+    require('./model/config.php');
+    require_once("./model/util.php");
+
+    $idAdm = $_SESSION['id'];
+    $objet = traitementCaractereSpeciaux($objet);
+    $texte = traitementCaractereSpeciaux($texte);
+    $nomCli = traitementCaractereSpeciaux($nom);
+
+    $query = $database -> prepare("UPDATE message SET `idAdministrateur`=? WHERE `objet`=? AND `texte`=?");
+    $query -> bindParam(1,$idAdm);
+    $query -> bindParam(2,$objet);
+    $query -> bindParam(3,$texte);
+
+    $query -> execute();
+    return true;
   }
 ?>

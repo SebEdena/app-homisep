@@ -1,0 +1,214 @@
+body{
+    /* background-image: url("../img/fond.jpg");
+    background-size: 100%;
+    margin : 0; */
+}
+
+h1 {
+    color : #90c843;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 2% 0;
+    overflow: hidden;
+    background-color: #CECECE;
+    height: 75px;
+    border-bottom: 2px solid #254672;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar{
+    max-height : 90%;
+    width: auto;
+    margin-left: 1%;
+}
+
+.page{
+    display : flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#conn{
+    margin: 4vh 0;
+    text-align:center;
+    color: #254672;
+    font-family : "Libel Suit";
+    font-size : 3em;
+}
+/* Bordered form */
+form {
+    border: 1px solid #254672;
+    background-color: #F5F5F5;
+    margin-left: 1%;
+    width: 40%;
+    border-radius: 7px;
+}
+
+#modal{
+    margin-left: 1%;
+    border-radius: 7px;
+    border: 0px;
+    background-color: #FFFFFF;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    border-radius: 7px;
+}
+
+form:not(h1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Full-width inputs */
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    height:50px;
+    width:100%;
+    border-radius:3px;
+    border:rgba(0,0,0,.3) 0px solid;
+    box-sizing:border-box;
+    padding:10px;
+    margin-bottom:30px;
+    margin-top:10px;
+    background:#90c843;
+    color:#FFF;
+    font-weight:bold;
+    font-size: 12pt;
+    transition:background .4s;
+    cursor:pointer;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 2vh 0 2vh 0;
+}
+
+/* Add padding to containers */
+.container {
+    width:80%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 1050px) {
+    .psw {
+        display: block;
+        float: none;
+        padding : 0;
+    }
+}
+
+label {
+    color: #254672;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 20px;
+    font-size : 1em;
+}
+
+#status_msg {
+    font-size: 1.2em;
+    color: crimson;
+}
+
+#cgu{
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.cbx {
+    margin: auto;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+.cbx span {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+}
+.cbx span:first-child {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    transform: scale(1);
+    vertical-align: middle;
+    border: 1px solid #9098A9;
+    transition: all 0.2s ease;
+}
+.cbx span:first-child svg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #FFFFFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+.cbx span:first-child:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #506EEC;
+    display: block;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+}
+.cbx span:last-child {
+    padding-left: 8px;
+}
+.cbx:hover span:first-child {
+    border-color: #506EEC;
+}
+
+.inp-cbx:checked + .cbx span:first-child {
+    background: #506EEC;
+    border-color: #506EEC;
+    animation: wave 0.4s ease;
+}
+.inp-cbx:checked + .cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+.inp-cbx:checked + .cbx span:first-child:before {
+    transform: scale(3.5);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+@keyframes wave {
+    50% {
+        transform: scale(0.9);
+    }
+}

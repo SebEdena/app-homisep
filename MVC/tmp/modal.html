@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="./css/modal.css">
+    <style>
+        body #container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #templateRect {
+            width: 90%;
+            height: 400px;
+            border: 5px solid rgb(83, 68, 255);
+        }
+
+        button {
+            padding: 10px;
+            background-color: rgb(83, 68, 255);
+            border: 0;
+            cursor: pointer;
+            color: white;
+            font-size: 1.1em;
+            transition: background-color 0.5s;
+        }
+
+        button:hover {
+            background-color: rgb(123, 111, 255);
+        }
+
+        #Modal1 {
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="modalBtn">Open 1</button>
+        <button id="modalBtn2">Open 2</button>
+        <div id="templateRect"></div>
+    </div>
+    <div class="modal-bg">
+        <div class="modal" id="Modal1">
+            <div class="modal-head">
+                <span class="modal-close">&times;</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="modal-body">
+                <p>Bonjour</p>
+            </div>
+        </div>
+        <div class="modal" id="Modal2">
+            <div class="modal-head">
+                <span class="modal-close">&times;</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="modal-body">
+                <p>Wow, 2 modaux !</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/modal.js"></script>
+<script>
+    document.querySelector('#modalBtn').onclick = function(){
+        displayModal("#Modal1");
+    };
+    document.querySelector('#modalBtn2').onclick = function(){
+        displayModal("#Modal2");
+    };
+</script>
+</html>

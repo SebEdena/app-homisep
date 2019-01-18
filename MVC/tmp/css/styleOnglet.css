@@ -1,0 +1,50 @@
+:root{
+    --tab-border: #444;
+    --tab-bg: #999;
+    --tab-bg-active: #444;
+}
+
+.tabcontainer{
+    margin: 5px;
+    border: 1px solid var(--tab-border);
+}
+
+.tablist {
+    display: flex;
+    height: 50px;
+}
+
+.tablink {
+    background-color: var(--tab-bg);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-size: 17px;
+    border-right: 1px solid var(--tab-border);
+}
+
+.tablink.active {
+    background-color: var(--tab-bg-active);
+}
+
+.tablink:last-child {
+    border: none;
+}
+
+.tablink:hover {
+    background-color: var(--tab-bg-active);
+}
+
+.tabcontent{
+    border-top: 1px solid var(--tab-border);
+}
+
+.tabpage {
+    color: black;
+    display: none;
+    padding: 50px;
+    text-align: center;
+}

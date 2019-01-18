@@ -1,0 +1,122 @@
+body{
+	margin : 0;
+}
+
+/* -------------------------------
+MENU
+------------------------------- */
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: var(--color-lightgrey);
+	height: 75px;
+  	border-bottom: 2px solid #254672;
+	box-sizing: border-box;
+	display: flex;
+}
+
+li {
+	box-sizing: border-box;
+	float: left;
+    flex: 1;
+	flex-grow: 1;
+}
+/*
+li:last-child {
+	border-right: 0;
+} */
+
+.avatar {
+	height: 90%;
+	width: auto;
+	overflow: hidden;
+	transition : 1s;
+}
+
+.logo{
+	height: 100%;
+	cursor : pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo:hover{
+	background-color: var(--color-grey);
+}
+
+li a {
+	color: var(--color-darkblue);
+	text-align: center;
+	/* padding: 14px 16px; */
+	text-decoration: none;
+	height: 100%;
+	vertical-align : middle;
+	font-size : 1.5em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+li a:hover {
+	background-color: var(--color-grey);
+	transition:0.5s;
+}
+
+/* li:not(.logout) a:hover {
+	background-color: var(--color-grey);
+}
+
+.logout{
+	background-color: var(--color-darkgreen);
+}
+
+.logout:hover {
+	background-color: green;
+} */
+
+.logout {
+	flex: 1;
+	flex-grow: 1;
+}
+
+.logout a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.logout a img{
+	height: 30px;
+}
+
+.logout a div{
+	display: block;
+	padding-left: 1vw;
+}
+
+@media screen and (max-width: 1260px) {
+	.logout a img {
+		padding: 0;
+		height: 40px;
+	}
+
+	li a{
+		font-size:0.9em;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.avatar{
+		height: 70%;
+		transition: 1s;
+	}
+
+	.logout a div{
+		display: none;
+	}
+}

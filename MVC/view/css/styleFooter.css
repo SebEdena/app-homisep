@@ -1,0 +1,47 @@
+
+/* -------------------------------
+				FOOTER
+   ------------------------------- */
+
+footer {
+    width: 100%;
+    color: #254672;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    background-color: #CECECE;
+    border-top: 2px solid #254672;
+    font-weight: bold;
+    padding-bottom: 3px;
+    box-sizing: content-box;
+    font-size: 0.95em;
+}
+
+footer * {
+    margin: 0;
+}
+
+footer a {
+    padding-right : 20px;
+    margin-top: 2px;
+}
+
+footer p {
+    margin-bottom: 3px;
+}
+
+@media screen and (max-width:800px) {
+    footer * {
+        font-size: 0.75em;
+    }
+
+    footer a {
+        padding-right : 5px;
+    }
+
+    footer p {
+        font-size: 0.70em;
+    }
+}

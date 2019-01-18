@@ -90,6 +90,19 @@
           </div>
         </div>
     </div>
+    <div class="modal" id="modalMention">
+        <div class="modal-head">
+            <span class="modal-close">&times;</span>
+            <h1>Mentions légales</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div id="contentMention">
+              <?php if(isset($mention)){echo nl2br($mention[0]['texteRegle']);} ?>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 <?php if(isset($modals)) { ?>
     <?= $modals ?>

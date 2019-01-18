@@ -4,6 +4,7 @@
     require_once("./model/init.php");
     $cgu = getRegle("CGU");
     $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/indexVue.tpl");
   }
 
@@ -12,6 +13,7 @@
     require_once("./model/init.php");
     $cgu = getRegle("CGU");
     $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/indexVue.tpl");
   }
 
@@ -33,7 +35,23 @@
     }
     else
     {
-      $message = "erreur dans le mail utilisateur";
+      if(verifyAdmin($_POST['mailResetMdp']))
+      {
+        $newMdp = Genere_mdp(9);
+        if(insere_mdp_admin($newMdp,$_POST['mailResetMdp']))
+        {
+          send_mail_mdp($newMdp,$_POST['mailResetMdp']);
+          $message = "Votre mot de passe a été réinitialisé";
+        }
+        else
+        {
+          $message = "erreur dans la modification de mot de passe";
+        }
+      }
+      else
+      {
+        $message = "erreur dans le mail utilisateur";
+      }
     }
     renvoi_page_connexion($message);
   }

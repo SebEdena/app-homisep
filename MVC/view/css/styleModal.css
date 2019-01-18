@@ -26,8 +26,12 @@
     transition: 1s;
 }
 
-.modal-head h2 {
-    margin: 10px 0;
+.modal-head h1 {
+    margin: 15px 0;
+}
+
+.modal:not(#modalcontact) .modal-body {
+    margin-bottom: 20px;
 }
 
 .modal-close {

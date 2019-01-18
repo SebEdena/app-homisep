@@ -1,7 +1,7 @@
 <?php
     $title = "Espace administrateur - Données client";
     $css = [
-        "styleModal.css","consultationDonnees.css"
+        "consultationDonnees.css"
     ];
     $js = [
         "modal.js"

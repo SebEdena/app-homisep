@@ -41,6 +41,7 @@
   <a class="linkFooter" href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
   <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">CGUs</a>
   <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Confidentialité</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalMention');">Mentions Légales</a>
   <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
 </footer>
 

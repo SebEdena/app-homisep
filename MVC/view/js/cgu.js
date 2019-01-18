@@ -18,8 +18,7 @@ $('#contactMention').on('click', (event)=>{
 $('#contentMention').css({'overflow-y' : 'scroll' , 'height' : '400px'});
 
 $(".cbx").on('click', (event)=>{
-  console.log(event.target);
-  if(event.target !== this){
+  if(event.target.hasAttribute("href")){
       event.preventDefault();
       return false;
   }

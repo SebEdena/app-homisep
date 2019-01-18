@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./view/css/basic_rules.css" />
     <link rel="stylesheet" href="./view/css/styleMenuUtil.css" />
     <link rel="stylesheet" href="./view/css/styleFooter.css" />
+    <link rel="stylesheet" href="./view/css/styleModal.css" />
     <?php foreach ($css as $value) { ?>
         <link rel="stylesheet" href="./view/css/<?= $value ?>" />
     <?php } ?>

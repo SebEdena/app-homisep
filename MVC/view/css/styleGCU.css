@@ -15,22 +15,22 @@
 input {
      width: 100%;
     padding: 5px;
-    border: 1% solid #ccc;
-    border-radius: 0px;
+    /* border: 1% solid #ccc; */
+    /* border-radius: 0px; */
 }
-#adress {
+/* #adress {
     width: 35%;
     margin-left: 13px;
     margin-top: 1%;
-}
+} */
 .container2 input {
     width: 40%;
     margin-left: 5%;
     margin-top: 1%
 }
-#cpsw {
+/* #cpsw {
     margin-left: 7%;
-}
+} */
 
 
 
@@ -58,9 +58,9 @@ input[type=Number] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
-#adresse {
+/* #adresse {
     width: 60%;
-}
+} */
 
 label {
     display: inline-block;
@@ -74,6 +74,7 @@ label {
     color: white;
     padding: 8px 12px;
     border-radius: 4px;
+    border: none;
     cursor: pointer;
     float: right;
     margin-top: 5px;
@@ -86,25 +87,31 @@ label {
     color: white;
     padding: 12px 20px;
     border-radius: 4px;
+    border: none;
     cursor: pointer;
     margin-left: 5px;
     margin-top: 5px;
-    margin-bottom: 5%;
 }
 .bouton3 {
     background-color: #4CAF50;
     color: white;
     padding: 8px 12px;
     border-radius: 4px;
+    border: none;
     cursor: pointer;
     margin-left: 90%;
     margin-top: 5px;
     margin-bottom: 3px;
 }
 
-
-.container2 > form > div {
-    margin-bottom: 3px;
+#actionsRapides {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
 .donnéesUtilisateur {

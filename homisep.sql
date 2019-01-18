@@ -112,16 +112,19 @@ INSERT INTO `client` (`idClient`, `nom`, `prenom`, `adresse`, `ville`, `codePost
 CREATE TABLE `grandeurphysique` (
   `idGrandeurPhysique` int(11) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
-  `symbole` varchar(5) DEFAULT NULL
+  `symbole` varchar(5) DEFAULT NULL,
+  `pas` float DEFAULT 1,
+  `borneInf` float DEFAULT 0,
+  `borneSup` float DEFAULT 100
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `grandeurphysique`
 --
 
-INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`) VALUES
-(1, 'Celsius', '°C'),
-(2, 'Pourcentage', '%');
+INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `borneInf`, `borneSup`) VALUES
+(1, 'Celsius', '°C', 0.5, 5, 35),
+(2, 'Pourcentage', '%', 1, 0, 100);
 
 -- --------------------------------------------------------
 
@@ -207,21 +210,20 @@ INSERT INTO `piece` (`idPiece`, `nom`, `idMaison`, `idTypePiece`) VALUES
 CREATE TABLE `programme` (
   `idProgramme` int(11) NOT NULL,
   `dateDebut` datetime NOT NULL,
-  `dateFin` datetime NOT NULL,
-  `valeur` float NOT NULL
+  `dateFin` datetime DEFAULT NULL,
+  `valeur` float NOT NULL,
+  `idCemac` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `programmecemac`
+-- Contenu de la table `piece`
 --
-
-CREATE TABLE `programmecemac` (
-  `idCemac` int(11) NOT NULL,
-  `idProgramme` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+INSERT INTO `programme` (`idProgramme`, `dateDebut`, `valeur`, `idCemac`) VALUES
+(1, '2019-01-14 10:00:00', 65, 4),
+(2, '2019-01-14 10:00:00', 100, 6),
+(3, '2019-01-14 10:00:00', 20, 7),
+(4, '2019-01-14 10:00:00', 40, 9),
+(5, '2019-01-14 10:00:00', 50, 12);
 -- --------------------------------------------------------
 
 --
@@ -363,14 +365,8 @@ ALTER TABLE `piece`
 -- Index pour la table `programme`
 --
 ALTER TABLE `programme`
-  ADD PRIMARY KEY (`idProgramme`);
-
---
--- Index pour la table `programmecemac`
---
-ALTER TABLE `programmecemac`
-  ADD PRIMARY KEY (`idCemac`,`idProgramme`),
-  ADD KEY `Fk_ProgrammeCemac_Programme` (`idProgramme`);
+  ADD PRIMARY KEY (`idProgramme`),
+  ADD KEY `Fk_Programme_Cemac` (`idCemac`);
 
 --
 -- Index pour la table `reponse`
@@ -525,9 +521,8 @@ ALTER TABLE `piece`
 --
 -- Contraintes pour la table `programmecemac`
 --
-ALTER TABLE `programmecemac`
-  ADD CONSTRAINT `Fk_ProgrammeCemac_Cemac` FOREIGN KEY (`idCemac`) REFERENCES `cemac` (`idCemac`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Fk_ProgrammeCemac_Programme` FOREIGN KEY (`idProgramme`) REFERENCES `programme` (`idProgramme`) ON DELETE CASCADE;
+ALTER TABLE `programme`
+  ADD CONSTRAINT `Fk_Programme_Cemac` FOREIGN KEY (`idCemac`) REFERENCES `cemac` (`idCemac`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `reponse`

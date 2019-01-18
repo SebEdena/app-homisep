@@ -14,6 +14,7 @@ for(let i = 0; i < modal_closers.length; i++){
     }
 }
 
+
 let displayModal = function(id){
     var displayedModal = document.querySelector(id);
     if(id != null){

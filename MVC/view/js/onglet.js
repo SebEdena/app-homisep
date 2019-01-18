@@ -29,5 +29,5 @@ function openTab(elt){
 }
 
 for(let i = 0; i < tabcontainers.length; i++){
-	tabcontainers[i].querySelector("#defaultOpen").click();
+	tabcontainers[i].querySelector(".defaultOpen").click();
 }

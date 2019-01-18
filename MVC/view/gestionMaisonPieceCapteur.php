@@ -132,6 +132,8 @@
                     <input type="text" id="maisonVille" placeholder="Entrez la ville" name="ville" value="">
                     <label for="codePostal">Code Postal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
+                    <label for="maisonPrincipale" >Maison Principale :</label>
+                    <input type="checkbox" id="maisonPrincipale" name="maisonPrincipale">
                     <div class="boutonRight">
                       <button type="button" onclick="deleteFunction('maison')">Supprimer</button>
                       <button type="button" onclick="backFunction('maison')">Annuler</button>

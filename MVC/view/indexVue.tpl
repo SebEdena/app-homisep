@@ -1,70 +1,129 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="./view/css/styleModalInscription.css" />
-  <link rel="stylesheet" href="./view/css/styleModal.css" />
-  <link rel="stylesheet" href="./view/css/styleConnexion.css" />
+  <link rel="icon" type="image/png" href="./view/img/LogoAPP.png"/>
+  <link rel="stylesheet" href="./view/css/basic_rules.css" />
+  <link rel="stylesheet" href="./view/css/styleModal.css"/>
+  <link rel="stylesheet" href="./view/css/styleConnexion.css"/>
+  <link rel="stylesheet" href="./view/css/styleFooter.css"/>
   <script src="./view/js/confMDPmodal.js"></script>
+  <script src="./view/js/jquery-3.3.1.min.js"></script>
   <title>Bienvenue - Homisep</title>
 </head>
 
 <body>
-  <h1 id="conn">Page de connexion</h1>
-  <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post">
-    <div class="imgcontainer">
-      <img src="./view/img/LogoAPP.png" alt="Homisep" class="avatar">
-    </div>
+  <ul id="menu">
+    <h1 id="conn">Bienvenue</h1>
+    <img src="./view/img/LogoAPP_short.png" alt="Homisep" class="avatar">
+  </ul>
+  <div class="page">
+    <form action="index.php?control=connexionInitialisation&action=seConnecter" method="post" onsubmit="validate(event);">
+      <h1>Connexion</h1>
+      <div class="container">
 
-    <div class="container">
+        <label for="uname"><b>Identifiant</b></label>
+        <input type="text" placeholder="Entrez votre identifiant" name="uname" required>
 
-      <label for="uname"><b>Identifiant</b></label><form>
-        <div class="radio-group">
-          <input type="radio" id="option-one" name="selector" value="client" checked><label for="option-one">Client</label>
-          <input type="radio" id="option-three" name="selector" value="admin"><label for="option-three">Administrateur</label>
-        </div>
-      </form>
-      <input type="text" placeholder="Entrez votre identifiant" name="uname" required>
+        <label for="psw"><b>Mot de passe</b></label>
+        <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
+        <a href="#" id="reset_mdp_link">Mot de passe oublié?</a>
 
-      <label for="psw"><b>Mot de passe</b></label>
-      <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
-
-      <button type="submit">Se connecter</button>
-
-      <span ><a href="#" id="modalBtn">Créer un nouvel utilisateur</a></span>
-    </div>
-
-  </form>
-
-  <div class="modal-bg">
-    <div class="modal" id="Modal1">
-      <div class="modal-head">
-        <span class="modal-close">&times;</span>
-        <h1>Formulaire d'inscription</h1>
+        <button type="submit">Se connecter</button>
+          <p id="status_msg">
+              <?php if(isset($message)) echo($message); ?>
+          </p>
       </div>
-      <div class="modal-body">
-        <div class="module">
-          <form name="inscr" class="form" action="index.php?control=connexionInitialisation&action=inscriptionClient">
-            <label>Adresse email</label><input type="email" placeholder="Entrez votre adresse mail" class="textbox" required/>
-            <label>Mot de passe</label><input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" required/>
-            <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
-            <input type="submit" value="S'enregistrer" class="button" onclick="validate();"/>
-          </form>
-        </div>
+
+    </form>
+
+    <form class="inscri" action="index.php?control=connexionInitialisation&action=inscriptionClient" method="post" onsubmit="validate(event);">
+      <h1>Formulaire d'inscription</h1>
+      <div class="container">
+
+        <label>Numéro de CeMAC</label>
+        <input type="number" placeholder="Entrez votre numéro de CeMAC acquis" name="num" required/>
+        <label>Adresse email</label>
+        <input type="email" placeholder="Entrez votre adresse mail" name="email" required/>
+        <label>Mot de passe</label>
+        <input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un nombre, une minuscule, une majuscule et au moins 8 caractères ou plus."required/>
+        <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
+<!--
+        <input class="inp-cbx" id="cbx" type="checkbox" style="display: none;"/>
+        <label class="cbx" for="cbx"><span>
+            <svg width="12px" height="10px" viewbox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span>
+            <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label> -->
+        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>, la <a href="#" id="contactPolitique">politique de confidentialité</a> et les <a href="#" id="contactMention">mentions légales</a></span></label>
+        <input class="inp-cbx" id="cbx" type="checkbox" required/></input>
+        <button type="submit">S'enregistrer</button>
       </div>
-    </div>
+
+    </form>
   </div>
-
+  <br/>
+  <br/>
+  <footer>
+    <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
+  </footer>
+  <div class="modal-bg">
+      <div class="modal" id="modalresetmdp">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h2>Réinitialisation de mot de passe</h2>
+          </div>
+          <div class="modal-body">
+            <form id="modal" action="index.php?control=connexionInitialisation&action=resetmdp" method="post">
+              <label for="mailResetMdp">Saisissez votre adresse mail</label>
+              <input id="mailResetMdp" type="email" name="mailResetMdp"></input>
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+      </div>
+      <div class="modal" id="modalCGU">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>Conditions Générales d'Utilisation</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div id="contentCGU">
+                <?php if(isset($cgu)){echo nl2br($cgu[0]['texteRegle']);} ?>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal" id="modalPolitique">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>Politique de confidentialité</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div id="contentPolitique">
+                <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal" id="modalMention">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>Mentions légales</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div id="contentMention">
+                <?php if(isset($mention)){echo nl2br($mention[0]['texteRegle']);} ?>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
 </body>
-
-<footer class="footer">
-  <p>&#9400; Homisep 2018, tous droits réservés.</p>
-</footer>
-
-<script>
-  document.querySelector('#modalBtn').onclick = function(){
-    displayModal("#Modal1");
-  };
-</script>
-<script src="./view/js/modal.js"></script>
-
+  <script src="./view/js/modal.js"></script>
+  <script src="./view/js/cgu.js"></script>
+  <script src="./view/js/connexion.js"></script>
 </html>

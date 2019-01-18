@@ -1,10 +1,18 @@
 <?php
 function afficherFAQ()
 {
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/FAQ.php");
 }
 
 function afficheTableauBord(){
+    require_once("./model/init.php");
+    $cgu = getRegle("CGU");
+    $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./model/tableau_bord.php");
     $maisons = getMaisons();
     require("./view/tableauBord.php");
@@ -32,8 +40,27 @@ function getDonneesMaison(){
     }
 }
 
+function updateActionneurs(){
+    require('./model/tableau_bord.php');
+    $valeurs = $_POST['valeurs'];
+    try{
+        $status = updateProgrammes($valeurs);
+        http_response_code(200);
+        header('Content-Type: application/json; charset=UTF-8');
+        print json_encode(array('returnStatus' => $status));
+    }catch(Exception $exception){
+        http_response_code(500);
+        header('Content-Type: application/json; charset=UTF-8');
+        print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
+    }
+}
+
 function afficheGestionCompte()
 {
+  require_once("./model/init.php");
+  $cgu = getRegle("CGU");
+  $politique = getRegle("Politique");
+  $mention = getRegle("Mention");
   require("./model/tableau_bord.php");
   $maisons = getMaisons();
   require("./view/gestionMaisonPieceCapteur.php");
@@ -114,7 +141,15 @@ function creerNouvelleMaison()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = creerNouvelleMaisonBD($_SESSION["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    if($_POST["maisonPrincipale"] === "true")
+    {
+      $maisonPrincipale = b'1';
+    }
+    else
+    {
+      $maisonPrincipale = b'0';
+    }
+    $status = creerNouvelleMaisonBD($_SESSION["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"],$maisonPrincipale);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);
@@ -129,7 +164,15 @@ function modifierMaison()
 {
   require("./model/tableau_bord.php");
   try{
-    $status = modifierMaisonBD($_POST["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"]);
+    if($_POST["maisonPrincipale"] === "true")
+    {
+      $maisonPrincipale = b'1';
+    }
+    else
+    {
+      $maisonPrincipale = b'0';
+    }
+    $status = modifierMaisonBD($_POST["id"],$_POST["adresse"],$_POST["ville"],$_POST["codePostal"],$maisonPrincipale);
     http_response_code(200);
     header('Content-Type: application/json; charset=UTF-8');
     print json_encode($status);
@@ -371,5 +414,4 @@ function setMessage(){
     print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
-
 ?>

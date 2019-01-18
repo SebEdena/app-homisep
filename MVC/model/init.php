@@ -47,10 +47,45 @@
     }
   }
 
+  function verifyAdmin($mail)
+  {
+    require("./model/config.php");
+    $res = $database -> prepare('select * from administrateur where administrateur.mail = ?');
+    $res -> bindParam(1, $mail);
+    $res -> execute();
+    $row = $res->fetch(PDO::FETCH_ASSOC);
+    if(is_null($row['mail']))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
   function insere_mdp($mdp,$mail)
   {
     require("./model/config.php");
     $res = $database -> prepare('update client set passe = ? where mail = ?');
+    $passHash = password_hash($mdp,PASSWORD_DEFAULT);
+    $res -> bindParam(1, $passHash);
+    $res -> bindParam(2, $mail);
+    try
+    {
+      $res -> execute();
+      return true;
+    }
+    catch(PDOException $exception)
+    {
+      return false;
+    }
+  }
+
+  function insere_mdp_admin($mdp,$mail)
+  {
+    require("./model/config.php");
+    $res = $database -> prepare('update administrateur set passe = ? where mail = ?');
     $passHash = password_hash($mdp,PASSWORD_DEFAULT);
     $res -> bindParam(1, $passHash);
     $res -> bindParam(2, $mail);

@@ -23,7 +23,7 @@
     width: 80%;
     animation-name: animateModal;
     animation-duration: 0.5s;
-
+    transition: 1s;
 }
 
 .modal-head h2 {
@@ -48,5 +48,12 @@
         opacity: 0;
     } to {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .modal{
+        width: 90% !important;
+        transition: 1s;
     }
 }

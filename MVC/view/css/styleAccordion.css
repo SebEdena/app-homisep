@@ -1,0 +1,83 @@
+/* -------------------------------
+ACCORDION
+------------------------------- */
+/* Espacement entre les questions */
+.accord{
+	/* border: 1px solid var(--color-darkblue); */
+}
+
+/* .accord:last-child{
+	margin-bottom: 0;
+} */
+
+/* Masquer les contenus des accordéons */
+.accord .accord-content {
+	/* display: none; */
+	max-height: 0;
+	transition: max-height 0.3s ease-out;
+	overflow: hidden;
+	margin-bottom: 5px;
+	padding: 0;
+	display: flex;
+}
+
+/* Si l'accordéon est ouvert, montrer le contenuu */
+.accord.accord-opened .accord-content {
+	/* display: block; */
+	/* font-size: 1em; */
+	/* Restaurer le texte entier */
+	/* text-overflow: clip; */
+	/* margin: 0;*/
+	/* padding: 0; */
+	/* white-space: normal; */
+	/* padding: 0 0 5px 0 ; */
+	/* transition:1s; */
+}
+
+/* Style des labels */
+.accord label {
+	font-size: 1.2em;
+	cursor: pointer;
+	background: var(--color-lightgrey);
+	display: block;
+	position: relative;
+	padding: 7px 10px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	transition: all .15s ease-out;
+}
+
+/* Éviter de sélectionner le texte en cliquant plusieurs fois */
+.accord label::selection{
+	background: none;
+}
+
+.accord label:hover{
+	background: var(--color-grey);
+}
+
+/* Style du label si l'accodéon est ouvert*/
+.accord.accord-opened label{
+	border-color: var(--color-darkblue);
+	color: var(--color-darkblue);
+	box-shadow: 0 0 1px rgba(0,0,0,.4);
+}
+
+/* Flèche du label par défaut */
+.accord label::before{
+	content: '';
+	position: absolute;
+	right: 4px;
+	top: 50%;
+	margin-top: -6px;
+	border: 6px solid transparent;
+	border-left-color: inherit;
+}
+
+/* Flèche du label sélectionné */
+.accord.accord-opened label::before{
+	border: 6px solid transparent;
+	border-top-color: inherit;
+	margin-top: -3px;
+	right: 10px;
+}

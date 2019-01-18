@@ -1,123 +1,109 @@
 body{
-	font-family: "Roboto Thin";
 	margin : 0;
 }
 
 /* -------------------------------
-				MENU 
-   ------------------------------- */
+MENU
+------------------------------- */
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 	height: 75px;
 }
 
 li {
-    float: left;
+	box-sizing: border-box;
+	float: left;
 	border-right: 1px solid #bbb;
-	width : 20%;
+	width : 25%;
+}
+
+li:last-child {
+	border-right: 0;
 }
 
 .avatar {
-	width : 25.5%;
-	margin-left : 35%;
+	width : auto;
+	height: 90%;
+	overflow: hidden;
+	transition : 1s;
 }
 
 .logo{
-	width : 19.6%;
+	height: 100%;
+	cursor : pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo:hover{
+	background-color: #111;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 	height : 49px;
 	vertical-align : middle;
 	font-size : 1.5em;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	align-items: center;
 	justify-content: center;
 }
 
-li a:hover:not(.active) {
-    background-color: #111;
+li:not(.logout) a:hover {
+	background-color: #111;
 }
 
 .logout{
-	float:right;
+	background-color: var(--color-darkgreen);
 }
 
-.active {
-    background-color: #4CAF50;
-	display : block;
-}
-
-.active:hover{
+.logout:hover {
 	background-color: green;
 }
 
-.logout_img{
-	width : 7%;
-	margin-top : 6%;
+.logout a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.logoutQuery{
-	display : none;
+.logout a img{
+	height: 60%;
 }
 
-@media screen and (max-width: 1260px) {
+.logout a div{
+	display: block;
+	padding-left: 1vw;
+}
+
+@media screen and (max-width: 900px) {
+	.logout a img {
+		padding: 0;
+		height: 70%;
+	}
+
 	li a{
-		font-size:1em;
+		font-size:0.9em;
 	}
-	
-	.logout {
+}
+
+@media screen and (max-width: 700px) {
+	.avatar{
+		height:70%;
+		transition: 1s;
+	}
+
+	.logout a div {
 		display: none;
-		transition :1s;
-	}
-	
-	.logoutQuery{
-		display : block;
-		width: 10%;
-		float : right;
-		transition :1s;
-	}
-	
-	.logoutQuery .active{
-		background-color: #4CAF50;
-	}
-	
-	.logoutQuery .active:hover{
-		background-color:green;
-	}
-	
-	.logoutQuery_img{
-		text-align : center;
-		margin-left :0;
-		margin-top:5%;
-		width:2em;
-	}
-}
-
-@media screen and (max-width: 1260px) {
-	.avatar{
-		height:72px;
-		width:72px;
-	}
-}
-
-@media screen and (max-width: 960px) {
-	li{
-		width:30%;
-	}
-	
-	.avatar{
-		margin-left : 10%;
-		transition : 1s;
 	}
 }

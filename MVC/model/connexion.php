@@ -1,28 +1,47 @@
 <?php
-  function connexionUtilisateur($username,$password,$selecteur)
-  {
-    $database = new PDO('mysql:host=localhost;dbname=homisep', "root", "root");
-    if($selecteur == "admin")
-    {
-      $res = $database -> prepare('select * from administrateur where administrateur.mail = ?');
-    }
-    else
-    {
-      $res = $database -> prepare('select * from client where client.mail = ?');
-    }
 
+function connexionUtilisateur($username,$password)
+{
+    require('./model/config.php');
+
+    $admin = true;
+
+    $res = $database -> prepare('select * from administrateur where administrateur.mail = ?');
     $res -> bindParam(1, $username);
-
     $res -> execute();
     $row = $res->fetch(PDO::FETCH_ASSOC);
-    if(password_verify($password,$row["passe"]))
+
+    if(is_null($row['mail']))
     {
-      echo(1);
+        $admin = false;
+
+        $res = $database -> prepare('select * from client where client.mail = ?');
+        $res -> bindParam(1, $username);
+        $res -> execute();
+        $row = $res->fetch(PDO::FETCH_ASSOC);
+    }
+
+    if($row['mail'] <> "")
+    {
+        if(password_verify($password,$row["passe"]))
+        {
+            $_SESSION["mail"] = $row["mail"];
+            $_SESSION["nom"] = $row["nom"];
+            $_SESSION["prenom"] = $row["prenom"];
+            $_SESSION["admin"] = $admin;
+            $_SESSION["id"] = $admin?$row["idAdministrateur"]:$row["idClient"];
+            return $admin?"admin":"client";
+        }
+        else
+        {
+            return "ErrorMDP";
+        }
     }
     else
     {
-      echo(0);
+        return "ErrorUser";
     }
-  }
+
+}
 
 ?>

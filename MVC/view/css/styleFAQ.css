@@ -1,5 +1,5 @@
 /* -------------------------------
-				FAQ 
+				FAQ
    ------------------------------- */
 
 .titre{
@@ -15,12 +15,12 @@
 	margin-right: 15%;
 	float:right;
 	width:15%;
-	min-width: 130px;
+	min-width: 140px;
 	height:40px;
 	border-radius:12px 0 12px 0;
 	background: #4682B4;
 	border:none;
-	color:white;	
+	color:white;
 	font-size : 1.2em;
 	padding:6px 0 6px 0;
 	box-shadow:1px 1px 3px #999;
@@ -99,8 +99,9 @@
 /* Style du label si le checkbox est coché */
 .faq-section input[type=checkbox]:checked~label{
         border-color: #1a2e6d;
-        background-image: linear-gradient(to bottom, #fff, #b5cde1);
+        background-color: rgb(181, 205, 225);
         box-shadow: 0 0 1px rgba(0,0,0,.4);
+				color : #1a2e6d;
 }
 
 /* Flèche du label par défaut */

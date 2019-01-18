@@ -63,7 +63,10 @@ function afficheGestionCompte()
   $mention = getRegle("Mention");
   require("./model/tableau_bord.php");
   $maisons = getMaisons();
+  $donnees = recupDonneesClient();
+  
   require("./view/gestionMaisonPieceCapteur.php");
+
 }
 
 function getDonneesPiece(){
@@ -160,6 +163,7 @@ function creerNouvelleMaison()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function modifierMaison()
 {
   require("./model/tableau_bord.php");
@@ -183,6 +187,7 @@ function modifierMaison()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function supprimerMaison()
 {
   require("./model/tableau_bord.php");
@@ -198,6 +203,7 @@ function supprimerMaison()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function creerNouvellePiece()
 {
   require("./model/tableau_bord.php");
@@ -213,6 +219,7 @@ function creerNouvellePiece()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function modifierPiece()
 {
   require("./model/tableau_bord.php");
@@ -228,6 +235,7 @@ function modifierPiece()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function supprimerPiece()
 {
   require("./model/tableau_bord.php");
@@ -243,6 +251,7 @@ function supprimerPiece()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function creerNouveauCemac()
 {
   require("./model/tableau_bord.php");
@@ -258,6 +267,7 @@ function creerNouveauCemac()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function modifierCemac()
 {
   require("./model/tableau_bord.php");
@@ -273,6 +283,7 @@ function modifierCemac()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function supprimerCemac()
 {
   require("./model/tableau_bord.php");
@@ -288,6 +299,7 @@ function supprimerCemac()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function reloadMaison()
 {
   require("./model/tableau_bord.php");
@@ -304,6 +316,7 @@ function reloadMaison()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function reloadPiece()
 {
   require("./model/tableau_bord.php");
@@ -320,6 +333,7 @@ function reloadPiece()
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
 }
+
 function reloadCemac()
 {
   require("./model/tableau_bord.php");
@@ -352,6 +366,39 @@ function recupererTypeCapteur()
       header('Content-Type: application/json; charset=UTF-8');
       print json_encode(array('error'=>true, 'message'=>$exception->getMessage()));
   }
+}
+
+function recupDonneesClient()
+{
+  require('./model/donneesClient.php');
+  return recupererDonneesClient();
+}
+
+function actualiserDonneesClient()
+{
+
+  require_once('./model/util.php');
+  require('./model/donneesClient.php');
+
+  $nom = traitementCaractereSpeciaux($_POST['lastname']);
+  $prenom = traitementCaractereSpeciaux($_POST['firstname']);
+  $bday = traitementCaractereSpeciaux($_POST['bdate']);
+  $email = traitementCaractereSpeciaux($_POST['email']);
+  $adresse = traitementCaractereSpeciaux($_POST['adress']); 
+  $ville = traitementCaractereSpeciaux($_POST['ville']);
+  $codePostal = traitementCaractereSpeciaux($_POST['postal']);
+
+  $id = $_SESSION['id'];
+  $e = actuDonneesClient($nom, $prenom, $bday, $email, $adresse, $ville, $codePostal, $id);
+  echo $e;
+  header('Location: index.php?control=relationClient&action=afficheGestionCompte');
+}
+
+function actualiserMDP()
+{
+  $ancienMdp = traitementCaractereSpeciaux($_POST['currentpsw']);
+  $nouveauMdp = traitementCaractereSpeciaux($_POST['newpsw']);
+  $verifieMdp = traitementCaractereSpeciaux($_POST['confirm_psw']);
 }
 
 function recupererOptionsPiece()

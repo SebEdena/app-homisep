@@ -40,6 +40,7 @@
   <a class="linkFooter" href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
   <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">Voir les conditions générales</a>
   <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Voir la politique de confidentialité</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalMention');">Voir les mentions légales</a>
   &#9400; 2018, Homisep un produit Domisep, tous droits réservés.
 </footer>
 
@@ -86,6 +87,19 @@
           <div class="container">
             <div id="contentPolitique">
               <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal" id="modalMention">
+        <div class="modal-head">
+            <span class="modal-close">&times;</span>
+            <h1>Mentions légales</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div id="contentMention">
+              <?php if(isset($mention)){echo nl2br($mention[0]['texteRegle']);} ?>
             </div>
           </div>
         </div>

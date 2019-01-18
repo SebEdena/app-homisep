@@ -56,7 +56,7 @@
               <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
             </svg></span>
             <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label> -->
-        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
+        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>, la <a href="#" id="contactPolitique">politique de confidentialité</a> et les <a href="#" id="contactMention">mentions légales</a></span></label>
         <input class="inp-cbx" id="cbx" type="checkbox" required/></input>
         <button type="submit">S'enregistrer</button>
       </div>
@@ -99,6 +99,19 @@
             <div class="container">
               <div id="contentPolitique">
                 <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal" id="modalMention">
+          <div class="modal-head">
+              <span class="modal-close">&times;</span>
+              <h1>Mentions légales</h1>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div id="contentMention">
+                <?php if(isset($mention)){echo nl2br($mention[0]['texteRegle']);} ?>
               </div>
             </div>
           </div>

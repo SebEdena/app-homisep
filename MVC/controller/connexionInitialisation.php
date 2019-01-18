@@ -4,6 +4,7 @@
     require_once("./model/init.php");
     $cgu = getRegle("CGU");
     $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/indexVue.tpl");
   }
 
@@ -12,6 +13,7 @@
     require_once("./model/init.php");
     $cgu = getRegle("CGU");
     $politique = getRegle("Politique");
+    $mention = getRegle("Mention");
     require("./view/indexVue.tpl");
   }
 

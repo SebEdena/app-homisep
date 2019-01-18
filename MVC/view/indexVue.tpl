@@ -49,13 +49,18 @@
         <input type="password" placeholder="Entrez votre mot de passe" class="textbox" id="pass" name="pass"
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un nombre, une minuscule, une majuscule et au moins 8 caractères ou plus."required/>
         <input type="password" placeholder="Confirmez votre mot de passe" class="textbox" id="confirm_pass" required/>
-        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGU</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
+        <span id="cgu">J'ai lu et j'accepte les <a href="#" id="contactCGU">CGUs</a>  et la <a href="#" id="contactPolitique">politique de confidentialité</a></span></label>
         <input class="inp-cbx" id="cbx" type="checkbox" required/></input>
         <button type="submit">S'enregistrer</button>
       </div>
 
     </form>
   </div>
+  <br/>
+  <br/>
+  <footer>
+    <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
+  </footer>
   <div class="modal-bg">
       <div class="modal" id="modalresetmdp">
           <div class="modal-head">
@@ -73,7 +78,7 @@
       <div class="modal" id="modalCGU">
           <div class="modal-head">
               <span class="modal-close">&times;</span>
-              <h1>CGU</h1>
+              <h1>Conditions Générales d'Utilisation</h1>
           </div>
           <div class="modal-body">
             <div class="container">
@@ -86,7 +91,7 @@
       <div class="modal" id="modalPolitique">
           <div class="modal-head">
               <span class="modal-close">&times;</span>
-              <h1>Politique confidentialité</h1>
+              <h1>Politique de confidentialité</h1>
           </div>
           <div class="modal-body">
             <div class="container">
@@ -98,10 +103,6 @@
       </div>
     </div>
 </body>
-<br/>
-<footer>
-  <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
-</footer>
   <script src="./view/js/modal.js"></script>
   <script src="./view/js/cgu.js"></script>
   <script src="./view/js/connexion.js"></script>

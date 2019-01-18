@@ -69,7 +69,7 @@ function build_capteurs(data){
         }
     }
     for (cemac of data.cemacs) {
-        inflate_capteur(false, null, cemac.id, cemac, cemac.typeCapteur.categorie, cemac.typeCapteur.categorie.exterieur);
+        inflate_capteur(false, null, cemac.id, cemac, cemac.typeCapteur.categorie, cemac.typeCapteur.exterieur);
     }
 }
 
@@ -163,7 +163,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         cemac.data('grandeur', context.typeCapteur.grandeur);
         cemac.find('.capt-buttons button').on('click', (event) => updateValue(cemac, false, (event.target.classList.contains('btnUp'))));
 
-        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + context.idPiece +'] > .accord-content').append(cemac);
+        $("#tabpage-"+categorie).find('.piece[data-piece-id=' + context.idPiece +'] > .accord-content > .capt-gen.'+categorie+ext).after(cemac);
+        //.addAfter(cemac);
     }
 }
 

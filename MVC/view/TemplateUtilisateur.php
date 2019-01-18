@@ -36,11 +36,12 @@
 </body>
 
 <br/>
+<br/>
 <footer>
   <a class="linkFooter" href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
-  <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">Voir les conditions générales</a>
-  <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Voir la politique de confidentialité</a>
-  &#9400; 2018, Homisep un produit Domisep, tous droits réservés.
+  <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">CGUs</a>
+  <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Confidentialité</a>
+  <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
 </footer>
 
 <div class="modal-bg">
@@ -52,7 +53,6 @@
         <div class="modal-body">
           <form class="contact" action="#" method="post" onsubmit="contactReceived(event);">
             <div class="container">
-
               <label for="object" class="object"><b>Objet</b></label>
               <input id="object" type="text" placeholder="Entrez le sujet de votre demande" name="object" required>
               </br>

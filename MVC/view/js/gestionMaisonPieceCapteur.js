@@ -47,9 +47,6 @@ function recupDonneesMaisonGestion(event)
           alert("Une erreur est survenue : " + error.message);
       }
   });
-  recupererOptionsMaison(0);
-  recupererOptionsPiece(0);
-  recupererOptionsTypeCemac(0);
 }
 
 function buildPieceGestion(pieces)
@@ -174,14 +171,6 @@ function afficherInformation($string,$donnees)
       document.getElementById("maisonAdresse").value = $donnees.adresse;
       document.getElementById("maisonVille").value = $donnees.ville;
       document.getElementById("maisonCodePostal").value = $donnees.codePostal;
-      if($donnees.maisonPrincipale == 1)
-      {
-        $("#maisonPrincipale").prop('checked', true);
-      }
-      else
-      {
-        $("#maisonPrincipale").prop('checked', false);
-      }
       openTab(document.getElementById("tabpage-Maison"));
       mediaQueryGestionMaisonPieceCapteur();
       break;
@@ -254,7 +243,6 @@ function eraseFunction($string)
       document.getElementById("maisonAdresse").value = "";
       document.getElementById("maisonVille").value = "";
       document.getElementById("maisonCodePostal").value = "";
-      $("#maisonPrincipale").prop('checked',false);
       break;
     }
     case "piece":
@@ -312,8 +300,7 @@ function nouveauFunction($string)
                 data: {
                   adresse : $("#maisonAdresse").val(),
                   ville : $("#maisonVille").val(),
-                  codePostal : $("#maisonCodePostal").val(),
-                  maisonPrincipale : document.getElementById("maisonPrincipale").checked
+                  codePostal : $("#maisonCodePostal").val()
                 },
                 success: function(retour){
                     //console.log(retour);
@@ -425,8 +412,7 @@ function modifierFunction($string)
                   id : $("#maisonId").val(),
                   adresse : $("#maisonAdresse").val(),
                   ville : $("#maisonVille").val(),
-                  codePostal : $("#maisonCodePostal").val(),
-                  maisonPrincipale : document.getElementById("maisonPrincipale").checked
+                  codePostal : $("#maisonCodePostal").val()
                 },
                 success: function(retour){
                     //console.log(retour);
@@ -533,20 +519,9 @@ function recupererOptionsTypeCemac($idTypeCapteur)
           console.log(retour);
           if(retour)
           {
-            if($idTypeCapteur == 0)
+            for(type of retour)
             {
-              let html = "";
-              for(type of retour)
-              {
-                html += ("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
-              }
-              $("#typeCemac").html(html);
-            }
-            else {
-              for(type of retour)
-              {
-                $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
-              }
+              $("#typeCemac").append("<option value="+ type.idTypeCapteur + ">" + type.type + " - " + type.libelleGroupBy + "</option>");
             }
           }
       },
@@ -572,21 +547,9 @@ function recupererOptionsPiece($idPiece)
           console.log(retour);
           if(retour)
           {
-            if($idPiece == 0)
+            for(piece of retour)
             {
-              let html = "";
-              for(piece of retour)
-              {
-                html += ("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
-              }
-              $("#pieceCemac").html(html);
-            }
-            else
-            {
-              for(piece of retour)
-              {
-                $("#pieceCemac").append("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
-              }
+              $("#pieceCemac").append("<option value="+ piece.idPiece + ">" + piece.nom + "</option>");
             }
           }
       },
@@ -611,16 +574,8 @@ function recupererOptionsMaison($idMaison)
           console.log(retour);
           if(retour)
           {
-            if($idMaison == 0)
+            for(maison of retour)
             {
-              let html = "";
-              for(maison of retour)
-              {
-                html += ("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
-              }
-              $("#pieceMaison").html(html);
-            }
-            else {
               $("#pieceMaison").append("<option value="+ maison.idMaison + ">" + maison.adresse + " " + maison.ville + " " + maison.codePostal + "</option>");
             }
           }

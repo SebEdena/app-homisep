@@ -36,12 +36,9 @@
 </body>
 
 <br/>
-<br/>
 <footer>
-  <a class="linkFooter" href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
-  <a class="linkFooter" href="##" onclick="displayModal('#modalCGU');">CGUs</a>
-  <a class="linkFooter" href="##" onclick="displayModal('#modalPolitique');">Confidentialité</a>
-  <p>&#9400; 2018, Homisep un produit Domisep, tous droits réservés.</p>
+  <a href="##" onclick="displayModal('#modalcontact');">Nous contacter</a>
+  &#9400; 2018, Homisep un produit Domisep, tous droits réservés.
 </footer>
 
 <div class="modal-bg">
@@ -53,54 +50,16 @@
         <div class="modal-body">
           <form class="contact" action="#" method="post" onsubmit="contactReceived(event);">
             <div class="container">
+
               <label for="object" class="object"><b>Objet</b></label>
               <input id="object" type="text" placeholder="Entrez le sujet de votre demande" name="object" required>
               </br>
               <label for="message" class="message"><b>Demande</b></label>
               <textarea id="msg" placeholder="Entrez votre message" name="message" required></textarea>
 
-              <button type="submit">Envoyer</button>
+              <button id="sendRep" type="submit">Envoyer</button>
             </div>
           </form>
-        </div>
-    </div>
-    <div class="modal" id="modalCGU">
-        <div class="modal-head">
-            <span class="modal-close">&times;</span>
-            <h1>CGU</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div id="contentCGU">
-              <?php if(isset($cgu)){echo nl2br($cgu[0]['texteRegle']);} ?>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="modal" id="modalPolitique">
-        <div class="modal-head">
-            <span class="modal-close">&times;</span>
-            <h1>Politique confidentialité</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div id="contentPolitique">
-              <?php if(isset($politique)){echo nl2br($politique[0]['texteRegle']);} ?>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="modal" id="modalMention">
-        <div class="modal-head">
-            <span class="modal-close">&times;</span>
-            <h1>Mentions légales</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div id="contentMention">
-              <?php if(isset($mention)){echo nl2br($mention[0]['texteRegle']);} ?>
-            </div>
-          </div>
         </div>
     </div>
   </div>
@@ -111,7 +70,6 @@
 <script src="./view/js/logo.js"></script>
 <script src="./view/js/modal.js"></script>
 <script src="./view/js/contact.js"></script>
-<script src="./view/js/cgu.js"></script>
 <?php foreach ($js as $value) { ?>
     <script src="./view/js/<?= $value ?>" /></script>
 <?php } ?>

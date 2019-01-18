@@ -20,16 +20,14 @@
               <h1>Pas de Maisons</h1>
             </div>
     <?php }else{ ?>
-    <div id="actions-content">
-        <label for="house-select">Maison : </label>
-        <select id="house-select">
-            <?php foreach ($maisons as $maison) { ?>
-                <option value="<?=$maison->getId()?>"><?= $maison->getAdresse()." - ".
-                $maison->getVille()." - ".$maison->getCodePostal()?></option>
-            <?php } ?>
-        </select>
-        <button id="save-tdb">Enregistrer les modifications</button>
-    </div>
+    <label for="house-select">Maison : </label>
+    <select id="house-select">
+        <?php foreach ($maisons as $maison) { ?>
+            <option value="<?=$maison->getId()?>"><?= $maison->getAdresse()." - ".
+            $maison->getVille()." - ".$maison->getCodePostal()?></option>
+        <?php } ?>
+    </select>
+    <button id="save-tdb">Enregistrer les modifications</button>
     <div class="tabcontainer">
         <div class="tablist">
             <a class="tablink defaultOpen" id="tablink-gen">Vue générale</a>

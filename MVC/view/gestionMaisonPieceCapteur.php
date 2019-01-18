@@ -23,20 +23,29 @@
 		<div class="tabcontent">
 			<div class="tabpage" id="tabpage-Coordonnees">
         <div class="dataUser-container container1" >
-          <h1 class="title">Données Client</h1>
-          <form action="index.php?control=relationClient&action=actualiserDonneesClient" method="post">
+          <h1 class="title">Connexion</h1>
+          <form>
             <div class="row">
               <div class="col-1">
                 <label for="lname">Nom</label>
               </div>
               <div class="col-2">
-                <input type="text" id="lname" name="lastname" placeholder="Nom"<?php if(null!==($donnees->getNom())){?>value="<?php echo $donnees->getNom()?><?php } ?>">
+                <input type="text" id="lname" name="lastname" placeholder="Nom">
               </div>
               <div class="col-3">
                 <label for="fname">Prénom</label>
               </div>
               <div class="col-4">
-                <input type="text" id="fname" name="firstname" placeholder="Prénom"<?php if(null!==($donnees->getPrenom())){?>value="<?php echo $donnees->getPrenom()?><?php } ?>">
+                <input type="text" id="fname" name="firstname" placeholder="Prénom">
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <label for="eMail">eMail</label>
+              </div>
+              <div class="email">
+                <input type="text" id="mail" name="eMail" placeholder="eMail">
               </div>
             </div>
 
@@ -45,51 +54,32 @@
                 <label for="date">Date de Naissance</label>
               </div>
               <div class="col-2">
-                <input type="date" id="bdate" name="bdate" placeholder="Date de Naissance"<?php if(null!==($donnees->getDateNaissance())){?>value="<?php echo $donnees->getDateNaissance()?><?php } ?>">
+                <input type="date" id="bdate" name="date" placeholder="Date de Naissance">
               </div>
               <div class="col-3">
-                <label for="eMail">eMail</label>
+                <label for="ntel">Numéro de tel</label>
               </div>
               <div class="col-4">
-                <input type="text" id="mail" name="email" placeholder="eMail"<?php if(null!==($donnees->getMail())){?>value="<?php echo $donnees->getMail()?><?php } ?>" disabled>
+                <input type="Number" id="numtel" name="tel" placeholder="Numéro de tel">
               </div>
             </div>
-            <div>
-              <label for="adresse">Adresse principale</label>
-              <input type="text" id="adress" name="adress" placeholder="Adresse"<?php if(null!==($donnees->getAdresse())){?>value="<?php echo $donnees->getAdresse()?><?php } ?>">
+            <div class="row">
+              <button class="bouton1" type="reset">Annuler</button>
+              <button class="bouton1" type="submit">Valider</button>
             </div>
+          </div>
 
-            <div class="col-1">
-                <label for="ville">Ville</label>
-              </div>
-              <div class="col-2">
-                <input type="text" id="ville" name="ville" placeholder="Ville"<?php if(null!==($donnees->getVille())){?>value="<?php echo $donnees->getVille()?><?php } ?>">
-              </div>
-              <div class="col-3">
-                <label for="postal">Code Postal</label>
-              </div>
-              <div class="col-4">
-                <input type="text" id="postal" name="postal" placeholder="Code Postal"<?php if(null!==($donnees->getCodePostal())){?>value="<?php echo $donnees->getCodePostal()?><?php } ?>">
-              </div>
 
-              <div class="row">
-                <button class="bouton1" type="submit">Valider</button>
-                <button class="bouton1" type="reset">Annuler</button>
-              </div>
-            </div>
-  
-
-  
           <div class="dataUser-container container2">
             <h1 class="title">Changer le Mot de Passe</h1>
             <form onsubmit="vaildate(event);">
                 <label class="entry" for="currentpsw">Ancien Mot de Passe</label>
-                <input  type="text" id="cpsw" name="currentpsw" placeholder="Ancien Mot de Passe"> <br/>
+                <input  type="text" id="cpsw" name="currentpsw" placeholder="Ancien Mot de Passe">
                 <label class="entry" for="newpsw">Nouveau Mot de Passe</label>
-                <input  type="text" id="pass" name="npsw" placeholder="Nouveau Mot de Passe"> <br/>
+                <input  type="text" id="pass" name="npsw" placeholder="Nouveau Mot de Passe">
                 <label class="entry" for="newpsw">Nouveau Mot de Passe</label>
                 <input  type="text" id="confirm_pass" name="confirm_psw" placeholder="Ancien Mot de Passe">
-                <button class="bouton3" type="submit">Valider</button> <br/>
+                <button class="bouton3" type="submit">Valider</button>
             </form>
           </div>
 
@@ -142,8 +132,6 @@
                     <input type="text" id="maisonVille" placeholder="Entrez la ville" name="ville" value="">
                     <label for="codePostal">Code Postal :</label>
                     <input type="text" id="maisonCodePostal" placeholder="Entrez le code postal" name="codePostal" value="">
-                    <label for="maisonPrincipale" >Maison Principale :</label>
-                    <input type="checkbox" id="maisonPrincipale" name="maisonPrincipale">
                     <div class="boutonRight">
                       <button type="button" onclick="deleteFunction('maison')">Supprimer</button>
                       <button type="button" onclick="backFunction('maison')">Annuler</button>
@@ -185,9 +173,9 @@
                       <button type="button" onclick="validateFunction('cemac')">Valider</button>
                   	</div>
                   </form>
-				</div>
-			</div>
-			</div>
+								</div>
+							</div>
+						</div>
           </div>
         </div>
 			</div>

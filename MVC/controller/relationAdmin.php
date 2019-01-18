@@ -26,7 +26,7 @@
     $prenom = $_POST["prenom"];
 
     $mailConf = 'Bonjour,</br></br>Nous vous remercions de nous avoir contacté :</br></br>     "'.
-      $txt.'"</br></br>'.$rep;
+      $txt.'"</br></br> Voici la réponse de notre administrateur : </br></br>'.$rep;
 
     try {
       $status = repondreMessage($obj, $txt, $nom);

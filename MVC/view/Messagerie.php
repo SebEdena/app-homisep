@@ -7,7 +7,8 @@ $css = [
   "styleContact.css"
 ];
 $js = [
-  "modal.js"
+  "modal.js",
+  "contact.js"
 ];
 $modals = null;
 $jsonpage = null;

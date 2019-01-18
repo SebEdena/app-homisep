@@ -28,3 +28,36 @@ function displayContact(){
 $('#contactbutton').onclick = function(){
     displayContact();
 };
+
+function formMail(obj, demande, mail, nom, prenom){
+  $("#labelDemande").text(obj);
+  $("#objectDemande").text(demande);
+  displayModal("#modalmail");
+
+  $("#sendRep").on('click', function(event) {
+    $.ajax({
+        url: "index.php?control=relationAdmin&action=sendMessage",
+        type: "POST",
+        dataType: "json",
+        data: {
+            object: obj,
+            message: demande,
+            reponse: $("#msg").val(),
+            mail: mail,
+            nom : nom,
+            prenom: prenom
+        },
+        success: function(retour){
+            console.log(retour);
+            hideModal();
+            alert("Votre réponse a bien été prise en compte. L'utilisateur "
+            + "recevra un mail de sur sa boîte de messagerie associée.");
+        },
+        error: function(error){
+            console.error(error);
+            alert("Une erreur est survenue : " + error.message);
+        }
+    });
+    return false;
+  });
+}

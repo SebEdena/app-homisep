@@ -62,5 +62,6 @@ function actuDonneesClient($nom, $prenom, $bday, $email, $adresse, $ville, $code
 }
 
 function actuMotDePasse()
+{}
 
 ?>

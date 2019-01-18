@@ -73,8 +73,8 @@
               </div>
 
               <div class="row">
-                <button class="bouton1" type="reset">Annuler</button>
                 <button class="bouton1" type="submit">Valider</button>
+                <button class="bouton1" type="reset">Annuler</button>
               </div>
             </div>
   

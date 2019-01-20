@@ -151,7 +151,7 @@ CREATE TABLE `maison` (
   `ville` varchar(255) NOT NULL,
   `codePostal` int(5) NOT NULL,
   `idClient` int(11) NOT NULL,
-  `maisonPrincipale` boolean NOT NULL DEFAULT b'0'
+  `maisonPrincipale` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -159,8 +159,8 @@ CREATE TABLE `maison` (
 --
 
 INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`,`maisonPrincipale`) VALUES
-(1, '143 avenue de Versailles', 'Paris', 75016, 5, b'1'),
-(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5, b'0');
+(1, '143 avenue de Versailles', 'Paris', 75016, 5, 1),
+(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5, 0);
 
 -- --------------------------------------------------------
 

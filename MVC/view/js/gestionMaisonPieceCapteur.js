@@ -47,6 +47,8 @@ function recupDonneesMaisonGestion(event)
           alert("Une erreur est survenue : " + error.message);
       }
   });
+  eraseFunction("piece");
+  eraseFunction("cemac");
   recupererOptionsMaison(0);
   recupererOptionsPiece(0);
   recupererOptionsTypeCemac(0);
@@ -135,6 +137,7 @@ function recupDonneesPieceGestion(event)
           alert("Une erreur est survenue : " + error.message);
       }
   });
+  eraseFunction("cemac");
 }
 
 function recupDonneesCapteurGestion(event)
@@ -321,6 +324,8 @@ function nouveauFunction($string)
                     {
                       alert("La maison a été créée");
                       reloadMaison();
+                      reloadPiece();
+                      reloadCemac();
                     }
                     else
                     {
@@ -354,6 +359,7 @@ function nouveauFunction($string)
                   {
                     alert("La pièce a été créée");
                     reloadPiece();
+                    reloadCemac();
                   }
                   else
                   {
@@ -434,6 +440,8 @@ function modifierFunction($string)
                     {
                       alert("La maison a été modifiée");
                       reloadMaison();
+                      reloadPiece();
+                      reloadCemac();
                     }
                     else
                     {
@@ -468,6 +476,7 @@ function modifierFunction($string)
                   {
                     alert("La piece a été modifiée");
                     reloadPiece();
+                    reloadCemac();
                   }
                   else
                   {
@@ -654,6 +663,8 @@ function deleteFunction($string)
                 {
                   alert("La maison a été supprimée");
                   reloadMaison();
+                  reloadPiece();
+                  reloadCemac();
                   eraseFunction("maison");
                 }
                 else
@@ -687,6 +698,7 @@ function deleteFunction($string)
                 {
                   alert("La pièce a été supprimée");
                   reloadPiece();
+                  reloadCemac();
                   eraseFunction("piece");
                 }
                 else
@@ -805,6 +817,7 @@ function reloadCemac()
         id : $("#piece-select-gestion").val()
       },
       success: function(retour){
+          $("#cemac-select-gestion").html("");
           console.log(retour);
           if(retour)
           {

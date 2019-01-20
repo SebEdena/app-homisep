@@ -4,7 +4,7 @@ function getMaisons()
 {
     require('./model/config.php');
     require('./model/classes/maison.php');
-    $query = $database -> prepare('select * from maison where idClient=?');
+    $query = $database -> prepare('select * from maison where idClient=? order by maisonPrincipale DESC');
     $query -> bindParam(1, $_SESSION["id"]);
     $query -> execute();
 
@@ -231,8 +231,8 @@ function creerNouvelleMaisonBD($idClient,$adresse,$ville,$codePostal,$maisonPrin
   $query -> bindParam(1,$adresse);
   $query -> bindParam(2,$ville);
   $query -> bindParam(3,$codePostal);
-  $query -> bindParam(4,$maisonPrincipale);
-  $query -> bindParam(5,$idClient);
+  $query -> bindParam(4,$idClient);
+  $query -> bindParam(5,$maisonPrincipale);
   if($maisonPrincipale)
   {
     deleteTrueMaisonPrincipale();

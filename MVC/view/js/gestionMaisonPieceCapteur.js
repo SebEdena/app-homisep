@@ -809,15 +809,39 @@ function reloadPiece()
 
 function reloadCemac()
 {
+  if(($("#piece-select-gestion").prop("selectedIndex", 0).val()) === undefined)
+  {
+    return;
+  }
+  else {
+    $("#cemac-select-gestion").html("");
+    if($("#piece-select-gestion").val() === null)
+    {
+      $("#piece-select-gestion option").each(function(index)
+      {
+          if($("#piece-select-gestion").prop("selectedIndex", index).val() !== undefined)
+          {
+            callReloadCemacAjax($("#piece-select-gestion").prop("selectedIndex", index).val());
+          }
+      });
+    }
+    else
+    {
+      callReloadCemacAjax($("#piece-select-gestion").val());
+    }
+  }
+}
+
+function callReloadCemacAjax($value)
+{
   $.ajax({
       url: "index.php?control=relationClient&action=reloadCemac",
       type: "POST",
       dataType: "json",
       data: {
-        id : $("#piece-select-gestion").val()
+        id : $value
       },
       success: function(retour){
-          $("#cemac-select-gestion").html("");
           console.log(retour);
           if(retour)
           {
@@ -827,7 +851,7 @@ function reloadCemac()
               console.log(cemac);
               buildHtml += "<option value='"+cemac.idCemac+"'>"+ cemac.numeroSerie + " - " + cemac.type + " " + cemac.libelleGroupBy + "</option>";
             }
-            $("#cemac-select-gestion").html(buildHtml);
+            $("#cemac-select-gestion").append(buildHtml);
           }
       },
       error: function(error){

@@ -1,4 +1,7 @@
 <?php
+  /**
+  * contrôleur permettant d'afficher la vue page connexion
+  */
   function page_connexion()
   {
     require_once("./model/init.php");
@@ -8,6 +11,9 @@
     require("./view/indexVue.tpl");
   }
 
+  /**
+  * contrôleur permettant de revoyer vers la vue page connexion avec un message d'erreur
+  */
   function renvoi_page_connexion($message)
   {
     require_once("./model/init.php");
@@ -17,6 +23,9 @@
     require("./view/indexVue.tpl");
   }
 
+  /**
+   * contrôleur permettant de réinitialiser le mot de passe d'un utilisateur
+   */
   function resetmdp()
   {
     require_once("./model/init.php");
@@ -56,6 +65,9 @@
     renvoi_page_connexion($message);
   }
 
+  /**
+   * contrôleur permettant de vérifier la connexion d'un utilisateur
+   */
   function seConnecter()
   {
     require("./model/connexion.php");
@@ -76,24 +88,11 @@
         renvoi_page_connexion($message);
         break;
     }
-    // if($etat  == "null")
-    // {
-    //   $message = "Utilisateur inconnu ou mot de passe refusé";
-    //   require("./view/indexVue.tpl");
-    // }
-    // else
-    // {
-    //   if($etat == "admin")
-    //   {
-    //     require("./view/consultationDonneesClient.php");
-    //   }
-    //   else
-    //   {
-    //     require("./view/consultationCapteurs.php");
-    //   }
-    // }
   }
 
+  /**
+   * contrôleur permettant de faire l'inscription d'un client
+   */
   function inscriptionClient()
   {
     require("./model/inscription.php");

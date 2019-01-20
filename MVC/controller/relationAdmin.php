@@ -1,4 +1,7 @@
 <?php
+  /**
+   * contrôleur permettant de faire l'affichage des données des clients
+   */
   function afficheDonneesClients()
   {
     require("./model/donneesClient.php");
@@ -6,6 +9,9 @@
     require("./view/consultationDonneesClient.php");
   }
 
+  /**
+   * contrôleur permettant de faire l'affichage de la messagerie
+   */
   function afficheMessagerie()
   {
     require("./model/demandesClient.php");
@@ -13,6 +19,9 @@
     require("./view/Messagerie.php");
   }
 
+  /**
+   * contrôleur permettant d'envoyer une réponse à un message
+   */
   function sendMessage()
   {
     require_once("./model/util.php");

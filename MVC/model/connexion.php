@@ -1,7 +1,11 @@
 <?php
-
-function connexionUtilisateur($username,$password)
-{
+  /**
+   * fonction permettant l'authentifiaction d'un utilisateur
+   * @param $username l'adresse mail de l'Utilisateur
+   * @param $password le mot de passe saisi par l'utilisateur
+   * @return retourne un booléen vrai si c'est un administrateur / faux : un client et un message d'erreur en cas d'échec d'authentifiaction
+   */
+function connexionUtilisateur($username,$password){
     require('./model/config.php');
 
     $admin = true;
@@ -11,8 +15,7 @@ function connexionUtilisateur($username,$password)
     $res -> execute();
     $row = $res->fetch(PDO::FETCH_ASSOC);
 
-    if(is_null($row['mail']))
-    {
+    if(is_null($row['mail'])){
         $admin = false;
 
         $res = $database -> prepare('select * from client where client.mail = ?');
@@ -21,10 +24,8 @@ function connexionUtilisateur($username,$password)
         $row = $res->fetch(PDO::FETCH_ASSOC);
     }
 
-    if($row['mail'] <> "")
-    {
-        if(password_verify($password,$row["passe"]))
-        {
+    if($row['mail'] <> ""){
+        if(password_verify($password,$row["passe"])){
             $_SESSION["mail"] = $row["mail"];
             $_SESSION["nom"] = $row["nom"];
             $_SESSION["prenom"] = $row["prenom"];
@@ -32,16 +33,13 @@ function connexionUtilisateur($username,$password)
             $_SESSION["id"] = $admin?$row["idAdministrateur"]:$row["idClient"];
             return $admin?"admin":"client";
         }
-        else
-        {
+        else{
             return "ErrorMDP";
         }
     }
-    else
-    {
+    else{
         return "ErrorUser";
     }
-
 }
 
 ?>

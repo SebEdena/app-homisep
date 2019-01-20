@@ -1,7 +1,10 @@
 <?php
 
-  function getDemandes()
-  {
+  /**
+   * fonction permettant de récupérer les messages des clients
+   * @return retourne la liste des messages
+   */
+  function getDemandes(){
       require('./model/config.php');
       require_once('./model/classes/message.php');
       $query = $database -> prepare('select * from message');
@@ -12,6 +15,11 @@
       return $res;
   }
 
+  /**
+   * fonction permettant de récupérer la dernière demande d'un client
+   * @param $demandeIdClient l'identifiant du client
+   * @return retourne le dernier message du client
+   */
   function getClientDem($demandeIdClient){
     require('./model/config.php');
     require_once('./model/classes/client.php');

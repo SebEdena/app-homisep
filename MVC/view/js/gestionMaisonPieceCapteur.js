@@ -4,6 +4,13 @@ $("#house-select-gestion").trigger('change');
 $("#house-select-gestion").on('load', recupDonneesMaisonGestion);
 $("#house-select-gestion").trigger('load');
 
+$("#house-select-gestion").on('click', recupDonneesMaisonGestion);
+$("#house-select-gestion").trigger('click');
+
+  /**
+   * fonction permettant de charger les sélecteurs des maisons, des pièces et des CeMacs
+   * @param event évènement déclancheur
+   */
 function recupDonneesMaisonGestion(event)
 {
   let idMaison = parseInt(event.target.value);
@@ -54,6 +61,10 @@ function recupDonneesMaisonGestion(event)
   recupererOptionsTypeCemac(0);
 }
 
+  /**
+   * fonciton permettant de créer les options dans le sélecteur
+   * @param pieces données des pièces
+   */
 function buildPieceGestion(pieces)
 {
   if(pieces.length === 0)
@@ -74,6 +85,10 @@ function buildPieceGestion(pieces)
   }
 }
 
+  /**
+   * fonction permettant de créer les options dans le sélecteur
+   * @param cemacs données des CeMacs
+   */
 function buildCapteurGestion(cemacs)
 {
   if(cemacs.length === 0)
@@ -95,6 +110,10 @@ function buildCapteurGestion(cemacs)
   }
 }
 
+  /**
+   * fonction permettant de charger les sélecteurs des pièces et des CeMacs
+   * @param event évènement déclancheur
+   */
 function recupDonneesPieceGestion(event)
 {
   let idPiece = parseInt(event.target.value);
@@ -140,6 +159,10 @@ function recupDonneesPieceGestion(event)
   eraseFunction("cemac");
 }
 
+  /**
+   * fonction permettant de charger les sélecteurs des CeMacs
+   * @param event évènement déclancheur
+   */
 function recupDonneesCapteurGestion(event)
 {
   let idCapteur = parseInt(event.target.value);
@@ -167,6 +190,11 @@ function recupDonneesCapteurGestion(event)
   });
 }
 
+  /**
+   * fonction permettant d'afficher les informations dans la fenêtre de formulaire à droite
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit placer les données
+   * @param $donnees données présentes
+   */
 function afficherInformation($string,$donnees)
 {
   switch ($string) {
@@ -225,6 +253,9 @@ function afficherInformation($string,$donnees)
   }
 }
 
+  /**
+   * fonction permettant d'adapteur les sélecteurs en fonction de la taille de l'écran
+   */
 function mediaQueryGestionMaisonPieceCapteur()
 {
   try
@@ -246,6 +277,10 @@ function mediaQueryGestionMaisonPieceCapteur()
   }
 }
 
+  /**
+   * fonciton permettant d'effacer les données du formulaire
+   * @param $string chaine de caractère permttant de définir dans quelle infobulle on doit effacer les données
+   */
 function eraseFunction($string)
 {
   switch ($string)
@@ -278,12 +313,20 @@ function eraseFunction($string)
   }
 }
 
+  /**
+   * fonction permettant de récupérer les informations effacées de l'infobulle
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit placer les données
+   */
 function backFunction($string)
 {
   console.log($("#"+$string+"Id").data(""+$string+""));
   afficherInformation($string,$("#"+$string+"Id").data(""+$string+""));
 }
 
+  /**
+   * fonction permettant de récupérer de savoir si l'utilisateur souhaite créer une nouvelle entité ou modifier une entité
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit récupérer les données
+   */
 function validateFunction($string)
 {
   if($("#"+$string+"Id").val() == "")
@@ -296,6 +339,10 @@ function validateFunction($string)
   }
 }
 
+  /**
+   * fonction permettant de créer une nouvelle entité dans la base de données
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit récupérer les données
+   */
 function nouveauFunction($string)
 {
   if(verifierChamp($string))
@@ -411,6 +458,10 @@ function nouveauFunction($string)
   }
 }
 
+  /**
+   * fonction permettant de modifier une entité dans la base de données
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit récupérer les données
+   */
 function modifierFunction($string)
 {
   if(verifierChamp($string))
@@ -528,6 +579,10 @@ function modifierFunction($string)
   }
 }
 
+  /**
+   * fonction permttant de récupérer les types de capteur sauf celui qui est présent dans l'infobulle
+   * @param $idTypeCapteur identifiant du type de capteur déjà présent dans l'infobulle
+   */
 function recupererOptionsTypeCemac($idTypeCapteur)
 {
   console.log($idTypeCapteur);
@@ -566,6 +621,10 @@ function recupererOptionsTypeCemac($idTypeCapteur)
   });
 }
 
+  /**
+   * fonction permttant de récupérer les pièces sauf celle qui est présente dans l'infobulle
+   * @param $idPiece identifiant de la pièce déjà présente dans l'infobulle
+   */
 function recupererOptionsPiece($idPiece)
 {
   console.log($idPiece);
@@ -606,6 +665,10 @@ function recupererOptionsPiece($idPiece)
   });
 }
 
+  /**
+   * fonction permttant de récupérer les maisons sauf celle qui est présente dans l'infobulle
+   * @param $idMaison identifiant de la maison déjà présente dans l'infobulle
+   */
 function recupererOptionsMaison($idMaison)
 {
   console.log();
@@ -641,6 +704,10 @@ function recupererOptionsMaison($idMaison)
   });
 }
 
+  /**
+   * fonction permettant de supprimer une entité dans la base de données
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit récupérer les données
+   */
 function deleteFunction($string)
 {
   switch($string)
@@ -759,6 +826,9 @@ $(window).resize(function() {
     mediaQueryGestionMaisonPieceCapteur();
 });
 
+  /**
+   * fonction permettant de récupérer les maisons pour le sélecteur
+   */
 function reloadMaison()
 {
   $.ajax({
@@ -781,6 +851,9 @@ function reloadMaison()
   });
 }
 
+  /**
+   * fonction permettant de récupérer les pièces pour le sélecteur
+   */
 function reloadPiece()
 {
   $.ajax({
@@ -807,6 +880,9 @@ function reloadPiece()
   });
 }
 
+  /**
+   * fonction permettant de récupérer les CeMacs pour le sélecteur
+   */
 function reloadCemac()
 {
   if(($("#piece-select-gestion").prop("selectedIndex", 0).val()) === undefined)
@@ -832,6 +908,10 @@ function reloadCemac()
   }
 }
 
+  /**
+   * fonction permttant de récupérer les CeMacs et de le placer dans le sélecteur
+   * @param $value identifiant du cemac
+   */
 function callReloadCemacAjax($value)
 {
   $.ajax({
@@ -861,6 +941,10 @@ function callReloadCemacAjax($value)
   });
 }
 
+  /**
+   * fonction permettant de vérifier les champs de l'infobulle
+   * @param $string chaine de caractère permettant de définir dans quelle infobulle on doit placer les données
+   */
 function verifierChamp($string)
 {
   switch($string)

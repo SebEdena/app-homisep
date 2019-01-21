@@ -14,7 +14,10 @@ for(let i = 0; i < modal_closers.length; i++){
     }
 }
 
-
+  /**
+   * fonciton permettant d'afficher un modal en particulier
+   * @param id l'identifiant du modal
+   */
 let displayModal = function(id){
     var displayedModal = document.querySelector(id);
     if(id != null){
@@ -26,6 +29,9 @@ let displayModal = function(id){
     }
 }
 
+  /**
+   * fonction permettant de cacher le modal
+   */
 let hideModal = function(){
     for (let i = 0; i < modals.length; i++) {
         modals[i].style.display = "none";

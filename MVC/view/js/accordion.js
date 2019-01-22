@@ -11,12 +11,18 @@ function toggleAccordion(event){
     1000, 'swing');
 }
 
+  /**
+   * fonction permettant la mise à jour des accordéons en terme de style
+   */
 function updateAccordions(){
     $('.accord label').off('click', toggleAccordion);
     $('.accord label').on('click', toggleAccordion);
     $('.accord .accord-content').css('max-height', '0px');
 }
 
+  /**
+   * fonction permettant de supprimer les accordéons
+   */
 function deleteAccordions(){
     $('.accord label').off('click', toggleAccordion);
     $('.accord').remove();

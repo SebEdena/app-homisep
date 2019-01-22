@@ -1,7 +1,12 @@
 <?php
 
-  function inscrireClient($email,$passe)
-  {
+  /**
+   * fonction permettant l'inscription du client
+   * @param $email l'adresse mail du client
+   * @param $passe le mot de passe du client
+   * @return renvoie un message
+   */
+  function inscrireClient($email,$passe){
     require('./model/util.php');
     require('./model/config.php');
 
@@ -12,28 +17,29 @@
     $query -> bindParam(1,$email);
     $passHash = password_hash($passe,PASSWORD_DEFAULT);
     $query -> bindParam(2,$passHash);
-    try
-    {
+    try{
       $query -> execute();
       return "Client.e créé.e";
     }
-    catch(PDOException $exception)
-    {
-      if ($exception->getCode() == 23000) //violation de clé unique
-      {
+    catch(PDOException $exception){
+      if ($exception->getCode() == 23000) //violation de clé unique{
         return "Client.e déjà existant.e";
       }
-      else
-      {
+      else{
         return "Erreur de traitement";
       }
     }
   }
 
+  /**
+   * fonction permettant d'inscrire un message dans la base de données
+   * @param $objet l'objet du message
+   * @param $texte le texte du message
+   * @return retourne vrai si ça fonction
+   */
   function inscrireMessage($objet, $texte){
     require('./model/config.php');
     require_once("./model/util.php");
-
 
     $idClient = $_SESSION['id'];
     $objet = traitementCaractereSpeciaux($objet);
@@ -46,9 +52,15 @@
 
     $query -> execute();
     return true;
-
   }
 
+  /**
+   * fonction permettant de répondre à un message dans la base de données
+   * @param $objet l'objet du message
+   * @param $texte le texte du message
+   * @param $nom le nom de l'administrateur
+   * @return retourne vrai
+   */
   function repondreMessage($objet, $texte, $nom){
     require('./model/config.php');
     require_once("./model/util.php");

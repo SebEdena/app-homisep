@@ -1,3 +1,7 @@
+  /**
+   * fonction permettant de vérifier les mots de passes du formulaire d'inscription
+   * @param event évènement déclancheur
+   */
 function validate(event) {
   var mdp1 = document.getElementById("pass").value;
   var mdp2 = document.getElementById("confirm_pass").value;

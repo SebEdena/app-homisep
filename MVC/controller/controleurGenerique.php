@@ -1,4 +1,7 @@
 <?php
+  /**
+   * contrôleur permettant de rediriger vers le bon contrôleur pour la vue d'accueil
+   */
   function afficherAccueil()
   {
     if($_SESSION['admin'] == true)
@@ -10,7 +13,10 @@
       header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
     }
   }
-
+  
+  /**
+   * contrôleur permettant la déconnexion d'un utilisateur
+   */
   function deconnexion()
   {
     session_destroy();

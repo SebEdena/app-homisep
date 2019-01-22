@@ -5,6 +5,10 @@ for(let i = 0; i < tablinks.length; i++){
 	tablinks[i].onclick = function(){ openTab(this); }
 }
 
+	/**
+	 * fonction permettant d'ouvrir une page grâce à un onglet
+	 * @param elt élement de la page
+	 */
 function openTab(elt){
 	let tabs = elt.parentNode.children;
 	let tab_pages = elt.parentNode.parentNode

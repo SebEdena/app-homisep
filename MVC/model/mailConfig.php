@@ -1,14 +1,15 @@
 <?php
+
+  /**
+   * fichier contenant les configurations pour l'envoi de mail avec PHPMailer (source PHPMailer)
+   */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-/* Exception class. */
 require_once('./model/PHPMailer/src/Exception.php');
 
-/* The main PHPMailer class. */
 require_once('./model/PHPMailer/src/PHPMailer.php');
 
-/* SMTP class, needed if you want to use SMTP. */
 require_once('./model/PHPMailer/src/SMTP.php');
 
 $mail = new PHPMailer(TRUE);

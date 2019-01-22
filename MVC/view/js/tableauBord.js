@@ -1,6 +1,10 @@
 const order = ['temp', 'lum', 'shut'];
 let count = null;
 
+  /**
+   * fonction peremttant de récupérer les données de la maison (pièces, toutes les informations des CeMacs)
+   * @param event évènement déclancheur
+   */
 function recupDonnéesMaison(event){
     let idMaison = parseInt(event.target.value);
     if(isNaN(idMaison))
@@ -28,6 +32,10 @@ function recupDonnéesMaison(event){
     });
 }
 
+  /**
+   * fonction peremttant de créer la vue des pièces
+   * @param data données des pièces
+   */
 function build_pieces(data){
     deleteAccordions();
     piecesMaison = {};
@@ -38,6 +46,10 @@ function build_pieces(data){
     updateAccordions();
 }
 
+  /**
+   * fonction peremttant de créer la vue des pièces
+   * @param data données des pièces
+   */
 function inflate_piece(data){
     let piece = $(`
         <div class="accord piece" data-piece-id=${data['id']}>
@@ -51,6 +63,10 @@ function inflate_piece(data){
     $('.tabpage:not("#tabpage-gen")').append(piece);
 }
 
+  /**
+   * fonction permettant de créer la vue pour les CeMacs
+   * @param data données des CeMacs
+   */
 function build_capteurs(data){
     for (piece of data.pieces) {
         for (categorie of order) {
@@ -73,6 +89,17 @@ function build_capteurs(data){
     }
 }
 
+  /**
+   * fonction permettant de créer le code pour le html pour les CeMacs
+   * @param grouped booléen CeMac groupé (actionneur et capteur) ou simple (actionneur ou capteur)
+   * @param target noeud html parent du capteur
+   * @param id identifiant de la pièce
+   * @param context données du CeMac
+   * @param categorie catégorie de CeMac (luminosité/température/volet)
+   * @param ext Cemac exterieur ou intérieur
+   * @param hasActionneurs booléen pour dire s'il y a des actionneurs
+   * @param hasCapteurs booléen pour dire s'il y a des capteurs
+   */
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
@@ -168,10 +195,20 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
     }
 }
 
+  /**
+   * fonction perttant de déplier le contenu de l'accordéon
+   * @param évènement déclancheur
+   */
 function openAccordions(event){
     $($('.tabpage')[$(this).index()]).find('.piece:not(.accord-opened) label').trigger('click');
 }
 
+  /**
+   * fonction permettant d'afficher les CeMacs dans le tableau de bord
+   * @param pieces liste des pièces
+   * @param context données
+   * @param cemacs liste des cemacs
+   */
 function displayGeneralView(pieces, context, cemacs){
     const links = { lumint: 'lightbulb.png', lumext: 'lightbulb.png', tempint: 'thermometer.png', tempext: 'thermometer.png', shut: 'blinds.png'}
     count = {lumint: null, lumext: null, tempint: null, tempext: null, shut: null};
@@ -218,6 +255,9 @@ function displayGeneralView(pieces, context, cemacs){
     }
 }
 
+  /**
+   * fonction permettant de sauvegarder les modifications faites par l'utilisateur
+   */
 function saveActionneurChanges(){
     let values = [];
     $(".gen-view").each((i, elt) => {
@@ -245,6 +285,12 @@ function saveActionneurChanges(){
     });
 }
 
+  /**
+   * fonction permettant la mise à jour d'une donnée
+   * @param cemac noeud html du cemac
+   * @param grouped booléen si le CeMac a des fonctions multiples
+   * @param up booléen si la valeur est supérieure à la précédente ou inférieure
+   */
 function updateValue(cemac, grouped, up){
     let grandeur = cemac.data('grandeur');
     let actualValue = cemac.data('valeur');
@@ -277,6 +323,12 @@ function updateValue(cemac, grouped, up){
     }
 }
 
+  /**
+   * fonction permettant de calculer la nouvelle valeur
+   * @param value la valeur
+   * @param up booléen si la valeur est supérieure à la précédente ou inférieure
+   * @param grandeur unité de la valeur
+   */
 function computeValue(value, up, grandeur){
     if(up){
         if(value >= grandeur.borneSup){
@@ -293,6 +345,10 @@ function computeValue(value, up, grandeur){
     }
 }
 
+  /**
+   * fonction permettant de calculer la moyenne
+   * @param cemac noeud html des CeMacs
+   */
 function computeMean(cemac){
     let mean = 0;
     let actionneurs = cemac.data('cemac').actionneur;
@@ -306,6 +362,11 @@ function computeMean(cemac){
     }
 }
 
+  /**
+   * fonction permettant de calculer une approximation de la moyenne
+   * @param valeur la valeur
+   * @param grandeur unité physique de la valeur
+   */
 function approxMean(valeur, grandeur){
     let times = Math.floor(valeur / grandeur.pas)
     let delta = (valeur - times*grandeur.pas);

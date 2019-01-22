@@ -856,28 +856,33 @@ function reloadMaison()
    */
 function reloadPiece()
 {
-  $.ajax({
-      url: "index.php?control=relationClient&action=reloadPiece",
-      type: "POST",
-      dataType: "json",
-      data : {
-        idMaison : $("#house-select-gestion").val()
-      },
-      success: function(retour){
-          console.log(retour.piece);
-          let buildHtml = "";
-          for(piece of retour.piece)
-          {
-            console.log(piece);
-            buildHtml += "<option value='"+piece.idPiece+"'>"+ piece.nom + "</option>";
-          }
-          $("#piece-select-gestion").html(buildHtml);
-      },
-      error: function(error){
-          console.error(error);
-          alert("Une erreur est survenue : " + error.message);
-      }
-  });
+  if(($("#house-select-gestion").prop("selectedIndex", 0).val()) === undefined){
+    return;
+  }
+  else {
+    $.ajax({
+        url: "index.php?control=relationClient&action=reloadPiece",
+        type: "POST",
+        dataType: "json",
+        data : {
+          idMaison : $("#house-select-gestion").val()
+        },
+        success: function(retour){
+            console.log(retour.piece);
+            let buildHtml = "";
+            for(piece of retour.piece)
+            {
+              console.log(piece);
+              buildHtml += "<option value='"+piece.idPiece+"'>"+ piece.nom + "</option>";
+            }
+            $("#piece-select-gestion").html(buildHtml);
+        },
+        error: function(error){
+            console.error(error);
+            alert("Une erreur est survenue : " + error.message);
+        }
+    });
+  }
 }
 
   /**

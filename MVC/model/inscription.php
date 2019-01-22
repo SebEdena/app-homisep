@@ -22,7 +22,7 @@
       return "Client.e créé.e";
     }
     catch(PDOException $exception){
-      if ($exception->getCode() == 23000) //violation de clé unique{
+      if ($exception->getCode() == 23000) /*violation de clé unique*/{
         return "Client.e déjà existant.e";
       }
       else{

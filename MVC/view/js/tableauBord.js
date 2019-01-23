@@ -276,7 +276,7 @@ function saveActionneurChanges(){
         },
         success: function(retour){
             console.log(retour);
-            alert("Les changments ont été enregistrés.");
+            alert("Les changements ont été enregistrés.");
         },
         error: function(error){
             console.error(error);
@@ -295,11 +295,10 @@ function updateValue(cemac, grouped, up){
     let grandeur = cemac.data('grandeur');
     let actualValue = cemac.data('valeur');
     let categ = null;
-    if(grouped){
+    if(grouped && !cemac.hasClass('gen-view')){
         categ = cemac.data('cemac').typeCapteur;
     } else {
         categ = cemac.data('cemac').typeCapteur.categorie + cemac.data('cemac').typeCapteur.exterieur;
-
     }
     if(grouped){
         let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);

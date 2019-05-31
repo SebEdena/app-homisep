@@ -76,9 +76,9 @@ INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idPie
 (10, 'X758333', b'1', 1, 4),
 (11, 'X869444', b'1', 2, 4),
 (12, 'X970555', b'1', 3, 4),
-(13, 'G02A11', b'1', 1, 6),
-(14, 'G02A41', b'1', 4, 6),
-(15, 'G02A61', b'1', 6, 6);
+(13, 'G02A101', b'1', 1, 6),
+(14, 'G02A401', b'1', 4, 6),
+(15, 'G02A601', b'1', 6, 6);
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`idClient`, `nom`, `prenom`, `adresse`, `ville`, `codePostal`, `mail`, `passe`, `dateNaissance`, `dateCreation`) VALUES
-(5, "Yu", "Laurent", NULL, NULL, NULL, 'laurent.yu@isep.fr', '$2y$10$I8tQPOD3Mjs4Bz4.1yAz8e/puk/ZoQRI9tH9Ianrv3pkGqa1oRLQy', NULL, NULL);
+(5, 'Yu', 'Laurent', NULL, NULL, NULL, 'laurent.yu@isep.fr', '$2y$10$I8tQPOD3Mjs4Bz4.1yAz8e/puk/ZoQRI9tH9Ianrv3pkGqa1oRLQy', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `
 
 CREATE TABLE `historique` (
   `idHistorique` int(11) NOT NULL,
-  `dateReleve` date NOT NULL,
+  `dateReleve` datetime NOT NULL,
   `valeurReleve` float NOT NULL,
   `idCemac` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -213,7 +213,7 @@ INSERT INTO `piece` (`idPiece`, `nom`, `idMaison`, `idTypePiece`) VALUES
 (3, 'Salle de Bain', 1, NULL),
 (4, 'Salle de classe', 2, NULL),
 (5, 'Amphithéâtre Olympe de Gouges', 2, NULL),
-(6, `Salle d'APP`, 3, NULL);
+(6, "Salle d'APP", 3, NULL);
 
 -- --------------------------------------------------------
 

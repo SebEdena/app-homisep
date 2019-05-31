@@ -75,7 +75,10 @@ INSERT INTO `cemac` (`idCemac`, `numeroSerie`, `statut`, `idTypeCapteur`, `idPie
 (9, 'X647222', b'0', 3, 5),
 (10, 'X758333', b'1', 1, 4),
 (11, 'X869444', b'1', 2, 4),
-(12, 'X970555', b'1', 3, 4);
+(12, 'X970555', b'1', 3, 4),
+(13, 'G02A101', b'1', 1, 6),
+(14, 'G02A401', b'1', 4, 6),
+(15, 'G02A601', b'1', 6, 6);
 
 -- --------------------------------------------------------
 
@@ -160,7 +163,8 @@ CREATE TABLE `maison` (
 
 INSERT INTO `maison` (`idMaison`, `adresse`, `ville`, `codePostal`, `idClient`,`maisonPrincipale`) VALUES
 (1, '143 avenue de Versailles', 'Paris', 75016, 5, 1),
-(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5, 0);
+(2, '106 Faubourg Poissonnière', 'Paris', 75010, 5, 0),
+(3, '10 Rue de Vanves', 'Issy-Les-Moulineaux', 92130, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -208,7 +212,8 @@ INSERT INTO `piece` (`idPiece`, `nom`, `idMaison`, `idTypePiece`) VALUES
 (2, 'Chambre', 1, NULL),
 (3, 'Salle de Bain', 1, NULL),
 (4, 'Salle de classe', 2, NULL),
-(5, 'Amphithéâtre Olympe de Gouges', 2, NULL);
+(5, 'Amphithéâtre Olympe de Gouges', 2, NULL),
+(6, `Salle d'APP`, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -232,7 +237,8 @@ INSERT INTO `programme` (`idProgramme`, `dateDebut`, `valeur`, `idCemac`) VALUES
 (2, '2019-01-14 10:00:00', 100, 6),
 (3, '2019-01-14 10:00:00', 20, 7),
 (4, '2019-01-14 10:00:00', 40, 9),
-(5, '2019-01-14 10:00:00', 50, 12);
+(5, '2019-01-14 10:00:00', 50, 12),
+(6, '2019-01-14 10:00:00', 22, 15);
 
 -- --------------------------------------------------------
 
@@ -345,6 +351,7 @@ ALTER TABLE `administrateur`
 --
 ALTER TABLE `cemac`
   ADD PRIMARY KEY (`idCemac`),
+  ADD UNIQUE KEY `numeroSerie` (`numeroSerie`),
   ADD KEY `Fk_Cemac_TypeCapteur` (`idTypeCapteur`),
   ADD KEY `Fk_Cemac_Piece` (`idPiece`);
 

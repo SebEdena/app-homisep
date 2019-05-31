@@ -10,6 +10,16 @@
       require("./view/FAQ.php");
   }
 
+  function initControllerBD()
+  {
+      require_once("./model/init.php");
+      $data = getDonneesServeur();
+      if (strpos($data, 'ERREUR') == false)
+      {
+          sendData($data);
+      }
+      header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
+  }
   /**
    * contrôleur permettant de faire l'affichage du tableau de bord
    */

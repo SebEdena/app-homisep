@@ -10,7 +10,7 @@
     }
     else
     {
-      header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
+      header("Location: " . "index.php?control=relationClient&action=initControllerBD");
     }
   }
   

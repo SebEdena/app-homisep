@@ -139,4 +139,20 @@
         echo $e->getMessage();
     }
   }
+
+  function getDonneesServeur()
+  {
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G02A");
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      $data = curl_exec($ch);
+      curl_close($ch);
+      return $data;
+  }
+
+  function sendData($data)
+  {
+
+  }
 ?>

@@ -222,6 +222,7 @@
 
   function getIdCeMac($donnees)
   {
+      require("./model/util.php");
       $donnees = translateCeMacToServer($donnees);
       if(strcmp($donnees,"4")||strcmp($donnees,"6"))
       {
@@ -235,19 +236,6 @@
       else
       {
           return "0";
-      }
-  }
-
-  function translateCeMacToServer($donnees)
-  {
-      switch($donnees)
-      {
-          case "3":
-              return "4";
-          case "5":
-              return "6";
-          default:
-              return "0";
       }
   }
 ?>

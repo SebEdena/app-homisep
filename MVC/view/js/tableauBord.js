@@ -124,8 +124,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         <div class="capt-value">78%</div>
                     </div>
                     <div class="capt-buttons">
-                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img class="btnDown" src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                 </div>
             </div>
@@ -172,8 +172,8 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         <div class="capt-value">20${context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
-                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img class="btnDown" src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                     <div class="capt-status capt-error"></div>
                 </div>

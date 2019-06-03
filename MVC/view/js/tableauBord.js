@@ -72,6 +72,7 @@ function build_capteurs(data){
         for (categorie of order) {
             if(data.context[piece.id][categorie]['int']!=null){
                 let context = data.context[piece.id][categorie]['int'];
+                console.log(context);
                 let hasActionneurs = (context.actionneur.length != 0);
                 let hasCapteurs = (context.capteur.length != 0);
                 inflate_capteur(true, null, piece.id, context, categorie, 'int', hasActionneurs, hasCapteurs);
@@ -221,10 +222,12 @@ function displayGeneralView(pieces, context, cemacs){
             aggreg += cemac.typeCapteur.exterieur;
         }
         if(count[aggreg] == null){
-            count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
+            count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, moyCapteur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur = cemac.typeCapteur.valeur;
+            if(cemac.typeCapteur.type === "capteur") count[aggreg].moyCapteur = cemac.typeCapteur.valeur;
         }else{
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur += cemac.typeCapteur.valeur;
+            if(cemac.typeCapteur.type === "capteur") count[aggreg].moyCapteur = cemac.typeCapteur.valeur;
         }
         count[aggreg][cemac.typeCapteur.type].push(cemac.id);
         count[aggreg].cemacs.push(cemac.id);
@@ -233,8 +236,12 @@ function displayGeneralView(pieces, context, cemacs){
 
     for(let order of countOrder){
         if(count[order] != null){
+            console.log(count[order]);
             if(count[order].actionneur.length !== 0){
                 count[order].moyActionneur = approxMean(count[order].moyActionneur/count[order].actionneur.length, count[order].grandeur);
+            }
+            if(count[order].capteur.length !== 0){
+                count[order].moyCapteur = approxMean(count[order].moyCapteur/count[order].capteur.length, count[order].grandeur);
             }
             let gen_status = $("<div class='gen-status'></div>");
             let summary = $(`

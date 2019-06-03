@@ -106,6 +106,7 @@ function buildCemacsContext($pieces, $cemacs){
                 'cemacs' => array(),
                 'statut' => true,
                 'moyActionneur' => null,
+                'moyCapteur' => null,
                 'libelleGroupBy' => $libelle,
                 'typeCapteur' => "" . $categ . $ext,
                 'grandeur' => $grandeur
@@ -120,6 +121,12 @@ function buildCemacsContext($pieces, $cemacs){
             }else{
                 $context[$piece][$categ][$ext]['moyActionneur'] += $valeur;
             }
+        } else {
+            if($context[$piece][$categ][$ext]['moyCapteur'] == null){
+                $context[$piece][$categ][$ext]['moyCapteur'] = $valeur;
+            }else{
+                $context[$piece][$categ][$ext]['moytCapteur'] += $valeur;
+            }
         }
     }
     foreach($pieces as $piece){
@@ -130,12 +137,24 @@ function buildCemacsContext($pieces, $cemacs){
                 }else{
                     $categ['int']['moyActionneur'] = null;
                 }
+
+                if(count($categ['int']['capteur']) > 0){
+                    $categ['int']['moyCapteur'] = $categ['int']['moyCapteur']/count($categ['int']['capteur']);
+                }else{
+                    $categ['int']['moyCapteur'] = null;
+                }
             }
             if(isset($categ['ext'])){
                 if(count($categ['ext']['actionneur']) > 0){
                     $categ['ext']['moyActionneur'] = $categ['ext']['moyActionneur']/count($categ['ext']['actionneur']);
                 }else{
                     $categ['ext']['moyActionneur'] = null;
+                }
+
+                if(count($categ['int']['capteur']) > 0){
+                    $categ['int']['moyCapteur'] = $categ['int']['moyCapteur']/count($categ['int']['capteur']);
+                }else{
+                    $categ['int']['moyCapteur'] = null;
                 }
             }
         }

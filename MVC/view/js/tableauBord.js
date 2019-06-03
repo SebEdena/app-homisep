@@ -103,7 +103,8 @@ function build_capteurs(data){
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
-        let moy = approxMean(context.moyActionneur, context.grandeur);
+        let moyA = approxMean(context.moyActionneur, context.grandeur);
+        let moyC = approxMean(context.moyCapteur, context.grandeur);
         let cemacGrouped = $(`
             <div class="capt-gen ${categorie + ext}">
                 <div class="capt-title">${context.libelleGroupBy}</div>
@@ -117,11 +118,11 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                     </div>
                     <div class="capt-data-desired">
                         <div class="capt-dd-label">Désiré</div>
-                        <div class="capt-value">${moy + context.grandeur.symbole}</div>
+                        <div class="capt-value">${moyA + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">78%</div>
+                        <div class="capt-value">${moyC + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
                         <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
@@ -141,7 +142,7 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         }
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
         cemacGrouped.data('cemac', context);
-        cemacGrouped.data('valeur', moy);
+        cemacGrouped.data('valeur', moyA);
         cemacGrouped.data('grandeur', context.grandeur);
         cemacGrouped.find('.capt-buttons button').on('click', (event) => updateValue(cemacGrouped, true, (event.target.classList.contains('btnUp'))));
         if(id !== null){
@@ -169,7 +170,7 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">20${context.typeCapteur.grandeur.symbole}</div>
+                        <div class="capt-value">${context.typeCapteur.valeur + context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
                         <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
@@ -306,7 +307,7 @@ function updateValue(cemac, grouped, up){
         cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
         for(let id of cemac.data('cemac').actionneur){
             let act = $(".capt-solo[data-capt-id=" + id + "]");
-            act.data('valeur', value),
+            act.data('valeur', value);
             act.find('.capt-data-desired .capt-value').text(value + grandeur.symbole);
         }
         if(cemac.hasClass("gen-view")) {

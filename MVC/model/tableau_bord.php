@@ -47,8 +47,9 @@ function getCemacs($idMaison){
     require('./model/config.php');
     require('./model/classes/cemac.php');
 
-    $query = $database -> prepare("select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.*, pr.valeur " .
-        "from cemac c LEFT OUTER JOIN programme pr on ( pr.idCemac = c.idCemac and pr.dateDebut = (SELECT MAX(dateDebut) from programme where idCemac = c.idCemac )), typecapteur tc, grandeurphysique gp, piece p, maison m " .
+    $query = $database -> prepare("select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.*, pr.valeur AS valA, hr.valeur AS valC " .
+        "from cemac c LEFT OUTER JOIN programme pr on ( pr.idCemac = c.idCemac and pr.dateDebut = (SELECT MAX(dateDebut) from programme pr2 where pr2.idCemac = c.idCemac )) ".
+        "LEFT OUTER JOIN historique hr on ( hr.idCemac = c.idCemac and hr.date = (SELECT MAX(h2.date) FROM historique h2 WHERE h2.idCemac = c.idCemac )), typecapteur tc, grandeurphysique gp, piece p, maison m " .
         "where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idPiece = p.idPiece and p.idMaison = m.idMaison and m.idClient = ? and m.idMaison = ? order by c.idPiece, c.idCemac");
     $query -> bindParam(1, $_SESSION["id"]);
     $query -> bindParam(2, $idMaison);

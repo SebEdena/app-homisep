@@ -137,8 +137,8 @@ INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `
 
 CREATE TABLE `historique` (
   `idHistorique` int(11) NOT NULL,
-  `dateReleve` datetime NOT NULL,
-  `valeurReleve` float NOT NULL,
+  `date` datetime NOT NULL,
+  `valeur` float NOT NULL,
   `idCemac` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

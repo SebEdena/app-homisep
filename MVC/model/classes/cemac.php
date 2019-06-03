@@ -30,10 +30,27 @@ class CeMac{
                 'borneSup' => (float)$data['borneSup']
             ),
             'libelleGroupBy' => $data['libelleGroupBy'],
-            'valeur' => (float)$data['valeur']
+            'valeur' => $this -> getRightValue($data)
         );
         $this->idPiece = (int) $data['idPiece'];
     }
+
+    private function getRightValue($data){
+        if($data['type'] === "capteur"){
+            if($data['valC'] == null){
+                return null;
+            } else {
+                return (float) $data['valC'];
+            }
+        } else {
+            if($data['valA'] == null){
+                return null;
+            } else {
+                return (float) $data['valA'];
+            }
+        }
+    }
+
     /**
      * fonction permettant de récupérer l'identifiant du client
      * @return retourne l'identifiant CeMac

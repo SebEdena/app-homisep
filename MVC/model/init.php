@@ -181,7 +181,7 @@
       $date = substr($donnees,19,14);
       $idCeMac = getIdCeMac($typeCeMac);
       require("./model/config.php");
-      $query = $database -> prepare('insert into historique(dateReleve, valeurReleve, idCemac) values (?,?,?);');
+      $query = $database -> prepare('insert into historique(date, valeur, idCemac) values (?,?,?);');
       $query -> bindparam(1, $date);
       $query -> bindparam(2, $valeur);
       $query -> bindparam(3, $idCeMac);
@@ -197,7 +197,7 @@
   function getLastDate()
   {
       require("./model/config.php");
-      $query = $database -> prepare('SELECT MAX(dateReleve) AS start_date FROM historique');
+      $query = $database -> prepare('SELECT MAX(date) AS start_date FROM historique');
       $query -> execute();
 
       $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -218,10 +218,11 @@
   {
       require_once("./model/util.php");
       $donnees = translateCeMacToServer($donnees);
-      if(strcmp($donnees,"4")||strcmp($donnees,"6"))
+      if(strcmp($donnees,"1") || strcmp($donnees,"2") ||
+          strcmp($donnees,"4")||strcmp($donnees,"5"))
       {
           require("./model/config.php");
-          $query = $database -> prepare('select * from cemac where idTypeCapteur = ? and numeroSerie sounds like \'G02A\';');
+          $query = $database -> prepare("select * from cemac where idTypeCapteur = ? and numeroSerie like 'G02A%'");
           $query -> bindparam(1,$donnees);
           $query -> execute();
           $res = $query->fetchAll(PDO::FETCH_ASSOC);

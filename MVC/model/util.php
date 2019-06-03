@@ -36,10 +36,10 @@
   function translateCeMacToServer($donnees){
       switch($donnees)
       {
+          case "5":
+              return "1";
           case "3":
               return "4";
-          case "5":
-              return "6";
           default:
               return "0";
       }
@@ -51,7 +51,7 @@
       {
           case "4":
               return "3";
-          case "6":
+          case "1":
               return "5";
           default:
               return "0";

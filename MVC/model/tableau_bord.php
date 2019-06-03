@@ -204,7 +204,7 @@ function getInfoPieceBD($idPiece){
  */
 function getInfoCapteurBD($idCapteur){
     require('./model/config.php');
-    require('./model/classes/cemac.php');
+    require_once('./model/classes/cemac.php');
     $query = $database -> prepare('select c.idCemac, c.numeroSerie, c.statut, c.idPiece, tc.idTypeCapteur, tc.categorie, tc.type, tc.exterieur, tc.libelleGroupBy, gp.nom, gp.symbole, p.nom from piece p, cemac c, typecapteur tc, grandeurphysique gp where c.idTypeCapteur = tc.idTypeCapteur and tc.idGrandeurPhysique = gp.idGrandeurPhysique and c.idCemac = ? and c.idPiece = p.idPiece');
     $query -> bindParam(1, $idCapteur);
     $query -> execute();
@@ -276,13 +276,13 @@ function prepareTrameActionneur($valeurs)
     {
         foreach($valeurs as $valeur)
         {
-            require("./model/util.php");
+            require_once("./model/util.php");
             $idTypeCapteur = getInfoCapteurBD($valeur['idCemac'])[0]['idTypeCapteur'];
             $idTypeCapteur = translateServerToCeMac($idTypeCapteur);
             if($idTypeCapteur != 0)
             {
-                $valeurCapteur = strpad(dechex($valeur['valeur']), 4, "0", STR_PAD_LEFT);
-                $trame = "1G02A2" . $idTypeCapteur . "01" . $valeurCapteur . "0000";
+                $valeurCapteur = str_pad(dechex($valeur['valeur']), 4, "0", STR_PAD_LEFT);
+                $trame = "1G02A2a01" . $valeurCapteur;
                 $trame = $trame . createCRC($trame);
                 sendTrameActionneur($trame);
             }
@@ -298,14 +298,30 @@ function createCRC($trame)
     return dechex($valeur);
 }
 
+function sum($carry, $item)
+{
+    $carry += $item;
+    return $carry;
+}
+
 function sendTrameActionneur($trame)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=G02A&TRAME=".$trame);
+    $address = "http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=G02A&TRAME=".$trame;
+    curl_setopt($ch, CURLOPT_URL, $address);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, FALSE);
-    curl_exec($ch);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
     curl_close($ch);
+    if(strpos($data, 'ERREUR') == false )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
 }
 
 /**

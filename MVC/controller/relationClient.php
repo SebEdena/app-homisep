@@ -18,7 +18,6 @@
       {
           sendData($data);
       }
-      header("Location: " . "index.php?control=relationClient&action=afficheTableauBord");
   }
   /**
    * contrôleur permettant de faire l'affichage du tableau de bord
@@ -28,6 +27,7 @@
       $cgu = getRegle("CGU");
       $politique = getRegle("Politique");
       $mention = getRegle("Mention");
+      initControllerBD();
       require("./model/tableau_bord.php");
       $maisons = getMaisons();
       require("./view/tableauBord.php");

@@ -155,18 +155,12 @@
   {
       $dateMax = strtotime(getLastDate());
       $tableau = str_split($data,33);
-      for($compteur = count($tableau) - 2; $compteur >= 0 ; $compteur--)
+
+      if($dateMax < strtotime(substr($tableau[count($tableau) - 3],19,33)))
       {
-          if($dateMax < strtotime(substr($tableau[$compteur],19,33)))
-          {
-              sendTrameToDB($tableau[$compteur]);
-          }
-          else
-          {
-              break;
-          }
+          sendTrameToDB($tableau[count($tableau) - 3]);
+          sendTrameToDB($tableau[count($tableau) - 2]);
       }
-      echo($compteur);
   }
 //      $typeTrame = substr($donnees,0,1);
 //      $objet = substr($donnees,1,5);
@@ -222,7 +216,7 @@
 
   function getIdCeMac($donnees)
   {
-      require("./model/util.php");
+      require_once("./model/util.php");
       $donnees = translateCeMacToServer($donnees);
       if(strcmp($donnees,"4")||strcmp($donnees,"6"))
       {

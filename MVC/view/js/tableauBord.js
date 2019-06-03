@@ -72,7 +72,6 @@ function build_capteurs(data){
         for (categorie of order) {
             if(data.context[piece.id][categorie]['int']!=null){
                 let context = data.context[piece.id][categorie]['int'];
-                console.log(context);
                 let hasActionneurs = (context.actionneur.length != 0);
                 let hasCapteurs = (context.capteur.length != 0);
                 inflate_capteur(true, null, piece.id, context, categorie, 'int', hasActionneurs, hasCapteurs);
@@ -236,7 +235,6 @@ function displayGeneralView(pieces, context, cemacs){
 
     for(let order of countOrder){
         if(count[order] != null){
-            console.log(count[order]);
             if(count[order].actionneur.length !== 0){
                 count[order].moyActionneur = approxMean(count[order].moyActionneur/count[order].actionneur.length, count[order].grandeur);
             }

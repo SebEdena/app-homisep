@@ -114,7 +114,7 @@ function buildCemacsContext($pieces, $cemacs){
         array_push($context[$piece][$categ][$ext][$capt], $id);
         array_push($context[$piece][$categ][$ext]['cemacs'], $id);
         $context[$piece][$categ][$ext]['statut'] = $context[$piece][$categ][$ext]['statut'] && $statut;
-        if(isset($valeur)){
+        if($capt === "actionneur"){
             if($context[$piece][$categ][$ext]['moyActionneur'] == null){
                 $context[$piece][$categ][$ext]['moyActionneur'] = $valeur;
             }else{

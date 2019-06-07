@@ -118,11 +118,11 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                     </div>
                     <div class="capt-data-desired">
                         <div class="capt-dd-label">Désiré</div>
-                        <div class="capt-value">${moyA + context.grandeur.symbole}</div>
+                        <div class="capt-value">${wrapNullValue(moyA) + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">${moyC + context.grandeur.symbole}</div>
+                        <div class="capt-value">${wrapNullValue(moyC) + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
                         <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
@@ -165,12 +165,12 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         </div>
                         <div class="capt-data-desired">
                             <div class="capt-dd-label">Désiré</div>
-                            <div class="capt-value">${context.typeCapteur.valeur + context.typeCapteur.grandeur.symbole}</div>
+                            <div class="capt-value">${wrapNullValue(context.typeCapteur.valeur) + context.typeCapteur.grandeur.symbole}</div>
                         </div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">${context.typeCapteur.valeur + context.typeCapteur.grandeur.symbole}</div>
+                        <div class="capt-value">${wrapNullValue(context.typeCapteur.valeur) + context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
                         <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
@@ -309,7 +309,7 @@ function updateValue(cemac, grouped, up){
     if(grouped){
         let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);
         cemac.data('valeur', value);
-        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(cemac.data('valeur')) + grandeur.symbole);
         for(let id of cemac.data('cemac').actionneur){
             let act = $(".capt-solo[data-capt-id=" + id + "]");
             act.data('valeur', value);
@@ -322,7 +322,7 @@ function updateValue(cemac, grouped, up){
         }
     }else{
         cemac.data('valeur', computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur));
-        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(cemac.data('valeur')) + grandeur.symbole);
         computeMean(cemac.parent().find('.capt-gen.'+categ));
         computeMean($(".gen-view.capt-gen." + categ));
     }
@@ -363,7 +363,7 @@ function computeMean(cemac){
         }
         mean = approxMean(mean/(actionneurs.length), cemac.data('grandeur'));
         cemac.data('valeur', mean);
-        cemac.find('.capt-data-desired .capt-value').text(mean + cemac.data('grandeur').symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(mean) + cemac.data('grandeur').symbole);
     }
 }
 
@@ -379,6 +379,14 @@ function approxMean(valeur, grandeur){
         return times*grandeur.pas;
     }else{
         return (times+1)*grandeur.pas;
+    }
+}
+
+function wrapNullValue(value) {
+    if(isNaN(value) || value==null){
+        return "--";
+    } else {
+        return value;
     }
 }
 

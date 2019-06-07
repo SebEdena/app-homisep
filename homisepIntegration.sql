@@ -16,6 +16,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+drop database if exists `homisep`;
+create database `homisep` CHARSET=utf8;
+use `homisep`;
+
 --
 -- Base de données :  `homisep`
 --
@@ -122,8 +126,8 @@ INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `
 
 CREATE TABLE `historique` (
   `idHistorique` int(11) NOT NULL,
-  `dateReleve` datetime NOT NULL,
-  `valeurReleve` float NOT NULL,
+  `date` datetime NOT NULL,
+  `valeur` float NOT NULL,
   `idCemac` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -131,7 +135,7 @@ CREATE TABLE `historique` (
 -- Contenu de la table `historique`
 --
 
-INSERT INTO `historique` (`idHistorique`, `dateReleve`, `valeurReleve`, `idCemac`) VALUES
+INSERT INTO `historique` (`idHistorique`, `date`, `valeur`, `idCemac`) VALUES
 (1, '2019-06-03 17:12:10', 25, 14),
 (2, '2019-06-03 17:12:12', 36, 15),
 (3, '2019-06-03 17:14:21', 37, 15),

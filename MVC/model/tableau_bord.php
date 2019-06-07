@@ -299,14 +299,18 @@ function prepareTrameActionneur($valeurs)
             require_once("./model/util.php");
             $idTypeCapteur = getInfoCapteurBD($valeur['idCemac'])[0]['idTypeCapteur'];
             $idTypeCapteur = translateServerToCeMac($idTypeCapteur);
-            if($idTypeCapteur != 0)
+            if($idTypeCapteur == "a")
             {
                 $valeurCapteur = str_pad(dechex($valeur['valeur']), 4, "0", STR_PAD_LEFT);
                 $trame = "1G02A2a01" . $valeurCapteur;
                 $trame = $trame . createCRC($trame);
-                sendTrameActionneur($trame);
+                return sendTrameActionneur($trame);
             }
         }
+    }
+    else
+    {
+        return false;
     }
 }
 
@@ -333,7 +337,7 @@ function sendTrameActionneur($trame)
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $data = curl_exec($ch);
     curl_close($ch);
-    if(strpos($data, 'ERREUR') == false )
+    if(strpos($data, 'ERREUR') == false)
     {
         return true;
     }

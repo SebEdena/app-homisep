@@ -53,6 +53,8 @@
               return "3";
           case "1":
               return "5";
+          case "6":
+              return "a";
           default:
               return "0";
       }

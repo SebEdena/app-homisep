@@ -66,7 +66,7 @@
       $valeurs = $_POST['valeurs'];
       try{
           $status = updateProgrammes($valeurs);
-          prepareTrameActionneur($valeurs);
+          $status = prepareTrameActionneur($valeurs);
           http_response_code(200);
           header('Content-Type: application/json; charset=UTF-8');
           print json_encode(array('returnStatus' => $status));

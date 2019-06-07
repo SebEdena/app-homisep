@@ -116,7 +116,7 @@ CREATE TABLE `grandeurphysique` (
 
 INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `borneInf`, `borneSup`) VALUES
 (1, 'Celsius', '°C', 1, 5, 35),
-(2, 'Pourcentage', '%', 5, 0, 100);
+(2, 'Pourcentage', '%', 1, 0, 100);
 
 -- --------------------------------------------------------
 

@@ -103,7 +103,8 @@ function build_capteurs(data){
 function inflate_capteur(grouped, target, id, context, categorie, ext, hasActionneurs=null, hasCapteurs=null){
     let isGrouped = (grouped == true);
     if(isGrouped == true){
-        let moy = approxMean(context.moyActionneur, context.grandeur);
+        let moyA = approxMean(context.moyActionneur, context.grandeur);
+        let moyC = approxMean(context.moyCapteur, context.grandeur);
         let cemacGrouped = $(`
             <div class="capt-gen ${categorie + ext}">
                 <div class="capt-title">${context.libelleGroupBy}</div>
@@ -117,15 +118,15 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                     </div>
                     <div class="capt-data-desired">
                         <div class="capt-dd-label">Désiré</div>
-                        <div class="capt-value">${moy + context.grandeur.symbole}</div>
+                        <div class="capt-value">${wrapNullValue(moyA) + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">78%</div>
+                        <div class="capt-value">${wrapNullValue(moyC) + context.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
-                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img class="btnDown" src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                 </div>
             </div>
@@ -141,7 +142,7 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
         }
         if(context.statut){cemacGrouped.find('.capt-status').removeClass('capt-error');}
         cemacGrouped.data('cemac', context);
-        cemacGrouped.data('valeur', moy);
+        cemacGrouped.data('valeur', moyA);
         cemacGrouped.data('grandeur', context.grandeur);
         cemacGrouped.find('.capt-buttons button').on('click', (event) => updateValue(cemacGrouped, true, (event.target.classList.contains('btnUp'))));
         if(id !== null){
@@ -164,16 +165,16 @@ function inflate_capteur(grouped, target, id, context, categorie, ext, hasAction
                         </div>
                         <div class="capt-data-desired">
                             <div class="capt-dd-label">Désiré</div>
-                            <div class="capt-value">${context.typeCapteur.valeur + context.typeCapteur.grandeur.symbole}</div>
+                            <div class="capt-value">${wrapNullValue(context.typeCapteur.valeur) + context.typeCapteur.grandeur.symbole}</div>
                         </div>
                     </div>
                     <div class="capt-data-real">
                         <div class="capt-dr-label">Actuel</div>
-                        <div class="capt-value">20${context.typeCapteur.grandeur.symbole}</div>
+                        <div class="capt-value">${wrapNullValue(context.typeCapteur.valeur) + context.typeCapteur.grandeur.symbole}</div>
                     </div>
                     <div class="capt-buttons">
-                        <button class="btnUp"><img src="./view/img/chevron-arrow-up.png"></button>
-                        <button class="btnDown"><img src="./view/img/chevron-arrow-down.png"></button>
+                        <button class="btnUp"><img class="btnUp" src="./view/img/chevron-arrow-up.png"></button>
+                        <button class="btnDown"><img class="btnDown" src="./view/img/chevron-arrow-down.png"></button>
                     </div>
                     <div class="capt-status capt-error"></div>
                 </div>
@@ -220,10 +221,12 @@ function displayGeneralView(pieces, context, cemacs){
             aggreg += cemac.typeCapteur.exterieur;
         }
         if(count[aggreg] == null){
-            count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
+            count[aggreg] = {capteur:[], actionneur:[], cemacs:[], moyActionneur: null, moyCapteur: null, typeCapteur:cemac.typeCapteur, libelleGroupBy:cemac.typeCapteur.libelleGroupBy, grandeur: cemac.typeCapteur.grandeur, valeur: null, status:true};
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur = cemac.typeCapteur.valeur;
+            if(cemac.typeCapteur.type === "capteur") count[aggreg].moyCapteur = cemac.typeCapteur.valeur;
         }else{
             if(cemac.typeCapteur.type === "actionneur") count[aggreg].moyActionneur += cemac.typeCapteur.valeur;
+            if(cemac.typeCapteur.type === "capteur") count[aggreg].moyCapteur = cemac.typeCapteur.valeur;
         }
         count[aggreg][cemac.typeCapteur.type].push(cemac.id);
         count[aggreg].cemacs.push(cemac.id);
@@ -234,6 +237,9 @@ function displayGeneralView(pieces, context, cemacs){
         if(count[order] != null){
             if(count[order].actionneur.length !== 0){
                 count[order].moyActionneur = approxMean(count[order].moyActionneur/count[order].actionneur.length, count[order].grandeur);
+            }
+            if(count[order].capteur.length !== 0){
+                count[order].moyCapteur = approxMean(count[order].moyCapteur/count[order].capteur.length, count[order].grandeur);
             }
             let gen_status = $("<div class='gen-status'></div>");
             let summary = $(`
@@ -303,10 +309,10 @@ function updateValue(cemac, grouped, up){
     if(grouped){
         let value = computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur);
         cemac.data('valeur', value);
-        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(cemac.data('valeur')) + grandeur.symbole);
         for(let id of cemac.data('cemac').actionneur){
             let act = $(".capt-solo[data-capt-id=" + id + "]");
-            act.data('valeur', value),
+            act.data('valeur', value);
             act.find('.capt-data-desired .capt-value').text(value + grandeur.symbole);
         }
         if(cemac.hasClass("gen-view")) {
@@ -316,7 +322,7 @@ function updateValue(cemac, grouped, up){
         }
     }else{
         cemac.data('valeur', computeValue(actualValue + (up?(1):(-1))*grandeur.pas, up, grandeur));
-        cemac.find('.capt-data-desired .capt-value').text(cemac.data('valeur') + grandeur.symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(cemac.data('valeur')) + grandeur.symbole);
         computeMean(cemac.parent().find('.capt-gen.'+categ));
         computeMean($(".gen-view.capt-gen." + categ));
     }
@@ -357,7 +363,7 @@ function computeMean(cemac){
         }
         mean = approxMean(mean/(actionneurs.length), cemac.data('grandeur'));
         cemac.data('valeur', mean);
-        cemac.find('.capt-data-desired .capt-value').text(mean + cemac.data('grandeur').symbole);
+        cemac.find('.capt-data-desired .capt-value').text(wrapNullValue(mean) + cemac.data('grandeur').symbole);
     }
 }
 
@@ -373,6 +379,14 @@ function approxMean(valeur, grandeur){
         return times*grandeur.pas;
     }else{
         return (times+1)*grandeur.pas;
+    }
+}
+
+function wrapNullValue(value) {
+    if(isNaN(value) || value==null){
+        return "--";
+    } else {
+        return value;
     }
 }
 

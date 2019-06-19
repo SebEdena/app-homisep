@@ -10,6 +10,15 @@
       require("./view/FAQ.php");
   }
 
+  function initControllerBD()
+  {
+      require_once("./model/init.php");
+      $data = getDonneesServeur();
+      if (strpos($data, 'ERREUR') == false)
+      {
+          sendData($data);
+      }
+  }
   /**
    * contrôleur permettant de faire l'affichage du tableau de bord
    */
@@ -18,6 +27,7 @@
       $cgu = getRegle("CGU");
       $politique = getRegle("Politique");
       $mention = getRegle("Mention");
+      initControllerBD();
       require("./model/tableau_bord.php");
       $maisons = getMaisons();
       require("./view/tableauBord.php");
@@ -56,6 +66,7 @@
       $valeurs = $_POST['valeurs'];
       try{
           $status = updateProgrammes($valeurs);
+          $status = prepareTrameActionneur($valeurs);
           http_response_code(200);
           header('Content-Type: application/json; charset=UTF-8');
           print json_encode(array('returnStatus' => $status));

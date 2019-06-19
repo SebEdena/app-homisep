@@ -126,8 +126,8 @@ CREATE TABLE `grandeurphysique` (
 --
 
 INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `borneInf`, `borneSup`) VALUES
-(1, 'Celsius', '°C', 0.5, 5, 35),
-(2, 'Pourcentage', '%', 5, 0, 100);
+(1, 'Celsius', '°C', 1, 5, 35),
+(2, 'Pourcentage', '%', 1, 0, 100);
 
 -- --------------------------------------------------------
 
@@ -137,8 +137,8 @@ INSERT INTO `grandeurphysique` (`idGrandeurPhysique`, `nom`, `symbole`, `pas`, `
 
 CREATE TABLE `historique` (
   `idHistorique` int(11) NOT NULL,
-  `dateReleve` datetime NOT NULL,
-  `valeurReleve` float NOT NULL,
+  `date` datetime NOT NULL,
+  `valeur` float NOT NULL,
   `idCemac` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

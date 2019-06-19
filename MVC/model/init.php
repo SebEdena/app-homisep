@@ -139,4 +139,98 @@
         echo $e->getMessage();
     }
   }
+
+  function getDonneesServeur()
+  {
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G02A");
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      $data = curl_exec($ch);
+      curl_close($ch);
+      return $data;
+  }
+
+  function sendData($data)
+  {
+      $dateMax = strtotime(getLastDate());
+      $tableau = str_split($data,33);
+
+      if($dateMax < strtotime(substr($tableau[count($tableau) - 3],19,33)))
+      {
+          sendTrameToDB($tableau[count($tableau) - 3]);
+          sendTrameToDB($tableau[count($tableau) - 2]);
+      }
+  }
+//      $typeTrame = substr($donnees,0,1);
+//      $objet = substr($donnees,1,5);
+//      $req = substr($donnees,5,6);
+//      $numCeMac = substr($donnees,7,9);
+//      $time = substr($donnees,13,17);
+//      $crc = substr($donnees,17,19);
+//$mois = substr($donnees,23,25);
+//$jour = substr($donnees,25,27);
+//$heure = substr($donnees,27,29);
+//$minute = substr($donnees,29,31);
+//$seconde = substr($donnees,31,33);
+
+  function sendTrameToDB($donnees)
+  {
+      $typeCeMac = substr($donnees,6,1);
+      $valeur = hexdec(substr($donnees,9,4));
+      $date = substr($donnees,19,14);
+      $idCeMac = getIdCeMac($typeCeMac);
+      require("./model/config.php");
+      $query = $database -> prepare('insert into historique(date, valeur, idCemac) values (?,?,?);');
+      $query -> bindparam(1, $date);
+      $query -> bindparam(2, $valeur);
+      $query -> bindparam(3, $idCeMac);
+      try{
+          $query -> execute();
+      }
+      catch (PDOException $exception)
+      {
+
+      }
+  }
+
+  function getLastDate()
+  {
+      require("./model/config.php");
+      $query = $database -> prepare('SELECT MAX(date) AS start_date FROM historique');
+      $query -> execute();
+
+      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      $dateMax = $res[0]['start_date'];
+      if(!is_null($dateMax))
+      {
+          $dateMax = str_replace("-","",$dateMax);
+          $dateMax = str_replace(":","", $dateMax);
+      }
+      else
+      {
+          $dateMax = "20190521163624";
+      }
+      return $dateMax;
+  }
+
+  function getIdCeMac($donnees)
+  {
+      require_once("./model/util.php");
+      $donnees = translateCeMacToServer($donnees);
+      if(strcmp($donnees,"1") || strcmp($donnees,"2") ||
+          strcmp($donnees,"4")||strcmp($donnees,"5"))
+      {
+          require("./model/config.php");
+          $query = $database -> prepare("select * from cemac where idTypeCapteur = ? and numeroSerie like 'G02A%'");
+          $query -> bindparam(1,$donnees);
+          $query -> execute();
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+          return $res[0]['idCemac'];
+      }
+      else
+      {
+          return "0";
+      }
+  }
 ?>

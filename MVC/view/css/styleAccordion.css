@@ -39,6 +39,7 @@ ACCORDION
 	font-size: 1.2em;
 	cursor: pointer;
 	background: var(--color-lightgrey);
+	color: var(--color-darkblue);
 	display: block;
 	position: relative;
 	padding: 7px 10px;
